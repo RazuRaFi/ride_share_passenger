@@ -2,9 +2,14 @@
 class Assets {
   Assets._();
 
+  static const String iconsDrawericonmenu = 'assets/icons/drawericonmenu.png';
+  static const String imagesNewpassword = 'assets/images/newpassword.png';
+  static const String imagesNoImage = 'assets/images/noImage.png';
   static const String imagesOnboard2 = 'assets/images/onboard2.png';
   static const String imagesOnboard3 = 'assets/images/onboard3.png';
+  static const String imagesPassword = 'assets/images/password.png';
   static const String imagesSplash = 'assets/images/splash.png';
   static const String imagesTogether = 'assets/images/together.png';
+  static const String imagesWin = 'assets/images/win.png';
 
 }

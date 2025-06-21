@@ -1,9 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:ride_share_flat/view/screen/common_screen/SignUp/SIgn_up_screen.dart';
+import 'package:ride_share_flat/view/screen/common_screen/signIn/sign_in_screen.dart';
 
-import '../../../component/common_button.dart';
-import '../../../component/common_text.dart';
+import '../../../component/button/CommonButton.dart';
+import '../../../component/CommonText.dart';
 
 class TogetherScreen extends StatelessWidget {
   const TogetherScreen({super.key});
@@ -11,6 +15,7 @@ class TogetherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -22,11 +27,19 @@ class TogetherScreen extends StatelessWidget {
               child: Image.asset("assets/images/together.png"),
             ),
           ),
-         CommontText(text: "Let’s travel together!", fSize: 20, fweight:FontWeight.w500),
+          CommonText(text: "Let’s travel together!", fontSize: 20, fontWeight:FontWeight.w500),
           SizedBox(height: 143,),
-          CommonButton(ttile: 'Sign In',height:56.h,width: 361.w,textcolor: Colors.black,),
+          GestureDetector(
+            onTap: (){
+              Get.to(()=>SignInScreen());
+            },
+              child: CommonButton(titleText: "Sign In",buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.white,titleColor: Colors.black,borderColor: Colors.black,titleSize: 20,)),
           SizedBox(height: 24,),
-          CommonButton(ttile: 'Sign up',height:56.h,width: 361.w,textcolor: Colors.white,color: Colors.black,),
+          GestureDetector(
+            onTap: (){
+              Get.to(SignUpScreen());
+            },
+              child: CommonButton(titleText: "Sign Up",buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.black,titleColor: Colors.white,titleSize: 20,)),
         ],
       ),
     );
