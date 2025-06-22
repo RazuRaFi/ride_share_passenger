@@ -1,5 +1,12 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:ride_share_flat/helpers/my_extension.dart';
+import 'package:ride_share_flat/view/component/CommonText.dart';
+import 'package:ride_share_flat/view/screen/passenger/HistoryScreen/history_screen.dart';
+
+import '../../../../utils/app_colors.dart';
+import '../../../component/image/common_image.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -7,7 +14,249 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: CommonText(
+          text: "Profile",
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    spacing: 10,
+                    children: [
+                      Container(
+                        height: 74,
+                        width: 74,
+                        decoration: BoxDecoration(shape: BoxShape.circle),
+                        child: Image.asset("assets/images/profileimage.png"),
+                      ),
+                      Column(
+                        spacing: 5,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CommonText(
+                            text: "RaFiuL RaZu",
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          CommonText(
+                            text: "+123 456 789",
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+        
+                  GestureDetector(
+                    onTap: () {},
+                    child: SizedBox(
+                      height: 43,
+                      width: 90,
+                      child: Column(
+                        spacing: 5,
+                        children: [
+                          Image.asset(
+                            "assets/icons/editprofile.png",
+                            height: 20,
+                            width: 20,
+                          ),
+                          CommonText(text: "Edit Profile"),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(thickness: 1, color: Colors.brown),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildTabItem(
+                  image: "assets/icons/history.png",
+                  label: "History",
+                  onTap: () {
+                    Get.to(HistoryScreen());
+                  },
+                ),
+                _buildTabItem(
+                  image: "assets/icons/faq.png",
+                  label: "FAQ",
+                  onTap: () {
+                    // Navigate or handle FAQ tap
+                  },
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                spacing: 10,
+                children: [
+                  roleContainer(
+                    title: 'You have multiple promos.',
+        
+                    details: 'We’ll automatically apply them on that saved you.',
+                    image: 'assets/images/offerup.png',
+                  ),
+                  roleContainer(title: "Schedule your ride.",
+                      details:"Schedule your next trip up to 60 days ago.",
+                      image: "assets/images/calender.png")
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  ListItem(title: 'Order Tracking', icon: 'assets/icons/order.png',),
+                  ListItem(title: 'Settings', icon: 'assets/icons/settings.png',),
+                  ListItem(title: 'Safety', icon: 'assets/icons/safety.png',),
+                  ListItem(title: 'Terms of Services', icon: 'assets/icons/terms.png',),
+                  ListItem(title: 'FAQ', icon: 'assets/icons/faq2.png',),
+                ],
+              ),
+            ),
+            SizedBox(height: 24),
 
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: Row(
+                spacing: 10,
+                children: [
+                  Image.asset("assets/icons/logout.png",height: 24,width: 24,),
+                  CommonText(text:"Log Out",fontSize: 16,fontWeight: FontWeight.w500,color: Color(0xff990000),),
+                ],
+              ),
+            ),
+            SizedBox(height: 24),
+
+
+        
+        
+        
+        
+          ],
+        ),
+      ),
     );
   }
+}
+
+class ListItem extends StatelessWidget {
+  const ListItem({
+    super.key, required this.title, required this.icon,
+  });
+  final String title;
+  final String icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 15),
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      height: 64,
+      width: 361,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey),
+      ),
+      child: Row(
+        spacing: 10,
+        children: [
+          Image.asset(icon,height: 24,width: 24,),
+          CommonText(text:title,fontSize: 14,fontWeight: FontWeight.w500,),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+class roleContainer extends StatelessWidget {
+  const roleContainer({
+    super.key, required this.title, required this.details, required this.image,
+  });
+  final String title;
+  final String details;
+  final String image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 90,
+      width: 361,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey)
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 5,
+                children: [
+                  CommonText(text:title,fontSize: 14,fontWeight: FontWeight.w500,),
+                  CommonText(textAlign: TextAlign.start,
+                      text: details,maxLines: 2,fontSize: 12,fontWeight: FontWeight.w400,),
+                ],
+              ),
+            ),
+          ),
+          Image.asset(image),
+        ],
+      ),
+    );
+  }
+}
+
+Widget _buildTabItem({
+  required String image,
+  required String label,
+  required VoidCallback onTap,
+}) {
+  return InkWell(
+    onTap: onTap,
+    borderRadius: BorderRadius.circular(12),
+    child: Container(
+      width: 100,
+      height: 80,
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(image, height: 25, width: 25),
+          const SizedBox(height: 8),
+          CommonText(text: label, fontSize: 16, fontWeight: FontWeight.w500),
+        ],
+      ),
+    ),
+  );
 }

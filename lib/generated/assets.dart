@@ -2,12 +2,37 @@
 class Assets {
   Assets._();
 
+  static const String iconsCar = 'assets/icons/car.png';
   static const String iconsDrawericonmenu = 'assets/icons/drawericonmenu.png';
+  static const String iconsEditprofile = 'assets/icons/editprofile.png';
+  static const String iconsFaq = 'assets/icons/faq.png';
+  static const String iconsFaq2 = 'assets/icons/faq2.png';
+  static const String iconsHistory = 'assets/icons/history.png';
+  static const String iconsHomeicon = 'assets/icons/homeicon.png';
+  static const String iconsLogout = 'assets/icons/logout.png';
+  static const String iconsMan = 'assets/icons/man.png';
+  static const String iconsOfffer = 'assets/icons/offfer.png';
+  static const String iconsOrder = 'assets/icons/order.png';
+  static const String iconsPin = 'assets/icons/pin.png';
+  static const String iconsPromos = 'assets/icons/promos.png';
+  static const String iconsSafety = 'assets/icons/safety.png';
+  static const String iconsScope1 = 'assets/icons/scope1.png';
+  static const String iconsSettings = 'assets/icons/settings.png';
+  static const String iconsTerms = 'assets/icons/terms.png';
+  static const String iconsWorkicon = 'assets/icons/workicon.png';
+  static const String imagesCalender = 'assets/images/calender.png';
+  static const String imagesDriver = 'assets/images/driver.png';
   static const String imagesNewpassword = 'assets/images/newpassword.png';
   static const String imagesNoImage = 'assets/images/noImage.png';
+  static const String imagesOfferup = 'assets/images/offerup.png';
   static const String imagesOnboard2 = 'assets/images/onboard2.png';
   static const String imagesOnboard3 = 'assets/images/onboard3.png';
   static const String imagesPassword = 'assets/images/password.png';
+  static const String imagesProfileimage = 'assets/images/profileimage.png';
+  static const String imagesService1 = 'assets/images/service1.png';
+  static const String imagesService2 = 'assets/images/service2.png';
+  static const String imagesService3 = 'assets/images/service3.png';
+  static const String imagesService4 = 'assets/images/service4.png';
   static const String imagesSplash = 'assets/images/splash.png';
   static const String imagesTogether = 'assets/images/together.png';
   static const String imagesWin = 'assets/images/win.png';
