@@ -38,7 +38,7 @@ class HistoryScreen extends StatelessWidget {
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 10),
-                  height: 143,
+                  height: 148,
                   width: 393,
                   decoration: BoxDecoration(
                     border: Border.symmetric(horizontal:BorderSide(color: Colors.grey)),

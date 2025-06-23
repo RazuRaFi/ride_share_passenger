@@ -20,18 +20,18 @@ class CommonPhoneNumberTextFiled extends StatelessWidget {
       onCountryChanged: countryChange,
       decoration: const InputDecoration(
         hintText: AppString.phoneNumber,
-        fillColor: AppColors.primary50Color,
+        fillColor: AppColors.white,
         filled: true,
         disabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey, width: 1), // Gray border when disabled
+          borderSide: BorderSide(color: Colors.black), // Gray border when disabled
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.deepBlue, width: 2), // Blue border when enabled
+          borderSide: BorderSide(color: AppColors.black), // Blue border when enabled
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.deepBlue, width: 2), // Green border when focused
+          borderSide: BorderSide(color: AppColors.black, width: 1), // Green border when focused
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         errorBorder: OutlineInputBorder(

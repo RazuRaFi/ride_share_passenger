@@ -3,7 +3,14 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/helpers/my_extension.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
+import 'package:ride_share_flat/view/component/button/CommonButton.dart';
+import 'package:ride_share_flat/view/screen/common_screen/FAQ/faq_screen.dart';
+import 'package:ride_share_flat/view/screen/common_screen/SafetyScreen/safety_screen.dart';
+import 'package:ride_share_flat/view/screen/common_screen/Terms&Services/terms_services.dart';
 import 'package:ride_share_flat/view/screen/passenger/HistoryScreen/history_screen.dart';
+import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/EditProfileScreen/edit_profile.dart';
+import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/OrderTracking/order_tracking.dart';
+import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/SettingsPage/settings_page.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../component/image/common_image.dart';
@@ -63,7 +70,9 @@ class ProfileScreen extends StatelessWidget {
                   ),
         
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(EditProfileScreen());
+                    },
                     child: SizedBox(
                       height: 43,
                       width: 90,
@@ -127,24 +136,111 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  ListItem(title: 'Order Tracking', icon: 'assets/icons/order.png',),
-                  ListItem(title: 'Settings', icon: 'assets/icons/settings.png',),
-                  ListItem(title: 'Safety', icon: 'assets/icons/safety.png',),
-                  ListItem(title: 'Terms of Services', icon: 'assets/icons/terms.png',),
-                  ListItem(title: 'FAQ', icon: 'assets/icons/faq2.png',),
+                  GestureDetector(
+                    onTap:(){
+                      Get.to(OrderTracking());
+                        },
+                      child: ListItem(title: 'Order Tracking', icon: 'assets/icons/order.png',)),
+                  GestureDetector(
+                    onTap: (){
+                      Get.to(SettingsPage());
+                    },
+
+                      child: ListItem(title: 'Settings', icon: 'assets/icons/settings.png',)),
+                  GestureDetector(
+                    onTap: (){
+                      Get.to(SafetyScreen());
+                    },
+                      child: ListItem(title: 'Safety', icon: 'assets/icons/safety.png',)),
+                  GestureDetector(
+                    onTap: (){
+                      Get.to(TermsServices());
+                    },
+                      child: ListItem(title: 'Terms of Services', icon: 'assets/icons/terms.png',)),
+                  GestureDetector(
+                    onTap: (){
+                      Get.to(FAQScreen());
+                    },
+                      child: ListItem(title: 'FAQ', icon: 'assets/icons/faq2.png',)),
                 ],
               ),
             ),
             SizedBox(height: 24),
 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: Row(
-                spacing: 10,
-                children: [
-                  Image.asset("assets/icons/logout.png",height: 24,width: 24,),
-                  CommonText(text:"Log Out",fontSize: 16,fontWeight: FontWeight.w500,color: Color(0xff990000),),
-                ],
+            GestureDetector(
+              onTap: (){
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                        height: 140,
+                        width: 350,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CommonText(
+                              text: "Do you want to logout your profile?",
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            const SizedBox(height: 20),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                CommonButton(
+                                  titleText: 'Yes',
+                                  backgroundColor: Colors.black,
+                                  buttonHeight: 45,
+                                  buttonWidth: 120,
+                                  titleSize: 14,
+                                  onTap: () {
+                                    // Add logout logic here
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                CommonButton(
+                                  titleText: 'No',
+                                  backgroundColor: Colors.white,
+                                  buttonHeight: 45,
+                                  buttonWidth: 120,
+                                  borderColor: Colors.black,
+                                  titleColor: Colors.black,
+                                  titleSize: 14,
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+
+
+              },
+              child: SizedBox(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal:30),
+                  child: Row(
+                    spacing: 10,
+                    children: [
+                      Image.asset("assets/icons/logout.png",height: 24,width: 24,),
+                      CommonText(text:"Log Out",fontSize: 16,fontWeight: FontWeight.w500,color: Color(0xff990000),),
+                    ],
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 24),

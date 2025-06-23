@@ -22,6 +22,7 @@ class Assets {
   static const String iconsWorkicon = 'assets/icons/workicon.png';
   static const String imagesCalender = 'assets/images/calender.png';
   static const String imagesDriver = 'assets/images/driver.png';
+  static const String imagesEditimage = 'assets/images/editimage.jpg';
   static const String imagesNewpassword = 'assets/images/newpassword.png';
   static const String imagesNoImage = 'assets/images/noImage.png';
   static const String imagesOfferup = 'assets/images/offerup.png';

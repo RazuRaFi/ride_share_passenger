@@ -1,11 +1,15 @@
 
-import 'package:dotted_border/dotted_border.dart';
-import 'package:dotted_line/dotted_line.dart';
-import 'package:flutter/material.dart';
-import 'package:ride_share_flat/view/component/CommonText.dart';
 
-class TripDetailsScreen extends StatelessWidget {
-  const TripDetailsScreen({super.key});
+import 'package:dotted_line/dotted_line.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
+
+import '../../../../../../component/CommonText.dart';
+
+class TripDetailsOrder extends StatelessWidget {
+  const TripDetailsOrder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +57,10 @@ class TripDetailsScreen extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal:2),
                       height: 25,
-                      width: 80,
+                      width: 75,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: Colors.grey)
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: Colors.grey)
                       ),
                       child: Row(
                         spacing: 5,
@@ -107,88 +111,101 @@ class TripDetailsScreen extends StatelessWidget {
             ),
             SizedBox(height: 14,),
             Row(
-              spacing: 10,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  height: 35,
-                  width: 35,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.black)
-                  ),
-                  child:  Image.asset("assets/images/driver.png",height: 48,width: 48,),
-                ),
-                CommonText(text: "RaFiuL RaZu",fontSize: 16,fontWeight: FontWeight.w500,),
+                CommonText(text: "Distance"),
+                CommonText(text: "6.7 Km"),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CommonText(text: "Estimated Riding Time"),
+                CommonText(text: "45 min"),
               ],
             ),
             SizedBox(height: 24,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 15,
               children: [
-                CommonText(text: "Receipt"),
-                SizedBox(height:5,),
+                CommonText(text: "Driver Info"),
+                SizedBox(height: 14,),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  spacing: 10,
                   children: [
-                    CommonText(text: "Base fare"),
-                    CommonText(text: "\$6"),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonText(text: "Distance"),
-                    CommonText(text: "\$10"),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonText(text: "Time"),
-                    CommonText(text: "\$0.06"),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonText(text: "Safety Coverage Fee"),
-                    CommonText(text: "\$0.04"),
-                  ],
-                ),
-                DottedLine(dashColor: Colors.red.shade300,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonText(text: "Subtotal"),
-                    CommonText(text: "\$17"),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonText(text: "Discount"),
-                    CommonText(text: "-\$6"),
-                  ],
-                ),
-                DottedLine(dashColor: Colors.red.shade300,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonText(text: "Net fare"),
-                    CommonText(text: "\$11"),
-                  ],
-                ),
+                    Container(
+                      height: 35,
+                      width: 35,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.black)
+                      ),
+                      child:  Image.asset("assets/images/driver.png",height: 48,width: 48,),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CommonText(text: "RaFiuL RaZu",fontSize: 16,fontWeight: FontWeight.w500,),
+                        FittedBox(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                            RatingBar.builder(
+                            initialRating: 3,
+                            minRating: 0,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            itemCount: 1,
+                            itemSize: 22,
+                            itemBuilder: (context, _) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            onRatingUpdate: (rating) {
+                              print(rating);
+                            },
+                          ),
+                              VerticalDivider(thickness: 1,),
+                              CommonText(text: "4.65"),
+                              VerticalDivider(thickness: 1,),
+                              CommonText(text: "2534 Trips"),
+                              VerticalDivider(thickness: 1,),
 
+                              Row(
+                                spacing: 5,
+                                children: [
+                                  Image.asset("assets/icons/car.png",height: 28,width: 28,),
+                                  CommonText(text: "CAR",fontSize: 14,fontWeight: FontWeight.w500,),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    Expanded(child: CustomTextField(hindText: "Send a free message",fieldBorderRadius: 60,prefixIcon: Icon(Icons.messenger),)),
+                    IconButton(onPressed: (){}, icon: Icon(Icons.call_outlined,size: 40,)),
+                  ],
+                ),
               ],
             ),
-            SizedBox(height: 24,),
-
+            SizedBox(height: 300,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CommonText(text: "REQUEST AGAIN"),
-                IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios_outlined,size: 16,)),
+                CommonText(text: "Cancel this ride?"),
+                Row(
+                  children: [
+                    CommonText(text: "Cancel now",color: Colors.red,),
+                    IconButton(onPressed: (){}, icon: Icon(Icons.cancel_outlined,size: 16,color: Colors.red,)),
+                  ],
+                ),
+
               ],
             ),
 
