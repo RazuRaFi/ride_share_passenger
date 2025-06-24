@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:ride_share_flat/controller/DrawerController/drawer_controller.dart';
 import 'package:ride_share_flat/controller/HomeController/home_controller.dart';
 import 'package:ride_share_flat/helpers/my_extension.dart';
+import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/Notifications/notifications.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/RentCar/rent_car.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/SetLocation/set_location.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/Widget/drawer_screen.dart';
 
 import '../../../../helpers/app_routes.dart';
 import '../../../../utils/app_colors.dart';
@@ -25,6 +31,7 @@ class HomeScreen extends StatelessWidget {
     final HomeController homeController=Get.put(HomeController());
     return Scaffold(
       backgroundColor: Colors.white,
+      drawer: HomeDrawer(),
       key: _scaffoldKey,
       body: SafeArea(
         child: Padding(
@@ -44,9 +51,14 @@ class HomeScreen extends StatelessWidget {
                       size: 24,
                     ),
                   ),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.notifications_none_outlined,size: 24,))
+                  IconButton(onPressed: (){
+                    Get.to(Notifications());
+                  }, icon: Icon(Icons.notifications_none_outlined,size: 24,))
                 ],
               ),
+
+
+
               Expanded(
                   child:SingleChildScrollView(
                     child: Column(
@@ -61,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                             const CommonText(
                               textAlign: TextAlign.start,
                               text:
-                              "13th Street. 47 W 13th St, New York, NY 10011",
+                              "13th Street.47 W 13th St, New York, NY 10011",
                               color: AppColors.blackLight,
                               fontWeight: FontWeight.w400,
                               bottom: 12,
@@ -78,23 +90,30 @@ class HomeScreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: 75,
-                                      width: 75,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
+                                child: GestureDetector(
+                                onTap:(){
+                                  if(homeController.serviceList[index]['title']== "Rent Car"){
+                                    Get.to(RentCarScreen());
+                                  };
+                                },
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: 75,
+                                        width: 75,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.asset(
+                                          "${homeController.serviceList[index]['image']}",
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                      child: Image.asset(
-                                        "${homeController.serviceList[index]['image']}",
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    SizedBox(height: 4),
-                                    CommonText(text: "${homeController.serviceList[index]['title']}"),
-                                  ],
+                                      SizedBox(height: 4),
+                                      CommonText(text: "${homeController.serviceList[index]['title']}"),
+                                    ],
+                                  ),
                                 ),
                               );
                             },
@@ -103,28 +122,37 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(height: 26,),
                         CommonText(text: "Take a ride",fontSize: 16,fontWeight: FontWeight.w500,),
                         SizedBox(height: 16,),
-                        TextFormField(
-                          controller: searchTextController,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            hintText: "Search a destination",
-                            prefixIcon: Icon(Icons.location_on),
-                            suffixIcon: Icon(Icons.search),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: Colors.grey)
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: Colors.grey)
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: Colors.grey)
-                            ),
-
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: (){
+                        //     Get.to(SetLocation());
+                        //   },
+                        //   child: TextFormField(
+                        //     controller: searchTextController,
+                        //     decoration: InputDecoration(
+                        //       contentPadding: EdgeInsets.zero,
+                        //       hintText: "Search a destination",
+                        //       prefixIcon: Icon(Icons.location_on),
+                        //       suffixIcon: Icon(Icons.search),
+                        //       border: OutlineInputBorder(
+                        //         borderRadius: BorderRadius.circular(10),
+                        //         borderSide: BorderSide(color: Colors.grey)
+                        //       ),
+                        //       enabledBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10),
+                        //           borderSide: BorderSide(color: Colors.grey)
+                        //       ),
+                        //       focusedBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10),
+                        //           borderSide: BorderSide(color: Colors.grey)
+                        //       ),
+                        //
+                        //     ),
+                        //   ),
+                        // ),
+                        CustomTextField(hindText: "Search a destination",prefixIcon: Icon(Icons.location_pin),suffixIcon: Icon(Icons.search),fieldBorderRadius: 10,fieldBorderColor: Colors.grey,
+                          onTap: (){
+                          Get.to(SetLocation());
+                          },),
                         SizedBox(height: 16,),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),

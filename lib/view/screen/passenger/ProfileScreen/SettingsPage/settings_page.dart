@@ -15,7 +15,9 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ProfileController controller=Get.put(ProfileController());
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: CommonText(text: "Settings",fontSize: 16,fontWeight: FontWeight.w500,),
         centerTitle: true,
       ),
@@ -53,7 +55,7 @@ class SettingsPage extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 4),
               child: GestureDetector(
                 onTap: (){
                   Get.to(CreatePassword());

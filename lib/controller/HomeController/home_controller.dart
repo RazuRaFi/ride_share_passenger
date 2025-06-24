@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController{
 
+
+
+
+
   List serviceList=[
     {'image':"assets/images/service1.png", "title":"Moto Bike"},
     {'image':"assets/images/service2.png", "title":"Car"},
