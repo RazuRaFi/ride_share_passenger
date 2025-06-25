@@ -6,7 +6,10 @@ import 'package:ride_share_flat/view/screen/common_screen/Onboarding/Onboarding_
 import 'package:ride_share_flat/view/screen/common_screen/SignUp/SIgn_up_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/signIn/sign_in_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/splash/splash_screen.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/riders_pickup.dart';
 import 'package:ride_share_flat/view/test_screen.dart';
+
+import '../view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/finding_rides.dart';
 
 
 
@@ -37,6 +40,8 @@ class AppRoutes {
   static const String subscriptionScreen = "/subscription_screen.dart";
   static const String feedbackScreen = "/feedback_screen.dart";
   static const String featureRequestScreen = "/feature_request_screen.dart";
+  static const String findingRides = "/findingRides_screen.dart";
+  static const String riderspickup = "/riderspickup.dart";
 
 
   static const String roleSelectionScreen = "/role_selection_screen.dart";
@@ -65,7 +70,7 @@ class AppRoutes {
   static List<GetPage> routes = [
     GetPage(
         name: test,
-        page: () => const TestScreenPage(),
+        page: () => const TestScreen(),
         transition: Transition.fade),
     GetPage(
         name: splash,
@@ -98,6 +103,14 @@ class AppRoutes {
     GetPage(
         name: createPassword,
         page: () => CreateNewPassword(),
+        transition: Transition.fade),
+    GetPage(
+        name: findingRides,
+        page: () => FindingRides(),
+        transition: Transition.fade),
+    GetPage(
+        name:riderspickup,
+        page: () => RidersPickup(),
         transition: Transition.fade),
 
   ];

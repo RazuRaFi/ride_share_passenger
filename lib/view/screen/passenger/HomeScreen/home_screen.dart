@@ -8,9 +8,8 @@ import 'package:ride_share_flat/controller/DrawerController/drawer_controller.da
 import 'package:ride_share_flat/controller/HomeController/home_controller.dart';
 import 'package:ride_share_flat/helpers/my_extension.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
-import 'package:ride_share_flat/view/screen/passenger/HomeScreen/Notifications/notifications.dart';
-import 'package:ride_share_flat/view/screen/passenger/HomeScreen/RentCar/rent_car.dart';
-import 'package:ride_share_flat/view/screen/passenger/HomeScreen/SetLocation/set_location.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/booking_screen.dart';
+
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/Widget/drawer_screen.dart';
 
 import '../../../../helpers/app_routes.dart';
@@ -19,6 +18,10 @@ import '../../../../utils/app_icons.dart';
 import '../../../component/CommonText.dart';
 import '../../../component/image/common_image.dart';
 import '../../../component/text_field/search_textfiled.dart';
+import '../../Map/map_screen.dart';
+import 'HomeChild/Notifications/notifications.dart';
+import 'HomeChild/RentCar/rent_car.dart';
+import 'HomeChild/SetLocation/set_location.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -94,6 +97,8 @@ class HomeScreen extends StatelessWidget {
                                 onTap:(){
                                   if(homeController.serviceList[index]['title']== "Rent Car"){
                                     Get.to(RentCarScreen());
+                                  }else if(homeController.serviceList[index]['title']== "Moto Bike"){
+                                    Get.to(()=>BookingScreen());
                                   };
                                 },
                                   child: Column(
@@ -212,7 +217,7 @@ class HomeScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Container(
                                   height: 90,
-                                  width: 260,
+                                  width: 270,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(color: Colors.grey),

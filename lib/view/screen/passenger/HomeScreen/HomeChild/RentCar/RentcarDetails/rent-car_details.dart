@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/view/component/button/CommonButton.dart';
-import 'package:ride_share_flat/view/screen/passenger/HomeScreen/RentCar/RentcarDetails/ConfirmRent/confirm_rent.dart';
 
-import '../../../../../component/CommonText.dart';
-import '../../../../../component/text_field/custom_textfield.dart';
+
+import '../../../../../../component/CommonText.dart';
+import '../../../../../../component/text_field/custom_textfield.dart';
+
+import 'ConfirmRent/confirm_rent.dart';
 
 class RentCarDetails extends StatelessWidget {
   const RentCarDetails({super.key});

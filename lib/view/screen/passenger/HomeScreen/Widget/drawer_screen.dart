@@ -19,7 +19,7 @@ import '../../../../../utils/app_image.dart';
 import '../../../../component/CommonText.dart';
 import '../../../../component/image/common_image.dart';
 import '../../HistoryScreen/history_screen.dart';
-import '../TakeRide/take_ride.dart';
+import '../HomeChild/TakeRide/take_ride.dart';
 import 'drawer_items.dart';
 
 class HomeDrawer extends StatelessWidget {

@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
-import 'package:ride_share_flat/view/screen/passenger/HomeScreen/ConfirmLocationOffice/confirm_location.dart';
 
 import '../ConfirmLocationHome/confirm_location.dart';
+import '../ConfirmLocationOffice/confirm_location.dart';
 
 class TakeRideSet extends StatelessWidget {
   const TakeRideSet({super.key});
@@ -52,7 +52,7 @@ class TakeRideSet extends StatelessWidget {
             SizedBox(height: 20,),
             GestureDetector(
               onTap: (){
-                Get.to(ConfirmLocationHome());
+                Get.to(SetLocationHome());
               },
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
@@ -81,7 +81,7 @@ class TakeRideSet extends StatelessWidget {
             SizedBox(height: 10,),
             GestureDetector(
               onTap: (){
-                Get.to(ConfirmLocationOffice());
+                Get.to(SetLocationOffice());
               },
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),

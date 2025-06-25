@@ -4,9 +4,10 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
-import 'package:ride_share_flat/view/screen/passenger/HomeScreen/RentCar/RentcarDetails/ConfirmRent/Payment/payment.dart';
 
-import '../../../../../../component/button/CommonButton.dart';
+import '../../../../../../../component/button/CommonButton.dart';
+
+import 'Payment/payment.dart';
 
 class ConfirmRentCar extends StatelessWidget {
   const ConfirmRentCar({super.key});

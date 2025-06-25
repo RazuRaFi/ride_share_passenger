@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
-import 'package:ride_share_flat/view/screen/passenger/HomeScreen/RentCar/RentcarDetails/rent-car_details.dart';
 
-import '../../../../component/text_field/custom_textfield.dart';
+
+import '../../../../../component/text_field/custom_textfield.dart';
+
+import 'RentcarDetails/rent-car_details.dart';
 
 class RentCarScreen extends StatelessWidget {
   const RentCarScreen({super.key});
