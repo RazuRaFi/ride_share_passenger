@@ -1,10 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:ride_share_flat/view/screen/common_screen/signIn/sign_in_screen.dart';
 
 import '../../../component/button/CommonButton.dart';
 import '../../../component/CommonText.dart';
 import '../../../component/CommonTextField.dart';
 import '../../../component/text_field/custom_textfield.dart';
+import '../EmailVerification/email_verification.dart';
 
 class CreateNewPassword extends StatelessWidget {
   const CreateNewPassword({super.key});
@@ -40,7 +44,7 @@ class CreateNewPassword extends StatelessWidget {
               SizedBox(height: 68,),
               GestureDetector(
                   onTap: (){
-                    // Get.to(EmailVerification());
+                    Get.to(SignInScreen());
           
                   },
                   child: CommonButton(titleText: "Save",buttonHeight: 56,buttonWidth: 360,backgroundColor: Colors.black,titleColor: Colors.white,titleSize: 20,)),

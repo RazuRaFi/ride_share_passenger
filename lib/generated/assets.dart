@@ -4,6 +4,7 @@ class Assets {
 
   static const String iconsCar = 'assets/icons/car.png';
   static const String iconsCarmodel = 'assets/icons/carmodel.png';
+  static const String iconsDestinationIcon = 'assets/icons/destinationIcon.png';
   static const String iconsDrawericonmenu = 'assets/icons/drawericonmenu.png';
   static const String iconsEditprofile = 'assets/icons/editprofile.png';
   static const String iconsFaq = 'assets/icons/faq.png';
@@ -23,6 +24,7 @@ class Assets {
   static const String iconsSafety = 'assets/icons/safety.png';
   static const String iconsScope1 = 'assets/icons/scope1.png';
   static const String iconsSettings = 'assets/icons/settings.png';
+  static const String iconsSourceIcon = 'assets/icons/sourceIcon.png';
   static const String iconsStripe = 'assets/icons/stripe.png';
   static const String iconsTerms = 'assets/icons/terms.png';
   static const String iconsWorkicon = 'assets/icons/workicon.png';

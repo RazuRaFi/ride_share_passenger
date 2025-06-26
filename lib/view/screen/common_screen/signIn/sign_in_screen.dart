@@ -10,6 +10,7 @@ import 'package:ride_share_flat/view/component/button/CommonButton.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
 import 'package:ride_share_flat/view/screen/common_screen/ForgottenPassword/forgottern_password.dart';
+import 'package:ride_share_flat/view/screen/common_screen/SignUp/SIgn_up_screen.dart';
 
 import '../../../component/CommonTextField.dart';
 import '../../../component/NavBar/common_bottom_nav.dart';
@@ -87,7 +88,9 @@ class SignInScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CommonText(text: "Don’t have an account? ", fontSize: 14, fontWeight:FontWeight.w400),
-                TextButton(onPressed: (){}, child:CommonText(text: "Sign up", fontSize: 14, fontWeight: FontWeight.w600,color: Colors.black,))
+                TextButton(onPressed: (){
+                  Get.to(()=>SignUpScreen());
+                }, child:CommonText(text: "Sign up", fontSize: 14, fontWeight: FontWeight.w600,color: Colors.black,))
               ],
             )
             

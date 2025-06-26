@@ -96,7 +96,8 @@ class RentCarScreen extends StatelessWidget {
                       ),
                     ),
                   );
-                })
+                }),
+              SizedBox(height: 24,),
           
           
             ],

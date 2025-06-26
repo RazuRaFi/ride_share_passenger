@@ -27,9 +27,8 @@ class MyApp extends StatelessWidget {
           fontFamily: GoogleFonts.lato().fontFamily,
         ),
         transitionDuration: const Duration(milliseconds: 300),
-        // home: SplashScreen(),
-        home: TestScreen(),
-        initialRoute: AppRoutes.riderspickup,
+        // home: TestScreen(),
+        initialRoute: AppRoutes.splash,
         getPages: AppRoutes.routes,
       ),
     );

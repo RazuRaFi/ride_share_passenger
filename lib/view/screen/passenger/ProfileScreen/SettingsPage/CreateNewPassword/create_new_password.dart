@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/view/screen/common_screen/ForgottenPassword/forgottern_password.dart';
+import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/profile_screen.dart';
 
 import '../../../../../component/CommonText.dart';
 import '../../../../../component/button/CommonButton.dart';
@@ -56,7 +57,11 @@ class CreatePassword extends StatelessWidget {
                     // Get.to(EmailVerification());
 
                   },
-                  child: CommonButton(titleText: "Save",buttonHeight: 56,buttonWidth: 360,backgroundColor: Colors.black,titleColor: Colors.white,titleSize: 20,)),
+                  child: CommonButton(
+                    onTap: (){
+                      Get.to(()=>ProfileScreen());
+                    },
+                    titleText: "Save",buttonHeight: 56,buttonWidth: 360,backgroundColor: Colors.black,titleColor: Colors.white,titleSize: 20,)),
 
             ],
           ),

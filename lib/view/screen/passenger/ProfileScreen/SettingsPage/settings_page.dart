@@ -56,19 +56,15 @@ class SettingsPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: GestureDetector(
-                onTap: (){
-                  Get.to(CreatePassword());
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CommonText(text: "Change Password"),
+                  IconButton(onPressed: (){
+                    Get.to(()=>CreatePassword());
+                  }, icon: Icon(Icons.arrow_forward_ios_outlined,size: 16,)),
 
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonText(text: "Change Password"),
-                    IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios_outlined,size: 16,)),
-
-                  ],
-                ),
+                ],
               ),
             ),
             TextButton(

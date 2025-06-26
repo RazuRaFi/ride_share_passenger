@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../controller/splash_controller/Onboarding_controller.dart';
@@ -8,7 +7,7 @@ class OnboardingScreen extends StatelessWidget {
   final PageController pageController = PageController();
   final OnboardingController controller = Get.put(OnboardingController());
 
-  final List<Map<String,String>> onboardingData = [
+  final List<Map<String, String>> onboardingData = [
     {
       "title": "Let’s travel together",
       "subtitle": "Make new friends",
@@ -29,6 +28,7 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Expanded(
@@ -41,7 +41,7 @@ class OnboardingScreen extends StatelessWidget {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(data["image"]!, height: 210,width: 210,),
+                    Image.asset(data["image"]!, height: 210, width: 210),
                     SizedBox(height: 20),
                     Text(data["title"]!, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                     SizedBox(height: 10),
@@ -51,11 +51,7 @@ class OnboardingScreen extends StatelessWidget {
               },
             ),
           ),
-
-
           SizedBox(height: 20),
-
-          // Buttons
           Obx(() {
             final isLastPage = controller.currentPage.value == onboardingData.length - 1;
             return Padding(
@@ -63,30 +59,30 @@ class OnboardingScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  isLastPage
-                      ? SizedBox(width: 80)
-                      : TextButton(
+                  TextButton(
                     onPressed: () {
-                      controller.updatePage(onboardingData.length - 1);
-                      // pageController.jumpToPage(onboardingData.length - 1);
+                      Get.offAll(() => TogetherScreen()); // Direct navigation on skip
                     },
-                    child: Text("Skip",style: TextStyle(color: Colors.black),),
+                    child: Text("Skip", style: TextStyle(color: Colors.black)),
                   ),
                   CircleAvatar(
                     radius: 20,
                     backgroundColor: Colors.black,
-                    child: IconButton(onPressed: (){
-                      pageController.nextPage(duration: 300.milliseconds, curve: Curves.ease);
-                     if(isLastPage==true){
-                       Get.to(TogetherScreen());
-                     }
-                    }, icon:Icon(Icons.arrow_forward_rounded,color: Colors.white,)),
-                  )
+                    child: IconButton(
+                      onPressed: () {
+                        if (isLastPage) {
+                          Get.to(() => TogetherScreen());
+                        } else {
+                          pageController.nextPage(duration: 300.milliseconds, curve: Curves.ease);
+                        }
+                      },
+                      icon: Icon(Icons.arrow_forward_rounded, color: Colors.white),
+                    ),
+                  ),
                 ],
               ),
             );
           }),
-
           SizedBox(height: 20),
         ],
       ),

@@ -4,6 +4,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:ride_share_flat/view/component/NavBar/common_bottom_nav.dart';
 
 import '../../../../controller/AuthController/Sign_up_controller.dart';
 import '../../../component/button/CommonButton.dart';
@@ -79,8 +80,8 @@ class SignUpScreen extends StatelessWidget {
                  showDialog(context: context, builder:(context){
                    return GestureDetector(
                      onTap: (){
-                       // Future.delayed(Duration(milliseconds: 300));
-                       // Get.offAll(()=>)
+                       Future.delayed(Duration(seconds: 3));
+                       Get.offAll(()=>NavBarScreen());
                      },
                      child: Container(
                        height: 600,

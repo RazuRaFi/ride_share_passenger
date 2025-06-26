@@ -9,6 +9,9 @@ import 'package:ride_share_flat/view/screen/common_screen/splash/splash_screen.d
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/riders_pickup.dart';
 import 'package:ride_share_flat/view/test_screen.dart';
 
+import '../view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/DirverArrived/DriverBegun/ConfirmPayment/confirm_payment.dart';
+import '../view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/DirverArrived/DriverBegun/driver_begun.dart';
+import '../view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/DirverArrived/driver_arrived.dart';
 import '../view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/finding_rides.dart';
 
 
@@ -42,6 +45,9 @@ class AppRoutes {
   static const String featureRequestScreen = "/feature_request_screen.dart";
   static const String findingRides = "/findingRides_screen.dart";
   static const String riderspickup = "/riderspickup.dart";
+  static const String driverArrived = "/driverArrived.dart";
+  static const String driverbegun = "/driverbegun.dart";
+  static const String confirmPayment = "/confirmPayment.dart";
 
 
   static const String roleSelectionScreen = "/role_selection_screen.dart";
@@ -111,6 +117,18 @@ class AppRoutes {
     GetPage(
         name:riderspickup,
         page: () => RidersPickup(),
+        transition: Transition.fade),
+    GetPage(
+        name:driverArrived,
+        page: () => DriverArrived(),
+        transition: Transition.fade),
+    GetPage(
+        name:driverbegun,
+        page: () => DriverBegun(),
+        transition: Transition.fade),
+    GetPage(
+        name:confirmPayment,
+        page: () => ConfirmPayment(),
         transition: Transition.fade),
 
   ];

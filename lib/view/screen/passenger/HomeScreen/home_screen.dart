@@ -21,6 +21,7 @@ import '../../../component/text_field/search_textfiled.dart';
 import '../../Map/map_screen.dart';
 import 'HomeChild/Notifications/notifications.dart';
 import 'HomeChild/RentCar/rent_car.dart';
+import 'HomeChild/Schedule/Schedule_screen.dart';
 import 'HomeChild/SetLocation/set_location.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -99,6 +100,11 @@ class HomeScreen extends StatelessWidget {
                                     Get.to(RentCarScreen());
                                   }else if(homeController.serviceList[index]['title']== "Moto Bike"){
                                     Get.to(()=>BookingScreen());
+                                  }else if(homeController.serviceList[index]['title']== "Car"){
+                                    Get.to(()=>BookingScreen());
+                                  }
+                                  else if(homeController.serviceList[index]['title']== "Schedule"){
+                                  Get.to(()=>ScheduleScreen());
                                   };
                                 },
                                   child: Column(

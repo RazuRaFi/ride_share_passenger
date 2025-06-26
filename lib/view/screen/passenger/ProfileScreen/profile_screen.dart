@@ -7,6 +7,7 @@ import 'package:ride_share_flat/view/component/button/CommonButton.dart';
 import 'package:ride_share_flat/view/screen/common_screen/FAQ/faq_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/SafetyScreen/safety_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/Terms&Services/terms_services.dart';
+import 'package:ride_share_flat/view/screen/common_screen/signIn/sign_in_screen.dart';
 import 'package:ride_share_flat/view/screen/passenger/HistoryScreen/history_screen.dart';
 import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/EditProfileScreen/edit_profile.dart';
 import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/OrderTracking/order_tracking.dart';
@@ -108,7 +109,7 @@ class ProfileScreen extends StatelessWidget {
                   image: "assets/icons/faq.png",
                   label: "FAQ",
                   onTap: () {
-                    // Navigate or handle FAQ tap
+                  Get.to(()=>FAQScreen());
                   },
                 ),
               ],
@@ -179,7 +180,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                         height: 140,
-                        width: 350,
+                        width: 360,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.white,
@@ -204,7 +205,7 @@ class ProfileScreen extends StatelessWidget {
                                   titleSize: 14,
                                   onTap: () {
                                     // Add logout logic here
-                                    Navigator.of(context).pop();
+                                    Get.offAll(()=>SignInScreen());
                                   },
                                 ),
                                 CommonButton(
@@ -216,7 +217,7 @@ class ProfileScreen extends StatelessWidget {
                                   titleColor: Colors.black,
                                   titleSize: 14,
                                   onTap: () {
-                                    Navigator.of(context).pop();
+                                   Get.back();
                                   },
                                 ),
                               ],
@@ -227,8 +228,6 @@ class ProfileScreen extends StatelessWidget {
                     );
                   },
                 );
-
-
               },
               child: SizedBox(
                 child: Padding(

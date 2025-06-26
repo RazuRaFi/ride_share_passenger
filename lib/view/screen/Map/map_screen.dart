@@ -25,7 +25,6 @@ class _MapScreenState extends State<MapScreen> {
     CreateLoadMapController(),
   );
 
-  final String googleApiKey = "AIzaSyC0hhuHPap6Wk98dZIyQdvvpoE3p-LuXhU";
   TextEditingController searchLocationController = TextEditingController();
 
   @override
@@ -130,29 +129,6 @@ class _MapScreenState extends State<MapScreen> {
                 Navigator.pop(context, data);
               },
               icon: const Icon(Icons.arrow_back, color: Colors.black),
-            ),
-          ),
-          Positioned(
-            bottom: 250,
-            right: 16,
-            child: circleIconButton(
-              context,
-              onTap: () {
-                Get.toNamed(AppRoutes.safetyScreen);
-              },
-              icon: CommonImage(imageSrc: AppIcons.safety, size: 24,),
-            ),
-          ),
-          Positioned(
-            bottom: 320,
-            right: 16,
-            child: circleIconButton(
-              context,
-              onTap: () {
-                // OfferScreen.isNotFromNavbar = true;
-                // Get.toNamed(AppRoutes.offersScreen);
-              },
-              icon: CommonImage(imageSrc: AppIcons.offersSolid, size: 24,),
             ),
           ),
         ],

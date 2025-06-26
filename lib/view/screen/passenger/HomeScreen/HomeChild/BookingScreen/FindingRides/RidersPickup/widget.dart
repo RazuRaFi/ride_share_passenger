@@ -2,6 +2,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/DirverArrived/driver_arrived.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/MessageScreen/message_screen.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/riders_pickup.dart';
 
 import '../../../../../../../component/CommonText.dart';
 import '../../../../../../../component/button/CommonButton.dart';
@@ -156,8 +161,63 @@ class RidersBottomsheet extends StatelessWidget {
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          Expanded(child: CustomTextField(hindText: "Send a free message",fieldBorderRadius: 60,prefixIcon: Icon(Icons.messenger),)),
-                          IconButton(onPressed: (){}, icon: Icon(Icons.call_outlined,size: 40,)),
+                          Expanded(child: CustomTextField(hindText: "Send a free message",fieldBorderRadius: 60,prefixIcon: Icon(Icons.messenger),onTap: (){
+                            Get.to(()=>MessageScreen());
+
+                          },)),
+                          IconButton(onPressed: (){
+                            showModalBottomSheet( // ✅ Prefer `showModalBottomSheet` for better behavior
+                              context: context,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                ),
+                              ),
+                              backgroundColor: Colors.white,
+                              isScrollControlled: true, // in case keyboard pops up
+                              builder: (context) {
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context).viewInsets.bottom, // ✅ Avoids keyboard overlap
+                                    top: 16,
+                                    left: 16,
+                                    right: 16,
+                                  ),
+                                  child: SizedBox(
+                                    height: 216,
+                                    child: Column(
+                                      children: [
+                                        SizedBox(height: 50,),
+                                        CustomTextField(
+                                          hindText: "Call 347 953 9042",
+                                          fieldBorderRadius: 10,
+                                          prefixIcon: Icon(Icons.call_outlined),
+                                          fieldBorderColor: Colors.grey,
+                                          textStyle: TextStyle(fontSize: 12),
+                                        ),
+                                        SizedBox(height: 16,),
+                                        CommonButton(
+                                          titleText: "Cancel",
+                                          buttonHeight: 56,
+                                          buttonWidth: 361,
+                                          titleSize: 14,
+                                          titleWeight: FontWeight.w500,
+                                          borderColor: Colors.grey,
+                                          titleColor: Colors.black,
+                                          backgroundColor: Colors.white,
+                                          onTap: (){
+                                            Get.back();
+                                          },
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+
+                          }, icon: Icon(Icons.call_outlined,size: 40,)),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -170,18 +230,6 @@ class RidersBottomsheet extends StatelessWidget {
                             fontWeight: FontWeight.w700,
                           ),
                           const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Image.asset("assets/icons/man.png", height: 20, width: 20),
-                              const SizedBox(width: 5),
-                              CommonText(
-                                text: "Block B, Banasree, Dhaka.",
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 5),
                           Row(
                             children: [
                               Image.asset("assets/icons/pin.png", height: 20),
@@ -260,7 +308,7 @@ class RidersBottomsheet extends StatelessWidget {
                         titleColor: Colors.white,
                         titleSize: 16,
                         onTap: () {
-                          // Get.to(()=>RidersPickup());
+                          Get.to(()=>DriverArrived());
                         },
                       ),
                       const SizedBox(height: 20),

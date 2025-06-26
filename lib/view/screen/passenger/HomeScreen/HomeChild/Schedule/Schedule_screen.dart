@@ -1,12 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/Schedule/widget/schedule_sheet.dart';
 
-import '../../../../../../../Map/map_screen.dart';
-import '../../Widget/bottomsheet.dart';
-import 'Widget/arrived-bottomsheet.dart';
+import '../../../../Map/map_screen.dart';
 
-class DriverArrived extends StatelessWidget {
-  const DriverArrived({super.key});
+class ScheduleScreen extends StatelessWidget {
+  const ScheduleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class DriverArrived extends StatelessWidget {
           /// BottomSheet
           const Align(
             alignment: Alignment.bottomCenter,
-            child: ArrivedBottomsheet(),
+            child: ScheduleSheet(),
           ),
         ],
       ),
