@@ -25,14 +25,20 @@ class RideBottomSheet extends StatelessWidget {
       {
         "image": 'assets/icons/carmodel.png',
         "title": "Car",
-        "subtitle": "5 mins away\nQuick and affordable ride",
+        "subtitle": "Quick and affordable ride",
         "Price": "\$210"
       },
       {
         "image": 'assets/icons/carmodel.png',
         "title": "Car",
-        "subtitle": "5 mins away\nQuick and affordable ride",
+        "subtitle": "Quick and affordable ride",
         "Price": "\$250"
+      },
+      {
+        "image": 'assets/icons/carmodel.png',
+        "title": "Schedule a car  ",
+        "subtitle": "Schedule trip for long rides",
+        "Price": ""
       },
     ];
 
@@ -76,7 +82,7 @@ class RideBottomSheet extends StatelessWidget {
                         children: [
                           Image.asset(
                             rideList[index]['image'],
-                            height: 60,
+                            height: 50,
                             width: 60,
                           ),
                           const SizedBox(width: 12),

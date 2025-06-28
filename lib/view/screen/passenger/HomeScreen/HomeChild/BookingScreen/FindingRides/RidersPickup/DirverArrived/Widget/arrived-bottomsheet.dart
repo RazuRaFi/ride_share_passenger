@@ -109,41 +109,40 @@ class ArrivedBottomsheet extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CommonText(text: "RaFiuL RaZu",fontSize: 16,fontWeight: FontWeight.w500,),
-                              FittedBox(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  spacing: 5,
-                                  children: [
-                                    RatingBar.builder(
-                                      initialRating: 3,
-                                      minRating: 0,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 1,
-                                      itemSize: 22,
-                                      itemBuilder: (context, _) => Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      onRatingUpdate: (rating) {
-                                        print(rating);
-                                      },
+                            
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                spacing: 5,
+                                children: [
+                                  RatingBar.builder(
+                                    initialRating: 3,
+                                    minRating: 0,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 1,
+                                    itemSize: 22,
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
                                     ),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  ),
 
-                                    CommonText(text: "4.65"),
+                                  CommonText(text: "4.65"),
 
-                                    CommonText(text: "2534 Trips"),
+                                  CommonText(text: "2534 Trips"),
 
 
-                                    Row(
-                                      spacing: 5,
-                                      children: [
-                                        Image.asset("assets/icons/car.png",height: 28,width: 28,),
-                                        CommonText(text: "Professional",fontSize: 14,fontWeight: FontWeight.w500,),
-                                      ],
-                                    )
-                                  ],
-                                ),
+                                  Row(
+                                    spacing: 5,
+                                    children: [
+                                      Image.asset("assets/icons/car.png",height: 28,width: 28,),
+                                      CommonText(text: "Professional",fontSize: 14,fontWeight: FontWeight.w500,),
+                                    ],
+                                  )
+                                ],
                               )
                             ],
                           )

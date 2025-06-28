@@ -10,16 +10,18 @@ class FindingRides extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        /// Google Map
-        const Positioned.fill(child: MapScreen()),
-        /// BottomSheet
-        const Align(
-          alignment: Alignment.bottomCenter,
-          child: FindBottomSheet(),
-        ),
-      ],
+    return Scaffold(
+      body: Stack(
+        children: [
+          /// Google Map
+          const Positioned.fill(child: MapScreen()),
+          /// BottomSheet
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: FindBottomSheet(),
+          ),
+        ],
+      ),
     );
   }
 }

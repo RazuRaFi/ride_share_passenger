@@ -163,30 +163,48 @@ class _SetLocationHomeState extends State<SetLocationHome> {
             ),
           ),
           Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 203,
-                width: 396,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey)
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 203, // Fixed height, adjust based on content if needed
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 28,),
-                      CustomTextField(hindText: "13th Street.47 W 13th St, New York",suffixIcon: Icon(Icons.search),fieldBorderRadius: 10,prefixIcon: Icon(Icons.location_pin),fieldBorderColor: Colors.grey,textStyle: TextStyle(fontSize: 12),),
-                      SizedBox(height: 16,),
-                      CommonButton(titleText: "Confirm Home Address",backgroundColor: Colors.black,titleColor: Colors.white,buttonHeight: 56,buttonWidth: 359,titleSize: 16,titleWeight: FontWeight.w500,),
-                    ],
-                  ),
+                color: Colors.white,
+                border: Border.all(color: Colors.grey),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min, // Ensures column takes minimum height
+                  children: [
+                    const SizedBox(height: 28),
+                    CustomTextField(
+                      hindText: "13th Street.47 W 13th St, New York",
+                      suffixIcon: const Icon(Icons.search),
+                      fieldBorderRadius: 10,
+                      prefixIcon: const Icon(Icons.location_pin),
+                      fieldBorderColor: Colors.grey,
+                      textStyle: const TextStyle(fontSize: 12),
+                    ),
+                    const SizedBox(height: 16),
+                    CommonButton(
+                      titleText: "Confirm Home Address",
+                      backgroundColor: Colors.black,
+                      titleColor: Colors.white,
+                      buttonHeight: 56,
+                      buttonWidth: double.infinity, // Use full available width
+                      titleSize: 16,
+                      titleWeight: FontWeight.w500,
+                    ),
+                  ],
                 ),
-
-              ))
+              ),
+            ),
+          ),
         ],
       ),
     );

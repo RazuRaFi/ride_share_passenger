@@ -15,7 +15,7 @@ class OnboardingScreen extends StatelessWidget {
     },
     {
       "title": "Find a ride",
-      "subtitle": "Request a ride and be picked up on the same route by the driver",
+      "subtitle": "Request a ride and be picked up\non the same route by the driver",
       "image": "assets/images/onboard2.png",
     },
     {
