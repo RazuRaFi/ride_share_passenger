@@ -1,13 +1,5 @@
-
-
-
-
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../../../controller/Mapcontroller/create_load_controller.dart';
@@ -28,82 +20,27 @@ class SetLocation extends StatefulWidget {
 
 class _SetLocationHomeState extends State<SetLocation> {
   final MapController mapController = Get.put(MapController());
-  CreateLoadMapController createLoadMapController = Get.put(
-    CreateLoadMapController(),
-  );
+  final CreateLoadMapController createLoadMapController = Get.put(CreateLoadMapController());
 
   final String googleApiKey = "AIzaSyC0hhuHPap6Wk98dZIyQdvvpoE3p-LuXhU";
-  TextEditingController searchLocationController = TextEditingController();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    Future.delayed(Duration(seconds: 5), () {
-      // Get.to(() => RouteScreen());
-    },);
-    super.initState();
-  }
+  final TextEditingController searchLocationController = TextEditingController();
 
   @override
   void dispose() {
-    // Dispose of the search controller
     searchLocationController.dispose();
-    // Dispose of the MapController to clean up the GoogleMapController
     Get.delete<MapController>();
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // Handle keyboard overlap
-      bottomSheet: Container(
-        margin: const EdgeInsets.only(top: 5), // Prevent shadow clipping
-        decoration: const BoxDecoration(
-          color: AppColors.background,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(16),
-            topRight: Radius.circular(16),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              spreadRadius: 2,
-              blurRadius: 5,
-            ),
-          ],
-        ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-              left: 16,
-              right: 16,
-              top: 16,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // locationSearchBar(
-                //   searchLocationController: searchLocationController,
-                //   createLoadMapController: createLoadMapController,
-                //   googleApiKey: googleApiKey,
-                // ),
-                // const SizedBox(height: 16),
-                // savedAddressBox(),
-                // 24.height,
-              ],
-            ),
-          ),
-        ),
-      ),
+      resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
           // Google Map
           Obx(() {
-            return mapController.isLoading.value == true
+            return mapController.isLoading.value
                 ? const Center(child: CircularProgressIndicator())
                 : GoogleMap(
               initialCameraPosition: CameraPosition(
@@ -120,7 +57,7 @@ class _SetLocationHomeState extends State<SetLocation> {
             );
           }),
 
-          // Top Bar with Back Arrow
+          // Back button
           Positioned(
             top: 60,
             left: 20,
@@ -133,12 +70,13 @@ class _SetLocationHomeState extends State<SetLocation> {
                   "state": createLoadMapController.state,
                   "zip": createLoadMapController.zip,
                 };
-                debugPrint("Data:======>>> $data");
                 Navigator.pop(context, data);
               },
               icon: const Icon(Icons.arrow_back, color: Colors.black),
             ),
           ),
+
+          // Floating icons
           Positioned(
             bottom: 250,
             right: 16,
@@ -147,7 +85,7 @@ class _SetLocationHomeState extends State<SetLocation> {
               onTap: () {
                 Get.toNamed(AppRoutes.safetyScreen);
               },
-              icon: CommonImage(imageSrc: AppIcons.safety, size: 24,),
+              icon: CommonImage(imageSrc: AppIcons.safety, size: 24),
             ),
           ),
           Positioned(
@@ -156,52 +94,66 @@ class _SetLocationHomeState extends State<SetLocation> {
             child: circleIconButton(
               context,
               onTap: () {
-                // OfferScreen.isNotFromNavbar = true;
-                // Get.toNamed(AppRoutes.offersScreen);
+                // Future use
               },
-              icon: CommonImage(imageSrc: AppIcons.offersSolid, size: 24,),
+              icon: CommonImage(imageSrc: AppIcons.offersSolid, size: 24),
             ),
           ),
+
+          // Bottom container
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: Container(
-              height: 203, // Fixed height, adjust based on content if needed
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              height: 203,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
                 color: Colors.white,
-                border: Border.all(color: Colors.grey),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min, // Ensures column takes minimum height
-                  children: [
-                    const SizedBox(height: 28),
-                    CustomTextField(
-                      hindText: "13th Street.47 W 13th St, New York",
-                      suffixIcon: const Icon(Icons.search),
-                      fieldBorderRadius: 10,
-                      prefixIcon: const Icon(Icons.location_pin),
-                      fieldBorderColor: Colors.grey,
-                      textStyle: const TextStyle(fontSize: 12),
-                    ),
-                    const SizedBox(height: 16),
-                    CommonButton(
-                      titleText: "Set Locations",
-                      backgroundColor: Colors.black,
-                      titleColor: Colors.white,
-                      buttonHeight: 56,
-                      buttonWidth: double.infinity, // Use full available width
-                      titleSize: 16,
-                      titleWeight: FontWeight.w500,
-                    ),
-                  ],
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
                 ),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 8),
+                  Container(
+                    width: 40,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  CustomTextField(
+                    hindText: "13th Street.47 W 13th St, New York",
+                    suffixIcon: const Icon(Icons.search),
+                    fieldBorderRadius: 10,
+                    prefixIcon: const Icon(Icons.location_pin),
+                    fieldBorderColor: Colors.grey,
+                    textStyle: const TextStyle(fontSize: 12),
+                  ),
+                  const SizedBox(height: 16),
+                  CommonButton(
+                    titleText: "Set Locations",
+                    backgroundColor: Colors.black,
+                    titleColor: Colors.white,
+                    buttonHeight: 56,
+                    buttonWidth: double.infinity,
+                    titleSize: 16,
+                    titleWeight: FontWeight.w500,
+                  ),
+                ],
               ),
             ),
           ),

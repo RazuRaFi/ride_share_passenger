@@ -14,25 +14,30 @@ class NavBarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final NavController navController = Get.put(NavController());
      return Obx(() => Scaffold(
-      body: navController.pages[navController.selectedIndex.value],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: navController.selectedIndex.value,
-        onTap: navController.changeTab,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black45,
-        selectedFontSize: 15,
-        unselectedFontSize: 14,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.percent), label: "Offers"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.history), label: "History"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person), label: "Profile"),
-        ],
-      ),
-    ));;
+       backgroundColor: Colors.white,
+       body: navController.pages[navController.selectedIndex.value],
+       bottomNavigationBar: SizedBox(
+         height: 105,
+         child: BottomNavigationBar(
+           backgroundColor: Colors.white,
+           elevation: 10,
+           currentIndex: navController.selectedIndex.value,
+           onTap: navController.changeTab,
+           selectedItemColor: Colors.black,
+           unselectedItemColor: Colors.black45,
+           selectedFontSize: 15,
+           unselectedFontSize: 14,
+           type: BottomNavigationBarType.fixed,
+           items: const [
+             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+             BottomNavigationBarItem(icon: Icon(Icons.percent), label: "Offers"),
+             BottomNavigationBarItem(icon: Icon(Icons.history), label: "History"),
+             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+           ],
+         ),
+       ),
+
+
+     ));;
   }
 }

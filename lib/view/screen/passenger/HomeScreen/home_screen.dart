@@ -223,7 +223,7 @@ class HomeScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Container(
                                   height: 90,
-                                  width: 270,
+                                  width: 280,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(color: Colors.grey),
@@ -315,8 +315,6 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 26,),
-
-
                       ],
                     ),
                   ))

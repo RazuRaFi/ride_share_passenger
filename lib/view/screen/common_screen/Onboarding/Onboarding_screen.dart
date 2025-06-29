@@ -7,20 +7,28 @@ class OnboardingScreen extends StatelessWidget {
   final PageController pageController = PageController();
   final OnboardingController controller = Get.put(OnboardingController());
 
+  // Checklist items for the first onboarding page
+  final List<String> checklistItems = [
+    "Save money",
+    "Make passive income",
+    "Make new friends",
+    "Overcome traffic congestion",
+  ];
+
   final List<Map<String, String>> onboardingData = [
     {
       "title": "Let’s travel together",
-      "subtitle": "Make new friends",
+      "subtitle": "", // Subtitle is handled as checklist for first page
       "image": "assets/images/splash.png",
     },
     {
       "title": "Find a ride",
-      "subtitle": "Request a ride and be picked up\non the same route by the driver",
+      "subtitle": "Request a ride and be picked up on \nthe same route by the driver",
       "image": "assets/images/onboard2.png",
     },
     {
       "title": "Post a ride",
-      "subtitle": "Publish a ride and pick up passengers along the way",
+      "subtitle": "Publish a ride and pick up passengers \nalong the way",
       "image": "assets/images/onboard3.png",
     },
   ];
@@ -42,18 +50,60 @@ class OnboardingScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(data["image"]!, height: 210, width: 210),
-                    SizedBox(height: 20),
-                    Text(data["title"]!, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 10),
-                    Text(data["subtitle"]!, textAlign: TextAlign.center),
+                    const SizedBox(height: 20),
+                    Text(
+                      data["title"]!,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+
+                    // If it's the first page, show checklist
+                    if (index == 0)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: checklistItems.map((item) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.check, size: 18),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      )
+                    else
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: Text(
+                          data["subtitle"]!,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ),
                   ],
                 );
               },
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Obx(() {
-            final isLastPage = controller.currentPage.value == onboardingData.length - 1;
+            final isLastPage =
+                controller.currentPage.value == onboardingData.length - 1;
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -61,9 +111,12 @@ class OnboardingScreen extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Get.offAll(() => TogetherScreen()); // Direct navigation on skip
+                      Get.offAll(() => TogetherScreen());
                     },
-                    child: Text("Skip", style: TextStyle(color: Colors.black)),
+                    child: const Text(
+                      "Skip",
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
                   CircleAvatar(
                     radius: 20,
@@ -73,17 +126,23 @@ class OnboardingScreen extends StatelessWidget {
                         if (isLastPage) {
                           Get.to(() => TogetherScreen());
                         } else {
-                          pageController.nextPage(duration: 300.milliseconds, curve: Curves.ease);
+                          pageController.nextPage(
+                            duration: 300.milliseconds,
+                            curve: Curves.ease,
+                          );
                         }
                       },
-                      icon: Icon(Icons.arrow_forward_rounded, color: Colors.white),
+                      icon: const Icon(
+                        Icons.arrow_forward_rounded,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
               ),
             );
           }),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
         ],
       ),
     );
