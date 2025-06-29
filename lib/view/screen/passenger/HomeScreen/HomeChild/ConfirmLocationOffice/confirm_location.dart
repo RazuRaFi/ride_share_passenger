@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/booking_screen.dart';
 
 import '../../../../../../controller/Mapcontroller/create_load_controller.dart';
 import '../../../../../../controller/Mapcontroller/map_controller.dart';
@@ -146,13 +147,16 @@ class _SetLocationHomeState extends State<SetLocationOffice> {
                   ),
                   const SizedBox(height: 16),
                   CommonButton(
-                    titleText: "Set Locations",
+                    titleText: "Confirm Office Address",
                     backgroundColor: Colors.black,
                     titleColor: Colors.white,
                     buttonHeight: 56,
                     buttonWidth: double.infinity,
                     titleSize: 16,
                     titleWeight: FontWeight.w500,
+                    onTap: (){
+                      Get.to(()=>BookingScreen());
+                    },
                   ),
                 ],
               ),

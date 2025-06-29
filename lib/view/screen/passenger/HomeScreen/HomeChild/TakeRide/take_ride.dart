@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/SetLocation/set_location.dart';
 
 import '../ConfirmLocationHome/confirm_location.dart';
 import '../ConfirmLocationOffice/confirm_location.dart';
@@ -25,9 +26,17 @@ class TakeRideSet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            CustomTextField(hindText: "13th Street.47 W 13th St, New York",suffixIcon: Icon(Icons.close),fieldBorderRadius: 10,prefixIcon: Icon(Icons.man),fieldBorderColor: Colors.grey,textStyle: TextStyle(fontSize: 12),),
+            CustomTextField(
+              onTap: (){
+                Get.to(()=>SetLocation());
+              },
+              hindText: "13th Street.47 W 13th St, New York",suffixIcon: Icon(Icons.close),fieldBorderRadius: 10,prefixIcon: Icon(Icons.man),fieldBorderColor: Colors.grey,textStyle: TextStyle(fontSize: 12),),
             SizedBox(height: 10,),
-            CustomTextField(hindText: "13th Street.47 W 13th St, New York",suffixIcon: Icon(Icons.search),fieldBorderRadius: 10,prefixIcon: Icon(Icons.location_pin),fieldBorderColor: Colors.grey,textStyle: TextStyle(fontSize: 12)),
+            CustomTextField(
+              onTap: (){
+                Get.to(()=>SetLocation());
+              },
+                hindText: "13th Street.47 W 13th St, New York",suffixIcon: Icon(Icons.search),fieldBorderRadius: 10,prefixIcon: Icon(Icons.location_pin),fieldBorderColor: Colors.grey,textStyle: TextStyle(fontSize: 12)),
             SizedBox(height: 20,),
             ListView.builder(
               shrinkWrap: true,

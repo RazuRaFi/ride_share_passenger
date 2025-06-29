@@ -32,6 +32,8 @@ class Assets {
   static const String imagesCalender = 'assets/images/calender.png';
   static const String imagesDriver = 'assets/images/driver.png';
   static const String imagesEditimage = 'assets/images/editimage.jpg';
+  static const String imagesKousimage = 'assets/images/kousimage.png';
+  static const String imagesLogoon = 'assets/images/logoon.png';
   static const String imagesMap = 'assets/images/map.png';
   static const String imagesMaps = 'assets/images/maps.png';
   static const String imagesNewpassword = 'assets/images/newpassword.png';

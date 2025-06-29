@@ -23,6 +23,7 @@ import 'HomeChild/Notifications/notifications.dart';
 import 'HomeChild/RentCar/rent_car.dart';
 import 'HomeChild/Schedule/Schedule_screen.dart';
 import 'HomeChild/SetLocation/set_location.dart';
+import 'HomeChild/TakeRide/take_ride.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -99,9 +100,9 @@ class HomeScreen extends StatelessWidget {
                                   if(homeController.serviceList[index]['title']== "Rent Car"){
                                     Get.to(RentCarScreen());
                                   }else if(homeController.serviceList[index]['title']== "Moto Bike"){
-                                    Get.to(()=>BookingScreen());
+                                    Get.to(()=>TakeRideSet());
                                   }else if(homeController.serviceList[index]['title']== "Car"){
-                                    Get.to(()=>BookingScreen());
+                                    Get.to(()=>TakeRideSet());
                                   }
                                   else if(homeController.serviceList[index]['title']== "Schedule"){
                                   Get.to(()=>ScheduleScreen());

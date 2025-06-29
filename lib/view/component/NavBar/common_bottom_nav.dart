@@ -17,7 +17,7 @@ class NavBarScreen extends StatelessWidget {
        backgroundColor: Colors.white,
        body: navController.pages[navController.selectedIndex.value],
        bottomNavigationBar: SizedBox(
-         height: 105,
+         height: 80,
          child: BottomNavigationBar(
            backgroundColor: Colors.white,
            elevation: 10,

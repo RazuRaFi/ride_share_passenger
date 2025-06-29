@@ -19,7 +19,7 @@ class OnboardingScreen extends StatelessWidget {
     {
       "title": "Let’s travel together",
       "subtitle": "", // Subtitle is handled as checklist for first page
-      "image": "assets/images/splash.png",
+      "image": "assets/images/logoon.png",
     },
     {
       "title": "Find a ride",
@@ -49,6 +49,7 @@ class OnboardingScreen extends StatelessWidget {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const SizedBox(height: 20),
                     Image.asset(data["image"]!, height: 210, width: 210),
                     const SizedBox(height: 20),
                     Text(

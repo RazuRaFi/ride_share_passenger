@@ -9,6 +9,7 @@ import 'package:ride_share_flat/view/screen/common_screen/FAQ/faq_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/SafetyScreen/safety_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/Terms&Services/terms_services.dart';
 import 'package:ride_share_flat/view/screen/common_screen/together_screen/together_screen.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/SetLocation/set_location.dart';
 import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/OrderTracking/order_tracking.dart';
 import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/SettingsPage/settings_page.dart';
 
@@ -75,7 +76,7 @@ class HomeDrawer extends StatelessWidget {
             iconColor: Colors.black,
            icon:"assets/icons/pin.png",
             onTap: () {
-              Get.to(TakeRideSet());
+              Get.to(()=>SetLocation());
             },
           ),
           DrawerItem(
