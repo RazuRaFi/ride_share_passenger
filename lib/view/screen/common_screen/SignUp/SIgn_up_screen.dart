@@ -75,33 +75,56 @@ class SignUpScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 32,),
-              GestureDetector(
-                onTap: (){
-                  showDialog(context: context, builder: (context) {
-                    return GestureDetector(
-                      onTap: () {
-                        Get.offAll(() => NavBarScreen());
-                      },
-                      child: Container(
-                        height: 600,
-                        width: 360,
-                        color: Colors.white,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/images/win.png", height: 106, width: 106),
-                            SizedBox(height: 19),
-                            CommonText(text: "Congratulations", fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black),
-                            SizedBox(height: 7),
-                            Center(child: CommonText(text: "Your account has been successfully registered", fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
-                          ],
-                        ),
-                      ),
-                    );
-                  });
-                },
-                  child:CommonButton(titleText: "Sign up",buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.black,titleColor: Colors.white,titleSize:20,),),
+             CommonButton(
+               onTap: () {
+                 showDialog(
+                   context: context,
+                   builder: (context) {
+                     return GestureDetector(
+                       onTap: () {
+                         Get.offAll(() => NavBarScreen());
+                       },
+                       child: Container(
+                         height: 600,
+                         width: 360,
+                         color: Colors.white,
+                         child: Column(
+                           crossAxisAlignment: CrossAxisAlignment.center,
+                           mainAxisAlignment: MainAxisAlignment.center,
+                           children: [
+                             Image.asset("assets/images/win.png", height: 106, width: 106),
+                             const SizedBox(height: 19),
+                             const Text(
+                               "Congratulations",
+                               style: TextStyle(
+                                 fontSize: 20,
+                                 fontWeight: FontWeight.w500,
+                                 color: Colors.black,
+                                 decoration: TextDecoration.none, // <- Remove underline
+                               ),
+                             ),
+                             const SizedBox(height: 7),
+                             const Center(
+                               child: Text(
+                                 "Your account has been successfully registered",
+                                 textAlign: TextAlign.center,
+                                 style: TextStyle(
+                                   fontSize: 14,
+                                   fontWeight: FontWeight.w400,
+                                   color: Colors.black,
+                                   decoration: TextDecoration.none, // <- Remove underline
+                                 ),
+                               ),
+                             ),
+                           ],
+                         ),
+                       ),
+                     );
+                   },
+                 );
+               },
+
+               titleText: "Sign up",buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.black,titleColor: Colors.white,titleSize:20,),
               SizedBox(height: 32,),
           
           
