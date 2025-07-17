@@ -11,7 +11,7 @@ class ProfileController extends GetxController {
   List gender = const ["Male", "Female", "Other"];
 
   // String selectedLanguage = "English";
-  String? image;
+  String image = "";
 
   TextEditingController nameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
@@ -29,7 +29,7 @@ class ProfileController extends GetxController {
   // }
 
   getProfileImage() async {
-    image = await OtherHelper.openGallery();
+    image = await OtherHelper.openGallery()??"";
     update();
   }
 

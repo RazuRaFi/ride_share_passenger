@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:ride_share_flat/view/component/NavBar/common_bottom_nav.dart';
 import 'package:ride_share_flat/view/screen/common_screen/CreatePassword/create_new_password.dart';
 import 'package:ride_share_flat/view/screen/common_screen/EmailVerification/email_verification.dart';
 import 'package:ride_share_flat/view/screen/common_screen/ForgottenPassword/forgottern_password.dart';
@@ -104,7 +105,7 @@ class AppRoutes {
         transition: Transition.fade),
     GetPage(
         name: verifyEmail,
-        page: () => const EmailVerification(),
+        page: () => EmailVerification(),
         transition: Transition.fade),
     GetPage(
         name: createPassword,
@@ -129,6 +130,10 @@ class AppRoutes {
     GetPage(
         name:confirmPayment,
         page: () => ConfirmPayment(),
+        transition: Transition.fade),
+    GetPage(
+        name:navBarScreen,
+        page: () => NavBarScreen(),
         transition: Transition.fade),
 
   ];

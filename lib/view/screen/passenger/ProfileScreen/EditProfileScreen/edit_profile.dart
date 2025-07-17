@@ -1,5 +1,7 @@
 
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_intl_phone_field/countries.dart';
 import 'package:flutter_intl_phone_field/phone_number.dart';
@@ -8,10 +10,13 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl_phone_number_field/intl_phone_number_field.dart';
 import 'package:ride_share_flat/controller/Profile/profile_controller.dart';
+import 'package:ride_share_flat/helpers/others_helper.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 import 'package:ride_share_flat/view/component/button/CommonButton.dart';
 import 'package:ride_share_flat/view/component/text_field/common_phone_number_textfield.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
+
+import '../../../../component/image/common_image.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
@@ -31,6 +36,7 @@ class EditProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: CommonText(text: "Edit Profile",fontSize: 16,fontWeight: FontWeight.w500,),
         centerTitle: true,
       ),
@@ -53,16 +59,28 @@ class EditProfileScreen extends StatelessWidget {
                         border: Border.all(color: Colors.grey),
                       ),
                       child: ClipOval(
-                        child: Image.asset(
-                          "assets/images/editimage.jpg",
-                          fit: BoxFit.cover, // Ensures it fills the circular container
+                        child:
+                        controller.image.isEmpty
+                            ? CommonImage(
+                          imageSrc:controller.image,
+                          imageType: ImageType.network,
+                          height: 100,
+                          width: 100,
+                        )
+                            : Image.file(
+                          File(controller.image),
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),
                     Positioned(
                       top: 30.h,
                         left: 42.w,
-                        child: IconButton(onPressed: (){}, icon: Icon(Icons.camera_alt_outlined,color: Colors.white,size: 28,)))
+                        child: IconButton(onPressed: (){
+                          controller.getProfileImage();
+                        }, icon: Icon(Icons.camera_alt_outlined,color: Colors.white,size: 28,)))
           
                   ],
                 ),

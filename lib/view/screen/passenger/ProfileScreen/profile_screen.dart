@@ -48,8 +48,17 @@ class ProfileScreen extends StatelessWidget {
                       Container(
                         height: 74,
                         width: 74,
-                        decoration: BoxDecoration(shape: BoxShape.circle),
-                        child: Image.asset("assets/images/profileimage.png"),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          border: Border.all(color: Colors.grey)
+                        ),
+                        child: ClipOval(
+                          child: CommonImage(
+                            imageSrc:"https://t4.ftcdn.net/jpg/05/31/37/89/360_F_531378938_xwRjN9e5ramdPj2coDwHrwk9QHckVa5Y.jpg",
+                            imageType: ImageType.network,
+                           fill: BoxFit.fill,
+                          ),
+                        ),
                       ),
                       Column(
                         spacing: 5,
