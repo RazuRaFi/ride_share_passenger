@@ -17,7 +17,7 @@ class AppUrls {
   static const termsOfServices = "$baseUrl/terms-and-conditions";
   static const chats = "$baseUrl/chats";
   static const messages = "$baseUrl/messages";
-  static const myProfile = "$baseUrl/users/my-profile";
+  static const myProfile = "$baseUrl/passenger/get-profile";
   static const updateProfile = "$baseUrl/users/update-my-profile";
   static const safety = "$baseUrl/safety";
   static const faq = "$baseUrl/settings/all-faq";

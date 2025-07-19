@@ -6,6 +6,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
+import 'package:ride_share_flat/controller/AuthController/forgot_password_controller.dart';
 import 'package:ride_share_flat/helpers/app_routes.dart';
 import 'package:ride_share_flat/utils/app_image.dart';
 import 'package:ride_share_flat/view/screen/common_screen/CreatePassword/create_new_password.dart';
@@ -15,12 +16,15 @@ import '../../../component/CommonText.dart';
 import '../ForgottenPassword/widget/otp_controller.dart';
 
 class EmailVerification extends StatelessWidget {
-  const EmailVerification({super.key});
+   EmailVerification({super.key});
+  final formKey = GlobalKey<FormState>();
+  final OtpController controller = Get.put(OtpController());
+  final ForgotPasswordController fController=Get.put(ForgotPasswordController());
+
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    final OtpController controller = Get.put(OtpController());
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -28,7 +32,8 @@ class EmailVerification extends StatelessWidget {
         title: CommonText(text: "Email verification", fontSize: 16, fontWeight:FontWeight.w500),
         centerTitle: true,
       ),
-      body: Padding(
+      body:GetBuilder<ForgotPasswordController>(builder: (fController){
+        return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Form(
@@ -41,12 +46,11 @@ class EmailVerification extends StatelessWidget {
                 SizedBox(height: 24,),
                 Center(child: CommonText(
                     textAlign: TextAlign.center ,text: "Please enter the 5 digit code that was sent to\n     "
-                       " xyz@gmail.com ", fontSize: 14, fontWeight:FontWeight.w400)),
+                    " xyz@gmail.com ", fontSize: 14, fontWeight:FontWeight.w400)),
                 SizedBox(height: 48,),
-                PinCodeTextField(),
                 SizedBox(height: 48,),
                 OtpTextField(
-                  numberOfFields: 5,
+                  numberOfFields:4,
                   borderColor: Colors.grey,
                   showFieldAsBox: true,
                   fieldHeight: 55,
@@ -54,25 +58,16 @@ class EmailVerification extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   onCodeChanged: (String code) {
                     log(">>>>>>>>>>>>>>>> $code");
-                    },
+                  },
                   onSubmit: (String verificationCode){
-                    showDialog(
-                        context: context,
-                        builder: (context){
-                          return AlertDialog(
-                            title: Text("Verification Code"),
-                            content: Text('Code entered is $verificationCode'),
-                          );
-                        }
-                    );
+                    fController.otpController.text = verificationCode;
                   }, // end onSubmit
                 ),
                 SizedBox(height: 135,),
                 CommonButton(
                   onTap: (){
                     if(formKey.currentState!.validate()){
-
-                      Get.toNamed(AppRoutes.createPassword);
+                      fController.verifyOtpRepo();
 
                     }
                   },
@@ -82,7 +77,8 @@ class EmailVerification extends StatelessWidget {
             ),
           ),
         ),
-      ),
+        );
+      }),
     );
   }
 }

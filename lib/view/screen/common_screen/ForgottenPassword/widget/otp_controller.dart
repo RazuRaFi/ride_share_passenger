@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class OtpController extends GetxController {
+
   RxInt resendSeconds = 30.obs;
   Timer? _timer;
   RxBool canResend = false.obs;
@@ -36,6 +38,8 @@ class OtpController extends GetxController {
     // Restart the timer
     startResendTimer();
   }
+
+
 
   @override
   void onClose() {

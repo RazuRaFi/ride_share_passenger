@@ -14,14 +14,21 @@ import '../../utils/app_utils.dart';
 
 class ForgotPasswordController extends GetxController{
   final TextEditingController forgotMailController=TextEditingController();
+  final TextEditingController otpController=TextEditingController();
+  final TextEditingController passwordController=TextEditingController();
+  final TextEditingController confirmPasswordController=TextEditingController();
 
   Timer? _timer;
   int start = 0;
+  bool isLoadingVerify=false;
+  bool isLoadingReset=false;
+
 
   String time = "";
   RxBool isLoading=false.obs;
   String signUpToken="";
   String otpVerifyToken="";
+  String forgetPasswordToken="";
 
   void startTimer() {
     _timer?.cancel(); // Cancel any existing timer
@@ -69,4 +76,63 @@ class ForgotPasswordController extends GetxController{
 
     isLoading(false);
   }
+
+
+  Future<void> verifyOtpRepo() async {
+    isLoadingVerify = true;
+    update();
+    Map<String, String> headers = {
+      "token":otpVerifyToken,
+    };
+    Map<String, String> body = {
+      "otp": otpController.text
+    };
+    var response = await ApiService.patchApi(
+        AppUrls.verifyOtp,
+        body:body,
+        header: headers
+    );
+
+    if (response.statusCode == 200) {
+      var data = response.body;
+      forgetPasswordToken = data['data'];
+      Get.toNamed(AppRoutes.createPassword);
+      otpController.clear();
+    } else {
+      Get.snackbar(response.statusCode.toString(), response.message);
+    }
+
+    isLoadingVerify = false;
+    update();
+  }
+
+  Future<void> resetPasswordRepo() async {
+
+    isLoadingReset = true;
+    update();
+    Map<String, String> header = {
+      "token": forgetPasswordToken,
+    };
+
+    Map<String, String> body = {
+      "newPassword": passwordController.text,
+      "confirmPassword":confirmPasswordController.text
+    };
+    var response =
+    await ApiService.patchApi(AppUrls.resetPassword, body:body, header: header);
+
+    if (response.statusCode == 200) {
+      Utils.toastMessage(response.message);
+      Get.offAllNamed(AppRoutes.signIn);
+
+      otpController.clear();
+      passwordController.clear();
+      confirmPasswordController.clear();
+    } else {
+      Get.snackbar(response.statusCode.toString(), response.message);
+    }
+    isLoadingReset = false;
+    update();
+  }
+
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:ride_share_flat/controller/Profile/profile_controller.dart';
 import 'package:ride_share_flat/helpers/my_extension.dart';
+import 'package:ride_share_flat/utils/app_urls.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 import 'package:ride_share_flat/view/component/button/CommonButton.dart';
 import 'package:ride_share_flat/view/screen/common_screen/FAQ/faq_screen.dart';
@@ -16,8 +18,21 @@ import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/SettingsPage
 import '../../../../utils/app_colors.dart';
 import '../../../component/image/common_image.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final ProfileController controller = ProfileController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.getMyProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,36 +64,49 @@ class ProfileScreen extends StatelessWidget {
                         height: 74,
                         width: 74,
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey)
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.grey),
                         ),
-                        child: ClipOval(
-                          child: CommonImage(
-                            imageSrc:"https://t4.ftcdn.net/jpg/05/31/37/89/360_F_531378938_xwRjN9e5ramdPj2coDwHrwk9QHckVa5Y.jpg",
-                            imageType: ImageType.network,
-                           fill: BoxFit.fill,
-                          ),
-                        ),
+                        child: Obx(() {
+                          return controller.isGetProfile.value
+                              ? Center(child: CircularProgressIndicator())
+                              : ClipOval(
+                                  child: CommonImage(
+                                    imageSrc:
+                                        "${AppUrls.imageUrl}${controller.userProfileModel.profileImage}",
+                                    imageType: ImageType.network,
+                                    fill: BoxFit.fill,
+                                  ),
+                                );
+                        }),
                       ),
                       Column(
                         spacing: 5,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CommonText(
-                            text: "RaFiuL RaZu",
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          CommonText(
-                            text: "+123 456 789",
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          Obx(() {
+                            return controller.isGetProfile.value
+                                ? Center(child: CircularProgressIndicator())
+                                : CommonText(
+                                    text: controller.userProfileModel.fullName,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  );
+                          }),
+                          Obx(() {
+                            return controller.isGetProfile.value
+                                ? Center(child: CircularProgressIndicator())
+                                : CommonText(
+                                    text: controller.userProfileModel.phone,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  );
+                          }),
                         ],
                       ),
                     ],
                   ),
-        
+
                   GestureDetector(
                     onTap: () {
                       Get.to(EditProfileScreen());
@@ -118,7 +146,7 @@ class ProfileScreen extends StatelessWidget {
                   image: "assets/icons/faq.png",
                   label: "FAQ",
                   onTap: () {
-                  Get.to(()=>FAQScreen());
+                    Get.to(() => FAQScreen());
                   },
                 ),
               ],
@@ -131,13 +159,16 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   roleContainer(
                     title: 'You have multiple promos.',
-        
-                    details: 'We’ll automatically apply them on that saved you.',
+
+                    details:
+                        'We’ll automatically apply them on that saved you.',
                     image: 'assets/images/offerup.png',
                   ),
-                  roleContainer(title: "Schedule your ride.",
-                      details:"Schedule your next trip up to 60 days ago.",
-                      image: "assets/images/calender.png")
+                  roleContainer(
+                    title: "Schedule your ride.",
+                    details: "Schedule your next trip up to 60 days ago.",
+                    image: "assets/images/calender.png",
+                  ),
                 ],
               ),
             ),
@@ -147,38 +178,58 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap:(){
+                    onTap: () {
                       Get.to(OrderTracking());
-                        },
-                      child: ListItem(title: 'Order Tracking', icon: 'assets/icons/order.png',)),
+                    },
+                    child: ListItem(
+                      title: 'Order Tracking',
+                      icon: 'assets/icons/order.png',
+                    ),
+                  ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.to(SettingsPage());
                     },
 
-                      child: ListItem(title: 'Settings', icon: 'assets/icons/settings.png',)),
+                    child: ListItem(
+                      title: 'Settings',
+                      icon: 'assets/icons/settings.png',
+                    ),
+                  ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.to(SafetyScreen());
                     },
-                      child: ListItem(title: 'Safety', icon: 'assets/icons/safety.png',)),
+                    child: ListItem(
+                      title: 'Safety',
+                      icon: 'assets/icons/safety.png',
+                    ),
+                  ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.to(TermsServices());
                     },
-                      child: ListItem(title: 'Terms of Services', icon: 'assets/icons/terms.png',)),
+                    child: ListItem(
+                      title: 'Terms of Services',
+                      icon: 'assets/icons/terms.png',
+                    ),
+                  ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.to(FAQScreen());
                     },
-                      child: ListItem(title: 'FAQ', icon: 'assets/icons/faq2.png',)),
+                    child: ListItem(
+                      title: 'FAQ',
+                      icon: 'assets/icons/faq2.png',
+                    ),
+                  ),
                 ],
               ),
             ),
             SizedBox(height: 24),
 
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -187,7 +238,10 @@ class ProfileScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 20,
+                          horizontal: 10,
+                        ),
                         height: 140,
                         width: 360,
                         decoration: BoxDecoration(
@@ -214,7 +268,7 @@ class ProfileScreen extends StatelessWidget {
                                   titleSize: 14,
                                   onTap: () {
                                     // Add logout logic here
-                                    Get.offAll(()=>SignInScreen());
+                                    Get.offAll(() => SignInScreen());
                                   },
                                 ),
                                 CommonButton(
@@ -226,7 +280,7 @@ class ProfileScreen extends StatelessWidget {
                                   titleColor: Colors.black,
                                   titleSize: 14,
                                   onTap: () {
-                                   Get.back();
+                                    Get.back();
                                   },
                                 ),
                               ],
@@ -240,24 +294,27 @@ class ProfileScreen extends StatelessWidget {
               },
               child: SizedBox(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal:30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Row(
                     spacing: 10,
                     children: [
-                      Image.asset("assets/icons/logout.png",height: 24,width: 24,),
-                      CommonText(text:"Log Out",fontSize: 16,fontWeight: FontWeight.w500,color: Color(0xff990000),),
+                      Image.asset(
+                        "assets/icons/logout.png",
+                        height: 24,
+                        width: 24,
+                      ),
+                      CommonText(
+                        text: "Log Out",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff990000),
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
             SizedBox(height: 24),
-
-
-        
-        
-        
-        
           ],
         ),
       ),
@@ -266,9 +323,7 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class ListItem extends StatelessWidget {
-  const ListItem({
-    super.key, required this.title, required this.icon,
-  });
+  const ListItem({super.key, required this.title, required this.icon});
   final String title;
   final String icon;
 
@@ -286,19 +341,20 @@ class ListItem extends StatelessWidget {
       child: Row(
         spacing: 10,
         children: [
-          Image.asset(icon,height: 24,width: 24,),
-          CommonText(text:title,fontSize: 14,fontWeight: FontWeight.w500,),
+          Image.asset(icon, height: 24, width: 24),
+          CommonText(text: title, fontSize: 14, fontWeight: FontWeight.w500),
         ],
       ),
     );
   }
 }
 
-
-
 class roleContainer extends StatelessWidget {
   const roleContainer({
-    super.key, required this.title, required this.details, required this.image,
+    super.key,
+    required this.title,
+    required this.details,
+    required this.image,
   });
   final String title;
   final String details;
@@ -310,22 +366,31 @@ class roleContainer extends StatelessWidget {
       height: 90,
       width: 361,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey)
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey),
       ),
       child: Row(
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 5,
                 children: [
-                  CommonText(text:title,fontSize: 14,fontWeight: FontWeight.w500,),
-                  CommonText(textAlign: TextAlign.start,
-                      text: details,maxLines: 2,fontSize: 12,fontWeight: FontWeight.w400,),
+                  CommonText(
+                    text: title,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  CommonText(
+                    textAlign: TextAlign.start,
+                    text: details,
+                    maxLines: 2,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ],
               ),
             ),
