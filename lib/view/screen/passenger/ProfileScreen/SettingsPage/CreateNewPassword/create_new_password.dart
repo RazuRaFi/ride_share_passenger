@@ -106,7 +106,7 @@ class _CreatePasswordState extends State<CreatePassword> {
                           text: "Forgot Password?",
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
-                          color: Colors.blue,
+                          color: Colors.black,
                         ),
                       ),
                     ),

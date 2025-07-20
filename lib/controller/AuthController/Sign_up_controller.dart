@@ -4,13 +4,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:ride_share_flat/view/component/NavBar/common_bottom_nav.dart';
 
 import '../../helpers/app_routes.dart';
-import '../../helpers/pref_helper.dart';
 import '../../services/api_services.dart';
 import '../../utils/app_urls.dart';
 import '../../utils/app_utils.dart';
