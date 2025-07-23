@@ -1,9 +1,11 @@
+
+
+
 import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ride_share_flat/helpers/app_routes.dart';
 import 'package:ride_share_flat/helpers/pref_helper.dart';
 import 'package:ride_share_flat/services/api_services.dart';
 import 'package:ride_share_flat/utils/app_urls.dart';
@@ -13,13 +15,13 @@ import '../../model/profile/get_profile_model.dart';
 import '../../model/profile/update_profile_model.dart';
 
 class ProfileController extends GetxController {
-  UserProfileModel userProfileModel = UserProfileModel.fromJson({});
-  UpdateProfileModel updateProfileModel = UpdateProfileModel();
-
+  ProfileDetailsModel profileDetailsModel=ProfileDetailsModel.fromJson({});
+  UpdateProfileModel updateProfileModel=UpdateProfileModel.fromJson({});
+  // List languages = ["English", "French", "Arabic"];
   List gender = const ["Male", "Female", "Other"];
 
   // String selectedLanguage = "English";
-  String image = "";
+  String image="";
 
   TextEditingController nameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
@@ -27,18 +29,10 @@ class ProfileController extends GetxController {
   TextEditingController monthController = TextEditingController();
   TextEditingController yearController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  RxBool isLoading = false.obs;
-  var userProfile = {""};
+  RxBool isGetProfile=false.obs;
+  RxBool isUpdateProfile=false.obs;
 
-  @override
-  void onClose() {
-    // Always dispose controllers to avoid memory leaks
-    dayController.dispose();
-    monthController.dispose();
-    yearController.dispose();
-    super.onClose();
-  }
+
 
   // selectedGender(int index) {
   //   genderController.text = gender[index].toString();
@@ -47,7 +41,7 @@ class ProfileController extends GetxController {
   // }
 
   getProfileImage() async {
-    image = await OtherHelper.openGallery() ?? "";
+    image = await OtherHelper.openGallery()??"";
     update();
   }
 
@@ -56,14 +50,13 @@ class ProfileController extends GetxController {
   //   update();
   //   Get.back();
   // }
-  var selectedGender = 'Female'.obs;
+  RxString selectedGender = ''.obs;
 
   void setGender(String gender) {
     selectedGender.value = gender;
   }
 
-  var selectedLanguage =
-      'English'.obs; // Observable variable for reactive updates
+  var selectedLanguage = 'English'.obs; // Observable variable for reactive updates
 
   final List<String> languages = ['English', 'Spanish', 'French', 'German'];
 
@@ -71,8 +64,8 @@ class ProfileController extends GetxController {
     selectedLanguage.value = newLanguage;
   }
 
-  RxBool isGetProfile = false.obs;
-  Future<UserProfileModel?> getMyProfile() async {
+
+  Future<ProfileDetailsModel?> getMyProfile() async {
     isGetProfile(true);
     try {
       Map<String, String> header = {"token": PrefsHelper.token};
@@ -84,7 +77,7 @@ class ProfileController extends GetxController {
 
         var data = response.body["data"];
         log(">>>>>>>>>>>>>>>>>> $data");
-        userProfileModel = UserProfileModel.fromJson(data);
+        profileDetailsModel = ProfileDetailsModel.fromJson(data);
       } else {
         log("Failed to fetch profile details: ${response.statusCode}");
       }
@@ -97,44 +90,58 @@ class ProfileController extends GetxController {
   }
 
   updateProfile() async {
-    isLoading(true);
+    isUpdateProfile(true);
     try {
-      Map<String, String> header = {"token": PrefsHelper.token};
 
-      Map<String, dynamic> body = {
+      Map<String, String> headers = {
+        "token": PrefsHelper.token,
+      };
+
+      Map<String,dynamic> body = {
         "data": jsonEncode({
           "fullName": nameController.text,
-          "phone": numberController.text,
           "dob": {
             "day": dayController.text,
             "month": monthController.text,
             "year": yearController.text,
           },
-          "address": addressController.text,
+          "phone": numberController.text,
           "gender": selectedGender.value,
-        }),
+          "address":addressController.text,
+        })
       };
 
-      final response = await ApiService.multipartRequest(
-        url: AppUrls.updateProfile,
-        body: body,
-        imagePath: image ?? "",
-        header: header,
-        method: "PATCH",
-      );
 
-      if (response.statusCode == 200) {
-        log("✅ Profile updated successfully");
-        Get.back();
+      final response = await ApiService.multipartRequest(url: AppUrls.updateProfile, body: body,imagePath: image,header: headers,method: "PATCH");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        nameController.clear();
+        numberController.clear();
+        dayController.clear();
+        monthController.clear();
+        yearController.clear();
+        addressController.clear();
+        log("Profile updated successfully");
+        log("edited data======${response.body["data"]}========================model--${UpdateProfileModel.fromJson(response.body["data"])}");
         getMyProfile();
+
+        log("My Profile Updated====${profileDetailsModel.user.profileImage}");
+        Get.back();
       } else {
-        log(" Failed to update profile: ${response.statusCode} - ${response.body}");
+        log("Failed to update profile: ${response.statusCode} - ${response.body} ");
+        return null;
       }
     } catch (e, stackTrace) {
-      log("Exception while updating profile: $e\n$stackTrace");
+      log("Exception occurred while updating profile: $e\n$stackTrace");
+      return null;
     } finally {
-      isLoading(false);
+      isUpdateProfile(false);
     }
   }
+
+
+
+
+
 
 }

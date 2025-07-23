@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/controller/Profile/profile_controller.dart';
-import 'package:ride_share_flat/helpers/my_extension.dart';
 import 'package:ride_share_flat/utils/app_urls.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 import 'package:ride_share_flat/view/component/button/CommonButton.dart';
@@ -10,23 +8,24 @@ import 'package:ride_share_flat/view/screen/common_screen/FAQ/faq_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/SafetyScreen/safety_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/Terms&Services/terms_services.dart';
 import 'package:ride_share_flat/view/screen/common_screen/signIn/sign_in_screen.dart';
-import 'package:ride_share_flat/view/screen/passenger/HistoryScreen/history_screen.dart';
-import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/EditProfileScreen/edit_profile.dart';
-import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/OrderTracking/order_tracking.dart';
-import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/SettingsPage/settings_page.dart';
+
 
 import '../../../../utils/app_colors.dart';
 import '../../../component/image/common_image.dart';
+import '../HistoryScreen/history_screen.dart';
+import 'EditProfileScreen/edit_profile.dart';
+import 'OrderTracking/order_tracking.dart';
+import 'SettingsPage/settings_page.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final ProfileController controller = ProfileController();
+  final ProfileController controller=Get.put(ProfileController());
   @override
   void initState() {
     // TODO: implement initState
@@ -36,6 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -57,56 +57,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    spacing: 10,
-                    children: [
-                      Container(
-                        height: 74,
-                        width: 74,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey),
+                  Obx((){
+                    return controller.isGetProfile.value
+                        ? Center(child: CircularProgressIndicator(),)
+                        : Row(
+                      spacing: 10,
+                      children: [
+                        Container(
+                          height: 74,
+                          width: 74,
+                          decoration: BoxDecoration(shape: BoxShape.circle),
+                          child:ClipOval(
+                            child: CommonImage(
+                              imageSrc:
+                              "${AppUrls.imageUrl}${controller.profileDetailsModel.user.profileImage}",
+                              imageType: ImageType.network,
+                              fill: BoxFit.fill,
+                            ),
+                          ),
                         ),
-                        child: Obx(() {
-                          return controller.isGetProfile.value
-                              ? Center(child: CircularProgressIndicator())
-                              : ClipOval(
-                                  child: CommonImage(
-                                    imageSrc:
-                                        "${AppUrls.imageUrl}${controller.userProfileModel.profileImage}",
-                                    imageType: ImageType.network,
-                                    fill: BoxFit.fill,
-                                  ),
-                                );
-                        }),
-                      ),
-                      Column(
-                        spacing: 5,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Obx(() {
-                            return controller.isGetProfile.value
-                                ? Center(child: CircularProgressIndicator())
-                                : CommonText(
-                                    text: controller.userProfileModel.fullName,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  );
-                          }),
-                          Obx(() {
-                            return controller.isGetProfile.value
-                                ? Center(child: CircularProgressIndicator())
-                                : CommonText(
-                                    text: controller.userProfileModel.phone,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  );
-                          }),
-                        ],
-                      ),
-                    ],
-                  ),
-
+                        Column(
+                          spacing: 5,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CommonText(
+                              text: controller.profileDetailsModel.user.fullName,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            CommonText(
+                              text:controller.profileDetailsModel.user.phone,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  }),
                   GestureDetector(
                     onTap: () {
                       Get.to(EditProfileScreen());
@@ -146,9 +134,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   image: "assets/icons/faq.png",
                   label: "FAQ",
                   onTap: () {
-                    Get.to(() => FAQScreen());
+                    Get.to(()=>FAQScreen());
                   },
                 ),
+
               ],
             ),
             SizedBox(height: 16),
@@ -157,18 +146,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 spacing: 10,
                 children: [
-                  roleContainer(
-                    title: 'You have multiple promos.',
-
-                    details:
-                        'We’ll automatically apply them on that saved you.',
-                    image: 'assets/images/offerup.png',
-                  ),
-                  roleContainer(
-                    title: "Schedule your ride.",
-                    details: "Schedule your next trip up to 60 days ago.",
-                    image: "assets/images/calender.png",
-                  ),
+                  roleContainer(title: "You have multiple promos.",
+                      details:"We’ll automatically apply them on that saved you.",
+                      image: "assets/images/offerup.png")
+                ],
+              ),
+            ),
+            SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                spacing: 10,
+                children: [
+                  roleContainer(title: "Schedule your ride.",
+                      details:"Schedule your next trip up to 60 days ago.",
+                      image: "assets/images/calender.png")
                 ],
               ),
             ),
@@ -178,58 +170,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Get.to(OrderTracking());
-                    },
-                    child: ListItem(
-                      title: 'Order Tracking',
-                      icon: 'assets/icons/order.png',
-                    ),
-                  ),
+                      onTap:(){
+                        Get.to(OrderTracking());
+                      },
+                      child: ListItem(title: 'Order Tracking', icon: 'assets/icons/order.png',)),
                   GestureDetector(
-                    onTap: () {
-                      Get.to(SettingsPage());
-                    },
+                      onTap: (){
+                        Get.to(SettingsPage());
+                      },
 
-                    child: ListItem(
-                      title: 'Settings',
-                      icon: 'assets/icons/settings.png',
-                    ),
-                  ),
+                      child: ListItem(title: 'Settings', icon: 'assets/icons/settings.png',)),
                   GestureDetector(
-                    onTap: () {
-                      Get.to(SafetyScreen());
-                    },
-                    child: ListItem(
-                      title: 'Safety',
-                      icon: 'assets/icons/safety.png',
-                    ),
-                  ),
+                      onTap: (){
+                        Get.to(SafetyScreen());
+                      },
+                      child: ListItem(title: 'Safety', icon: 'assets/icons/safety.png',)),
                   GestureDetector(
-                    onTap: () {
-                      Get.to(TermsServices());
-                    },
-                    child: ListItem(
-                      title: 'Terms of Services',
-                      icon: 'assets/icons/terms.png',
-                    ),
-                  ),
+                      onTap: (){
+                        Get.to(TermsServices());
+                      },
+                      child: ListItem(title: 'Terms of Services', icon: 'assets/icons/terms.png',)),
                   GestureDetector(
-                    onTap: () {
-                      Get.to(FAQScreen());
-                    },
-                    child: ListItem(
-                      title: 'FAQ',
-                      icon: 'assets/icons/faq2.png',
-                    ),
-                  ),
+                      onTap: (){
+                        Get.to(FAQScreen());
+                      },
+                      child: ListItem(title: 'FAQ', icon: 'assets/icons/faq2.png',)),
                 ],
               ),
             ),
             SizedBox(height: 24),
 
             GestureDetector(
-              onTap: () {
+              onTap: (){
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -238,10 +210,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 20,
-                          horizontal: 10,
-                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                         height: 140,
                         width: 360,
                         decoration: BoxDecoration(
@@ -268,7 +237,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   titleSize: 14,
                                   onTap: () {
                                     // Add logout logic here
-                                    Get.offAll(() => SignInScreen());
+                                    Get.offAll(()=>SignInScreen());
                                   },
                                 ),
                                 CommonButton(
@@ -294,27 +263,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: SizedBox(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal:30),
                   child: Row(
                     spacing: 10,
                     children: [
-                      Image.asset(
-                        "assets/icons/logout.png",
-                        height: 24,
-                        width: 24,
-                      ),
-                      CommonText(
-                        text: "Log Out",
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff990000),
-                      ),
+                      Image.asset("assets/icons/logout.png",height: 24,width: 24,),
+                      CommonText(text:"Log Out",fontSize: 16,fontWeight: FontWeight.w500,color: Color(0xff990000),),
                     ],
                   ),
                 ),
               ),
             ),
             SizedBox(height: 24),
+
+
+
+
+
+
           ],
         ),
       ),
@@ -323,7 +289,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 class ListItem extends StatelessWidget {
-  const ListItem({super.key, required this.title, required this.icon});
+  const ListItem({
+    super.key, required this.title, required this.icon,
+  });
   final String title;
   final String icon;
 
@@ -341,20 +309,19 @@ class ListItem extends StatelessWidget {
       child: Row(
         spacing: 10,
         children: [
-          Image.asset(icon, height: 24, width: 24),
-          CommonText(text: title, fontSize: 14, fontWeight: FontWeight.w500),
+          Image.asset(icon,height: 24,width: 24,),
+          CommonText(text:title,fontSize: 14,fontWeight: FontWeight.w500,),
         ],
       ),
     );
   }
 }
 
+
+
 class roleContainer extends StatelessWidget {
   const roleContainer({
-    super.key,
-    required this.title,
-    required this.details,
-    required this.image,
+    super.key, required this.title, required this.details, required this.image,
   });
   final String title;
   final String details;
@@ -366,31 +333,22 @@ class roleContainer extends StatelessWidget {
       height: 90,
       width: 361,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey)
       ),
       child: Row(
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 5,
                 children: [
-                  CommonText(
-                    text: title,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  CommonText(
-                    textAlign: TextAlign.start,
-                    text: details,
-                    maxLines: 2,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  CommonText(text:title,fontSize: 14,fontWeight: FontWeight.w500,),
+                  CommonText(textAlign: TextAlign.start,
+                    text: details,maxLines: 2,fontSize: 12,fontWeight: FontWeight.w400,),
                 ],
               ),
             ),
