@@ -28,6 +28,12 @@ class AppUrls {
   static const customerService = "$baseUrl/customer";
   static const delete = "$baseUrl/users/delete-my-account";
   static const completeProfile = "$baseUrl/users/complete";
+  static const pendingRider = "$baseUrl/passenger/get-pending-rides";
+  static const pendingRiderDetails = "$baseUrl/passenger/get-pending-rides/688304d1cd8c0a6ddf20a68e";
+  static const completeRide = "$baseUrl/passenger/get-complete-rides";
+  static const completeRideDetails = "$baseUrl/passenger/get-complete-rides/6883026e7af508d422208587";
+  static const history = "$baseUrl/passenger/history";
+  static const historyDetails = "$baseUrl/passenger/history/6883026e7af508d422208587";
 }
 
 
