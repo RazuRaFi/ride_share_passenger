@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../helpers/app_routes.dart';
 import '../../helpers/pref_helper.dart';
 import '../../services/api_services.dart';
+import '../../services/socket_services.dart';
 import '../../utils/app_urls.dart';
 
 class SignInController extends GetxController{
@@ -55,7 +56,10 @@ class SignInController extends GetxController{
 
       log("PrefsHelper.token ${PrefsHelper.token}");
 
+
       Get.offAllNamed(AppRoutes.navBarScreen);
+
+      SocketServices.connectToSocket(token: data['data']["accessToken"]);
 
       emailController.clear();
       passwordController.clear();

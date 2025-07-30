@@ -1,7 +1,7 @@
 class AppUrls {
   static const baseUrl = "http://10.10.10.31:7010/api/v1";
   static const imageUrl = "http://10.10.10.31:7010";
-  static const socketUrl = "http://103.145.138.74:3001";
+  static const socketUrl = "ws://10.10.10.31:7010";
 
 
 
@@ -34,6 +34,7 @@ class AppUrls {
   static const completeRideDetails = "$baseUrl/passenger/get-complete-rides/6883026e7af508d422208587";
   static const history = "$baseUrl/passenger/history";
   static const historyDetails = "$baseUrl/passenger/history/6883026e7af508d422208587";
+  static const message = "$baseUrl/ride/ride-status/6889a6f00ed53d6712276289";
 }
 
 

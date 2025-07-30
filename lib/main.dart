@@ -3,10 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ride_share_flat/helpers/app_routes.dart';
+import 'package:ride_share_flat/helpers/pref_helper.dart';
+import 'package:ride_share_flat/services/socket_services.dart';
 import 'package:ride_share_flat/view/screen/common_screen/splash/splash_screen.dart';
 import 'package:ride_share_flat/view/test_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  if(PrefsHelper.token.isNotEmpty){
+    SocketServices.connectToSocket(token: PrefsHelper.token);
+  }
   runApp(const MyApp());
 }
 
