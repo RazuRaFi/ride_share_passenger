@@ -33,8 +33,7 @@ class FaqModel {
     return {
       '_id': id,
       'category': category,
-      'questionAndAnswer':
-      questionAndAnswer.map((e) => e.toJson()).toList(),
+      'questionAndAnswer': questionAndAnswer.map((e) => e.toJson()).toList(),
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       '__v': v,

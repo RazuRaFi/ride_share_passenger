@@ -295,17 +295,21 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                         child: Image.asset("assets/icons/scope1.png"),
                                       ),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              CommonText(text: "Passenger’s safety"),
-                                              IconButton(onPressed: (){}, icon:Icon(Icons.arrow_forward,size: 18,))
-                                            ],
-                                          ),
-                                          CommonText(text: "On-trip help with safety issues"),
-                                        ],
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                CommonText(text: "Passenger’s safety"),
+                                                IconButton(onPressed: (){}, icon:Icon(Icons.arrow_forward,size: 18,))
+                                              ],
+                                            ),
+                                            CommonText(textAlign: TextAlign.start,
+                                                text: "On-trip help with safety issues"),
+                                          ],
+                                        ),
                                       ),
 
                                     ],

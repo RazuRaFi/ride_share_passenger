@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ride_share_flat/controller/Profile/profile_controller.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/utils/app_urls.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 import 'package:ride_share_flat/view/component/button/CommonButton.dart';
@@ -41,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: CommonText(
-          text: "Profile",
+          text:AppString.profile,
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
@@ -99,19 +100,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onTap: () {
                       Get.to(EditProfileScreen());
                     },
-                    child: SizedBox(
-                      height: 43,
-                      width: 90,
-                      child: Column(
-                        spacing: 5,
-                        children: [
-                          Image.asset(
-                            "assets/icons/editprofile.png",
-                            height: 20,
-                            width: 20,
-                          ),
-                          CommonText(text: "Edit Profile"),
-                        ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: SizedBox(
+                        child: Column(
+                          spacing: 5,
+                          children: [
+                            Image.asset(
+                              "assets/icons/editprofile.png",
+                              height: 20,
+                              width: 20,
+                            ),
+                            CommonText(text: AppString.editProfile),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -125,14 +127,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 _buildTabItem(
                   image: "assets/icons/history.png",
-                  label: "History",
+                  label: AppString.history,
                   onTap: () {
                     Get.to(HistoryScreen());
                   },
                 ),
                 _buildTabItem(
                   image: "assets/icons/faq.png",
-                  label: "FAQ",
+                  label: AppString.faq,
                   onTap: () {
                     Get.to(()=>FAQScreen());
                   },
@@ -146,8 +148,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 spacing: 10,
                 children: [
-                  roleContainer(title: "You have multiple promos.",
-                      details:"We’ll automatically apply them on that saved you.",
+                  roleContainer(title: AppString.multiplePromos,
+                      details:AppString.applySaved,
                       image: "assets/images/offerup.png")
                 ],
               ),
@@ -158,8 +160,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 spacing: 10,
                 children: [
-                  roleContainer(title: "Schedule your ride.",
-                      details:"Schedule your next trip up to 60 days ago.",
+                  roleContainer(title:AppString.scheduleRide,
+                      details:AppString.scheduleRideNext,
                       image: "assets/images/calender.png")
                 ],
               ),

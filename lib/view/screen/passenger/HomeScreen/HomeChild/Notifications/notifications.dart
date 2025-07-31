@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ride_share_flat/controller/NotificationController/notification_controller.dart';
 import 'package:ride_share_flat/helpers/others_helper.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
-import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});
@@ -14,76 +12,123 @@ class Notifications extends StatefulWidget {
 }
 
 class _NotificationsState extends State<Notifications> {
-  final NotificationController controller=Get.put(NotificationController());
+  final NotificationController controller = Get.put(NotificationController());
+  final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
-    controller.getNotification();
     super.initState();
+    controller.getNotification(isFirstLoad: true);
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent - 200 &&
+          controller.hasMore.value &&
+          !controller.isPaginating.value) {
+        controller.getNotification();
+      }
+    });
   }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: CommonText(text: "Notification",fontSize: 16,fontWeight: FontWeight.w500,),
+        title: CommonText(
+          text: "Notification",
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
         centerTitle: true,
       ),
-      body:Obx((){
-        return controller.isLoading.value
-            ? Center(child: CircularProgressIndicator(color: Colors.blueAccent,),)
-            : Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 8,),
-              SizedBox(height: 16,),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: ScrollPhysics(),
-                  itemCount: controller.notifyList.length,
-                  itemBuilder: (context,index){
-                    final notify=controller.notifyList[index];
-                    return Card(
-                        color: Colors.grey.shade200,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
-                          child: Row(
-                            spacing: 15,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                spacing: 10,
-                                children: [
-                                  Icon(Icons.notifications_on_outlined),
-                                  SizedBox(
-                                    width: 200,
-                                    child:Column(
-                                      spacing: 5,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        CommonText(maxLines: 1,overflow: TextOverflow.ellipsis,textAlign: TextAlign.start,
-                                          text: notify.message.title,fontSize: 16,fontWeight: FontWeight.w500,),
-                                        CommonText(
-                                          maxLines: 2,textAlign: TextAlign.start,
-                                          text: notify.message.text,fontSize: 14,fontWeight: FontWeight.w500,color: Colors.grey,),
-                                      ],
-                                    ),
-                                  ),
+      body: Obx(() {
+        if (controller.isLoading.value && controller.notifyList.isEmpty) {
+          return const Center(
+            child: CircularProgressIndicator(color: Colors.blueAccent),
+          );
+        }
 
-                                ],
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: ListView.builder(
+            controller: scrollController,
+            itemCount: controller.notifyList.length +
+                (controller.hasMore.value ? 1 : 0),
+            itemBuilder: (context, index) {
+              if (index < controller.notifyList.length) {
+                final notify = controller.notifyList[index];
+                return Card(
+                  color: Colors.grey.shade200,
+                  margin: const EdgeInsets.only(top: 16),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.notifications_on_outlined),
+                              const SizedBox(width: 10),
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CommonText(
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.start,
+                                      text: notify.message.title,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    const SizedBox(height: 5),
+                                    CommonText(
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.start,
+                                      text: notify.message.text,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              CommonText(text: OtherHelper.formatDateAgo(notify.createdAt.toString()),fontSize: 10,),
                             ],
                           ),
-                        )
-                    );
-                  })
-            ],
+                        ),
+                        const SizedBox(width: 10),
+                        CommonText(
+                          text: OtherHelper.formatDateAgo(
+                              notify.createdAt.toString()),
+                          fontSize: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              } else {
+                // Show loader when loading more pages
+                return const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
+            },
           ),
         );
       }),

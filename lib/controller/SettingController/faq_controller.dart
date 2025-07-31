@@ -1,44 +1,30 @@
-
-import 'dart:developer';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../helpers/pref_helper.dart';
 import '../../model/Faq_Model/faq_model.dart';
 import '../../services/api_services.dart';
 import '../../utils/app_urls.dart';
 
-
 class FaqController extends GetxController {
-  final FaqModel faqModel=FaqModel.fromJson({});
   RxBool isLoading = false.obs;
-  List faqList =[];
+  RxList faqList = [].obs;
 
   Future<void> getFaq() async {
-    log(">>>>>>>>>>>>>>Step 1: Fetching safety data>>>>>>>>>>>>");
-    isLoading(true);
+    isLoading.value = true;
     try {
-      Map<String, String> headers = {
-        "token": PrefsHelper.token,
-      };
-      var response = await ApiService.getApi(AppUrls.faq, header: headers);
-      log(">>>>>>>>>>>>>>Step 3: API response received>>>>>>>>>>>>");
+      final headers = {"token": PrefsHelper.token};
+      final response = await ApiService.getApi(AppUrls.faq, header: headers);
 
-      if (response.body['data'] != null && response.body['data'] is List) {
-        faqList = (response.body['data']['faq'] as List)
-            .map((e) => FaqModel.fromJson(e))
-            .toList();
-        log(">>>>>>>>>>>>>>Step 4: Safety list updated with ${faqList.length} items>>>>>>>>>>>>");
-      } else {
-        log(">>>>>>>>>>>>>>Step 4: No data found in response>>>>>>>>>>>>");
-        faqList.clear();
-      }
+      final List<FaqModel> fetchedFaqs = (response.body['data'] as List)
+          .map((e) => FaqModel.fromJson(e))
+          .toList();
+
+      faqList.value = fetchedFaqs;
     } catch (e) {
-      log(">>>>>>>>>>>>>>Error fetching safety data: $e<<<<<<<<<<<<");
       faqList.clear();
     } finally {
-      isLoading(false);
-      log(">>>>>>>>>>>>>>Step 5: Loading finished>>>>>>>>>>>>");
+      isLoading.value = false;
     }
   }
 }

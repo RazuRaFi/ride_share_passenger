@@ -45,6 +45,7 @@ dependencies:
   flutter_holo_date_picker: ^2.0.0
   pin_code_text_field: ^1.8.0
   web_socket_channel: ^3.0.3
+  flutter_localization: ^0.3.3
 
 dev_dependencies:
   flutter_test:
