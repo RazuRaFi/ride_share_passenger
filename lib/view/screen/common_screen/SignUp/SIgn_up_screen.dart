@@ -4,6 +4,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/NavBar/common_bottom_nav.dart';
 
 import '../../../../controller/AuthController/Sign_up_controller.dart';
@@ -42,15 +43,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 24,),
-                  Center(child: CommonText(text: "Welcome!", fontSize: 20, fontWeight: FontWeight.w600)),
+                  Center(child: CommonText(text:AppString.welcome, fontSize: 20, fontWeight: FontWeight.w600)),
                   SizedBox(height: 16,),
-                  Center(child: CommonText(text: "Please Sign up to continue our app", fontSize: 14, fontWeight: FontWeight.w400)),
+                  Center(child: CommonText(text: AppString.pleaseSign, fontSize: 14, fontWeight: FontWeight.w400)),
                   SizedBox(height: 32,),
-                  CommonText(text: "Full Name", fontSize: 14, fontWeight:FontWeight.w500),
+                  CommonText(text: AppString.fullName, fontSize: 14, fontWeight:FontWeight.w500),
                   SizedBox(height: 7,),
                   CustomTextField(
                     controller: controller.fullNameController,
-                    hindText: "Enter your name",fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),
+                    hindText: AppString.enterFullName,fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return "Name is required";
@@ -58,11 +59,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },),
                   SizedBox(height: 16,),
-                  CommonText(text: "Email", fontSize: 14, fontWeight:FontWeight.w500),
+                  CommonText(text: AppString.email, fontSize: 14, fontWeight:FontWeight.w500),
                   SizedBox(height: 7,),
                   CustomTextField(
                     controller: controller.emailController,
-                    hindText: "Enter your email",fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),
+                    hindText: AppString.enterEmail,fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return "Email is required";
@@ -71,12 +72,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   SizedBox(height: 16,),
-                  CommonText(text: "Phone Number", fontSize: 14, fontWeight:FontWeight.w500),
+                  CommonText(text:AppString.phoneNumber, fontSize: 14, fontWeight:FontWeight.w500),
                   SizedBox(height: 7,),
                   CustomTextField(
                     controller: controller.phoneController,
                     keyboardType: TextInputType.number,
-                    hindText: "Enter your number",fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),
+                    hindText: AppString.enterPhone,fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return "Number is required";
@@ -85,11 +86,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   SizedBox(height: 16,),
-                  CommonText(text: "Password", fontSize: 14, fontWeight:FontWeight.w500),
+                  CommonText(text: AppString.password, fontSize: 14, fontWeight:FontWeight.w500),
                   SizedBox(height: 7,),
                   CustomTextField(
                     controller: controller.passwordController,
-                    hindText: "Enter your password",fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),suffixIcon:Icon(Icons.visibility),
+                    hindText: AppString.enterYouPassword,fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),suffixIcon:Icon(Icons.visibility),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return "Password is required";
@@ -98,11 +99,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   SizedBox(height: 16,),
-                  CommonText(text: "Confirm Password", fontSize: 14, fontWeight:FontWeight.w500),
+                  CommonText(text: AppString.confirmPassword, fontSize: 14, fontWeight:FontWeight.w500),
                   SizedBox(height: 7,),
                   CustomTextField(
                     controller: controller.confirmPassController,
-                    hindText: "Confirm your password",fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),suffixIcon:Icon(Icons.visibility),
+                    hindText: AppString.enterYouPassword,fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),suffixIcon:Icon(Icons.visibility),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return "Confirm Password is required";
@@ -131,7 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                       )),
                       const SizedBox(width: 5),
-                      CommonText(text: "Agree With Terms and Conditions", fontSize: 14, fontWeight: FontWeight.w400)
+                      CommonText(text: AppString.agreeTerms, fontSize: 14, fontWeight: FontWeight.w400)
                     ],
                   ),
                   SizedBox(height: 32,),
@@ -187,7 +188,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // );
                     },
 
-                    titleText: "Sign up",buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.black,titleColor: Colors.white,titleSize:20,),
+                    titleText: AppString.signUp,buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.black,titleColor: Colors.white,titleSize:20,),
                   SizedBox(height: 32,),
 
 

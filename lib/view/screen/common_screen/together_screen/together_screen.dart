@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/screen/common_screen/SignUp/SIgn_up_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/signIn/sign_in_screen.dart';
 
@@ -27,19 +28,19 @@ class TogetherScreen extends StatelessWidget {
               child: Image.asset("assets/images/together.png"),
             ),
           ),
-          CommonText(text: "Let’s travel together!", fontSize: 20, fontWeight:FontWeight.w500),
+          CommonText(text: AppString.together, fontSize: 20, fontWeight:FontWeight.w500),
           SizedBox(height: 143,),
           GestureDetector(
             onTap: (){
               Get.to(()=>SignInScreen());
             },
-              child: CommonButton(titleText: "Sign In",buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.white,titleColor: Colors.black,borderColor: Colors.black,titleSize: 20,)),
+              child: CommonButton(titleText: AppString.signIn,buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.white,titleColor: Colors.black,borderColor: Colors.black,titleSize: 20,)),
           SizedBox(height: 24,),
           GestureDetector(
             onTap: (){
               Get.to(SignUpScreen());
             },
-              child: CommonButton(titleText: "Sign Up",buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.black,titleColor: Colors.white,titleSize: 20,)),
+              child: CommonButton(titleText: AppString.signUp,buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.black,titleColor: Colors.white,titleSize: 20,)),
         ],
       ),
     );

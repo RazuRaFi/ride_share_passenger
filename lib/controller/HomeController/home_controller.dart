@@ -1,5 +1,6 @@
 
 import 'package:get/get.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 
 class HomeController extends GetxController{
 
@@ -12,13 +13,13 @@ class HomeController extends GetxController{
 
 
   List serviceList=[
-    {'image':"assets/images/service1.png", "title":"Moto Bike"},
-    {'image':"assets/images/service2.png", "title":"Car"},
-    {'image':"assets/images/service3.png", "title":"Rent Car"},
-    {'image':"assets/images/service4.png", "title":"Schedule"},
+    {'image':"assets/images/service1.png", "title":AppString.motoBike},
+    {'image':"assets/images/service2.png", "title":AppString.car},
+    {'image':"assets/images/service3.png", "title":AppString.rentCar},
+    {'image':"assets/images/service4.png", "title":AppString.schedule},
   ];
   List scopeList=[
-    {'image':"assets/icons/scope1.png", "title":"Passenger’s safety","details":"On-trip help with safety issues"},
-    {'image':"assets/icons/scope1.png", "title":"First-class rides","details":"Top-rated drivers, newer cars"},
+    {'image':"assets/icons/scope1.png", "title":AppString.passengerSafety,"details":AppString.onTripIssues},
+    {'image':"assets/icons/scope1.png", "title":AppString.firstClassRide,"details":AppString.topRated},
   ];
 }

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:ride_share_flat/controller/AuthController/SignInController.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/button/CommonButton.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
@@ -40,16 +41,16 @@ class SignInScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 49,),
-                  Center(child: CommonText(text: "Welcome!", fontSize: 20, fontWeight: FontWeight.w600)),
+                  Center(child: CommonText(text: AppString.welcome, fontSize: 20, fontWeight: FontWeight.w600)),
                   SizedBox(height: 16,),
-                  Center(child: CommonText(text: "Please Login in to continue our app", fontSize: 14, fontWeight: FontWeight.w400)),
+                  Center(child: CommonText(text: AppString.pleaseSign, fontSize: 14, fontWeight: FontWeight.w400)),
                   SizedBox(height: 56,),
-                  CommonText(text: "Email Address", fontSize: 14, fontWeight:FontWeight.w500),
+                  CommonText(text: AppString.email, fontSize: 14, fontWeight:FontWeight.w500),
                   SizedBox(height: 7,),
                   // CommonTextField(title: 'Enter your email',),
                   CustomTextField(
                     controller: controller.emailController,
-                    hindText: "Enter your email",fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),
+                    hindText: AppString.enterEmail,fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return "Email is required";
@@ -58,11 +59,11 @@ class SignInScreen extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: 16,),
-                  CommonText(text: "Password", fontSize: 14, fontWeight:FontWeight.w500),
+                  CommonText(text: AppString.password, fontSize: 14, fontWeight:FontWeight.w500),
                   SizedBox(height: 7,),
                   CustomTextField(
                     controller: controller.passwordController,
-                    hindText: "Enter your password",fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),
+                    hindText: AppString.enterYouPassword,fieldBorderRadius: 10,textStyle:TextStyle(fontSize: 14),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return "Number is required";
@@ -90,7 +91,7 @@ class SignInScreen extends StatelessWidget {
                           )),
 
                           const SizedBox(width: 5),
-                          CommonText(text: "Remember Me", fontSize: 14, fontWeight: FontWeight.w400)
+                          CommonText(text:AppString.remember, fontSize: 14, fontWeight: FontWeight.w400)
                         ],
                       ),
                       GestureDetector(
@@ -98,7 +99,7 @@ class SignInScreen extends StatelessWidget {
                             Get.to(ForgottenPassword());
 
                           },
-                          child: CommonText(text: "Forgot Password?", fontSize: 14, fontWeight: FontWeight.w500))
+                          child: CommonText(text:AppString.forgotPassword, fontSize: 14, fontWeight: FontWeight.w500))
                     ],
                   ),
                   SizedBox(height: 32,),
@@ -109,15 +110,15 @@ class SignInScreen extends StatelessWidget {
 
                         }
                       },
-                      child: CommonButton(titleText: "Sign in",buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.black,titleColor: Colors.white,titleSize: 20,)),
+                      child: CommonButton(titleText:AppString.signIn,buttonHeight: 56,buttonWidth: 361,backgroundColor: Colors.black,titleColor: Colors.white,titleSize: 20,)),
                   SizedBox(height: 24,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CommonText(text: "Don’t have an account? ", fontSize: 14, fontWeight:FontWeight.w400),
+                      CommonText(text: AppString.doNotHaveAccount, fontSize: 14, fontWeight:FontWeight.w400),
                       TextButton(onPressed: (){
                         Get.to(()=>SignUpScreen());
-                      }, child:CommonText(text: "Sign up", fontSize: 14, fontWeight: FontWeight.w600,color: Colors.black,))
+                      }, child:CommonText(text: AppString.signUp, fontSize: 14, fontWeight: FontWeight.w600,color: Colors.black,))
                     ],
                   )
 

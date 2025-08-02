@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 
 class OffeScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class OffeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: CommonText(text: "Offers",fontSize: 16,fontWeight: FontWeight.w500,),
+        title: CommonText(text: AppString.offers,fontSize: 16,fontWeight: FontWeight.w500,),
         centerTitle: true,
       ),
       body: Padding(

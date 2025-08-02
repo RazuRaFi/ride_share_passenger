@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import '../../../../controller/splash_controller/Onboarding_controller.dart';
 import '../together_screen/together_screen.dart';
 
@@ -9,29 +10,31 @@ class OnboardingScreen extends StatelessWidget {
 
   // Checklist items for the first onboarding page
   final List<String> checklistItems = [
-    "Save money",
-    "Make passive income",
-    "Make new friends",
-    "Overcome traffic congestion",
+    AppString.orBoardList1,
+    AppString.orBoardList2,
+    AppString.orBoardList3,
+    AppString.orBoardList4,
   ];
 
   final List<Map<String, String>> onboardingData = [
     {
-      "title": "Let’s travel together",
+      "title":AppString.orBoard1,
       "subtitle": "", // Subtitle is handled as checklist for first page
       "image": "assets/images/logoon.png",
     },
     {
-      "title": "Find a ride",
-      "subtitle": "Request a ride and be picked up on \nthe same route by the driver",
+      "title": AppString.orBoard2,
+      "subtitle": AppString.orBoard2List,
       "image": "assets/images/onboard2.png",
     },
     {
-      "title": "Post a ride",
-      "subtitle": "Publish a ride and pick up passengers \nalong the way",
+      "title": AppString.orBoard3,
+      "subtitle": AppString.orBoard3List,
       "image": "assets/images/onboard3.png",
     },
   ];
+
+  OnboardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +117,8 @@ class OnboardingScreen extends StatelessWidget {
                     onPressed: () {
                       Get.offAll(() => TogetherScreen());
                     },
-                    child: const Text(
-                      "Skip",
+                    child:Text(
+                      AppString.skip,
                       style: TextStyle(color: Colors.black),
                     ),
                   ),

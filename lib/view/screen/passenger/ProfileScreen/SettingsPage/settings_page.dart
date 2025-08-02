@@ -23,7 +23,7 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: CommonText(
-          text: "Settings",
+          text: AppString.settings.tr,
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
@@ -62,11 +62,11 @@ class SettingsPage extends StatelessWidget {
                             if (newValue == "English") {
                               Get.updateLocale(Locale('en', 'US'));
                             } else if (newValue == "Spanish") {
-                              Get.updateLocale(Locale('de', 'DE'));
+                              Get.updateLocale(Locale('es', 'ES'));
                             } else if (newValue == "French") {
-                              Get.updateLocale(Locale('de', 'DE'));
-                            } else if (newValue == "German") {
-                              Get.updateLocale(Locale('de', 'DE'));
+                              Get.updateLocale(Locale('fr', 'FR'));
+                            } else if (newValue == "Creole") {
+                              Get.updateLocale(Locale('ht', 'HT'));
                             }
                             log("language=========$newValue}");
                           }

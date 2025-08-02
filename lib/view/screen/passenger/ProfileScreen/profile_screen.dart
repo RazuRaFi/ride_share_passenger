@@ -175,28 +175,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onTap:(){
                         Get.to(OrderTracking());
                       },
-                      child: ListItem(title: 'Order Tracking', icon: 'assets/icons/order.png',)),
+                      child: ListItem(title: AppString.orderTracking, icon: 'assets/icons/order.png',)),
                   GestureDetector(
                       onTap: (){
                         Get.to(SettingsPage());
                       },
 
-                      child: ListItem(title: 'Settings', icon: 'assets/icons/settings.png',)),
+                      child: ListItem(title: AppString.settings, icon: 'assets/icons/settings.png',)),
                   GestureDetector(
                       onTap: (){
                         Get.to(SafetyScreen());
                       },
-                      child: ListItem(title: 'Safety', icon: 'assets/icons/safety.png',)),
+                      child: ListItem(title:AppString.safety, icon: 'assets/icons/safety.png',)),
                   GestureDetector(
                       onTap: (){
                         Get.to(TermsServices());
                       },
-                      child: ListItem(title: 'Terms of Services', icon: 'assets/icons/terms.png',)),
+                      child: ListItem(title: AppString.termsOfService, icon: 'assets/icons/terms.png',)),
                   GestureDetector(
                       onTap: (){
                         Get.to(FAQScreen());
                       },
-                      child: ListItem(title: 'FAQ', icon: 'assets/icons/faq2.png',)),
+                      child: ListItem(title: AppString.faq, icon: 'assets/icons/faq2.png',)),
                 ],
               ),
             ),
@@ -223,7 +223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             CommonText(
-                              text: "Do you want to logout your profile?",
+                              text:AppString.doYouWantToLogoutProfile,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
@@ -232,7 +232,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 CommonButton(
-                                  titleText: 'Yes',
+                                  titleText: AppString.yes,
                                   backgroundColor: Colors.black,
                                   buttonHeight: 45,
                                   buttonWidth: 120,
@@ -243,7 +243,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   },
                                 ),
                                 CommonButton(
-                                  titleText: 'No',
+                                  titleText: AppString.no,
                                   backgroundColor: Colors.white,
                                   buttonHeight: 45,
                                   buttonWidth: 120,
@@ -270,7 +270,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     spacing: 10,
                     children: [
                       Image.asset("assets/icons/logout.png",height: 24,width: 24,),
-                      CommonText(text:"Log Out",fontSize: 16,fontWeight: FontWeight.w500,color: Color(0xff990000),),
+                      CommonText(text:AppString.logOut,fontSize: 16,fontWeight: FontWeight.w500,color: Color(0xff990000),),
                     ],
                   ),
                 ),

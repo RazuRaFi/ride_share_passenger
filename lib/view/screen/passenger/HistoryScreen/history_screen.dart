@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/controller/HistoryController/history_controller.dart';
 import 'package:ride_share_flat/helpers/others_helper.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 import 'package:ride_share_flat/view/screen/passenger/HistoryScreen/HistoryDetails/history_details.dart';
 
@@ -30,7 +31,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: CommonText(text: "History",fontSize: 16,fontWeight: FontWeight.w500,),
+        title: CommonText(text: AppString.history,fontSize: 16,fontWeight: FontWeight.w500,),
         centerTitle: true,
       ),
       body: Obx((){

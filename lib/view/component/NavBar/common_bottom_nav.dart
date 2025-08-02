@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 
 import '../../../controller/NavbarController/NavBarController.dart';
 
@@ -29,11 +30,11 @@ class NavBarScreen extends StatelessWidget {
              selectedFontSize: 15,
              unselectedFontSize: 14,
              type: BottomNavigationBarType.fixed,
-             items: const [
-               BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-               BottomNavigationBarItem(icon: Icon(Icons.percent), label: "Offers"),
-               BottomNavigationBarItem(icon: Icon(Icons.history), label: "History"),
-               BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+             items: [
+               BottomNavigationBarItem(icon: Icon(Icons.home), label: AppString.home),
+               BottomNavigationBarItem(icon: Icon(Icons.percent), label: AppString.offers),
+               BottomNavigationBarItem(icon: Icon(Icons.history), label: AppString.history),
+               BottomNavigationBarItem(icon: Icon(Icons.person), label: AppString.profile),
              ],
            ),
          ),

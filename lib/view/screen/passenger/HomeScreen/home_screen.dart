@@ -7,6 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/controller/DrawerController/drawer_controller.dart';
 import 'package:ride_share_flat/controller/HomeController/home_controller.dart';
 import 'package:ride_share_flat/helpers/my_extension.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/booking_screen.dart';
 
@@ -97,14 +98,14 @@ class HomeScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: GestureDetector(
                                 onTap:(){
-                                  if(homeController.serviceList[index]['title']== "Rent Car"){
+                                  if(homeController.serviceList[index]['title']== AppString.rentCar){
                                     Get.to(RentCarScreen());
-                                  }else if(homeController.serviceList[index]['title']== "Moto Bike"){
+                                  }else if(homeController.serviceList[index]['title']== AppString.motoBike){
                                     Get.to(()=>TakeRideSet());
-                                  }else if(homeController.serviceList[index]['title']== "Car"){
+                                  }else if(homeController.serviceList[index]['title']== AppString.car){
                                     Get.to(()=>TakeRideSet());
                                   }
-                                  else if(homeController.serviceList[index]['title']== "Schedule"){
+                                  else if(homeController.serviceList[index]['title']== AppString.schedule){
                                   Get.to(()=>ScheduleScreen());
                                   };
                                 },
@@ -132,7 +133,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 26,),
-                        CommonText(text: "Take a ride",fontSize: 16,fontWeight: FontWeight.w500,),
+                        CommonText(text: AppString.takeRide,fontSize: 16,fontWeight: FontWeight.w500,),
                         SizedBox(height: 16,),
                         // GestureDetector(
                         //   onTap: (){
@@ -161,7 +162,7 @@ class HomeScreen extends StatelessWidget {
                         //     ),
                         //   ),
                         // ),
-                        CustomTextField(hindText: "Search a destination",prefixIcon: Icon(Icons.location_pin),suffixIcon: Icon(Icons.search),fieldBorderRadius: 10,fieldBorderColor: Colors.grey,
+                        CustomTextField(hindText:AppString.searchDestination,prefixIcon: Icon(Icons.location_pin),suffixIcon: Icon(Icons.search),fieldBorderRadius: 10,fieldBorderColor: Colors.grey,
                           onTap: (){
                           Get.to(SetLocation());
                           },),
@@ -187,8 +188,8 @@ class HomeScreen extends StatelessWidget {
                                    crossAxisAlignment: CrossAxisAlignment.start,
                                    spacing: 5,
                                    children: [
-                                     CommonText(text: "Home",fontSize: 14,fontWeight:FontWeight.w500),
-                                     CommonText(text: "Set Address",fontSize: 12,fontWeight: FontWeight.w400,),
+                                     CommonText(text: AppString.home,fontSize: 14,fontWeight:FontWeight.w500),
+                                     CommonText(text: AppString.setAddress,fontSize: 12,fontWeight: FontWeight.w400,),
                                    ],
                                  )
                                ],
@@ -204,8 +205,8 @@ class HomeScreen extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     spacing: 5,
                                     children: [
-                                      CommonText(text: "Work",fontSize: 14,fontWeight:FontWeight.w500),
-                                      CommonText(text: "Set Address",fontSize: 12,fontWeight: FontWeight.w400,),
+                                      CommonText(text: AppString.work,fontSize: 14,fontWeight:FontWeight.w500),
+                                      CommonText(text: AppString.setAddress,fontSize: 12,fontWeight: FontWeight.w400,),
                                     ],
                                   )
                                 ],
@@ -238,10 +239,10 @@ class HomeScreen extends StatelessWidget {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             SizedBox(height: 19,),
-                                            CommonText(text: "You have multiple promos.",fontSize: 12,fontWeight: FontWeight.w500,),
+                                            CommonText(text: AppString.multiplePromos,fontSize: 12,fontWeight: FontWeight.w500,),
                                             Row(
                                               children: [
-                                                CommonText(text: "Terms apply",fontSize: 12,fontWeight: FontWeight.w400,),
+                                                CommonText(text: AppString.termsApply,fontSize: 12,fontWeight: FontWeight.w400,),
                                                 IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios_outlined,size: 15,)),
                                               ],
                                             )
@@ -266,7 +267,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 23,),
-                        CommonText(text: "More ways to use Scoop",fontSize: 16,fontWeight: FontWeight.w500,),
+                        CommonText(text: AppString.moreWayScope,fontSize: 16,fontWeight: FontWeight.w500,),
                         SizedBox(height: 24,),
                         SizedBox(
                           height: 210, // <-- Provide a fixed height
@@ -302,12 +303,12 @@ class HomeScreen extends StatelessWidget {
                                           children: [
                                             Row(
                                               children: [
-                                                CommonText(text: "Passenger’s safety"),
+                                                CommonText(text: AppString.passengerSafety),
                                                 IconButton(onPressed: (){}, icon:Icon(Icons.arrow_forward,size: 18,))
                                               ],
                                             ),
                                             CommonText(textAlign: TextAlign.start,
-                                                text: "On-trip help with safety issues"),
+                                                text:AppString.onTripIssues),
                                           ],
                                         ),
                                       ),
