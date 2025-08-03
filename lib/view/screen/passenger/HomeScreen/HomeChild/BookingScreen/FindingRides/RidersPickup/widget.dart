@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:ride_share_flat/controller/CallController/callController.dart';
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/DirverArrived/driver_arrived.dart';
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/MessageScreen/message_screen.dart';
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/riders_pickup.dart';
@@ -12,9 +13,21 @@ import '../../../../../../../component/CommonText.dart';
 import '../../../../../../../component/button/CommonButton.dart';
 import '../../../../../../../component/text_field/custom_textfield.dart';
 
-class RidersBottomsheet extends StatelessWidget {
+class RidersBottomsheet extends StatefulWidget {
   const RidersBottomsheet({super.key});
 
+  @override
+  State<RidersBottomsheet> createState() => _RidersBottomsheetState();
+}
+
+class _RidersBottomsheetState extends State<RidersBottomsheet> {
+
+  final CallController controller=Get.put(CallController());
+  @override
+  void initState() {
+  controller.makeCall();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
