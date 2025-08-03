@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ride_share_flat/helpers/my_extension.dart';
+import 'package:ride_share_flat/helpers/pref_helper.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/screen/common_screen/FAQ/faq_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/SafetyScreen/safety_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/Terms&Services/terms_services.dart';
@@ -63,16 +65,16 @@ class HomeDrawer extends StatelessWidget {
                 color: Colors.grey
               ),
               child: ClipOval(
-                child: Image.asset("assets/images/editimage.jpg",fit: BoxFit.cover,),
+                child: Image.asset(PrefsHelper.myImage,fit: BoxFit.cover,),
               ),
             ),
-            CommonText(text: "Arlene McCoy",fontSize: 16,fontWeight: FontWeight.w500,),
+            CommonText(text:PrefsHelper.myName,fontSize: 16,fontWeight: FontWeight.w500,),
           ],),
           20.height,
         Divider(thickness: 1,color: Colors.brown ,),
           // Drawer Items
           DrawerItem(
-            title: "Your Location",
+            title:AppString.yourLocation,
             iconColor: Colors.black,
            icon:"assets/icons/pin.png",
             onTap: () {
@@ -80,14 +82,14 @@ class HomeDrawer extends StatelessWidget {
             },
           ),
           DrawerItem(
-            title: "Order Tracking",
+            title: AppString.orderTracking,
             icon:"assets/icons/order.png",
             onTap: () {
               Get.to(OrderTracking());
             },
           ),
           DrawerItem(
-            title: "Request History",
+            title: AppString.requestHistory,
             icon:"assets/icons/request.png",
             onTap: () {
               // HistoryScreen.isFromDrawer = true;
@@ -95,28 +97,28 @@ class HomeDrawer extends StatelessWidget {
             },
           ),
           DrawerItem(
-            title: "Safety",
+            title: AppString.safety,
             icon:"assets/icons/safety.png",
             onTap: () {
               Get.to(SafetyScreen());
             },
           ),
           DrawerItem(
-            title: "Settings",
+            title:AppString.settings,
             icon:"assets/icons/settings.png",
             onTap: () {
               Get.to(SettingsPage());
             },
           ),
           DrawerItem(
-            title: "Terms & Policies",
+            title: AppString.termsOfService,
             icon:"assets/icons/terms.png",
             onTap: () {
               Get.to(TermsServices());
             },
           ),
           DrawerItem(
-            title: "FAQ",
+            title: AppString.faq,
             icon:"assets/icons/faq2.png",
             onTap: () {
               Get.to(FAQScreen());
@@ -124,7 +126,7 @@ class HomeDrawer extends StatelessWidget {
           ),
           100.height,
           DrawerItem(
-            title: "Log out",
+            title: AppString.logOut,
             icon:"assets/icons/logout.png",
             textColor: Color(0xff990000),
             iconColor: Color(0xff990000),

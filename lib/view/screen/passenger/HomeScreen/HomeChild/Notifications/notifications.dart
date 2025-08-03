@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ride_share_flat/controller/NotificationController/notification_controller.dart';
 import 'package:ride_share_flat/helpers/others_helper.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 
 class Notifications extends StatefulWidget {
@@ -43,7 +44,7 @@ class _NotificationsState extends State<Notifications> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: CommonText(
-          text: "Notification",
+          text: AppString.notifications,
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),

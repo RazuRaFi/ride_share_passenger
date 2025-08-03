@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 
 import '../../../../../../controller/Mapcontroller/create_load_controller.dart';
 import '../../../../../../controller/Mapcontroller/map_controller.dart';
@@ -145,7 +146,7 @@ class _SetLocationHomeState extends State<SetLocation> {
                   ),
                   const SizedBox(height: 16),
                   CommonButton(
-                    titleText: "Set Locations",
+                    titleText: AppString.setLocation,
                     backgroundColor: Colors.black,
                     titleColor: Colors.white,
                     buttonHeight: 56,

@@ -35,6 +35,8 @@ class AppUrls {
   static const history = "$baseUrl/passenger/history";
   static const historyDetails = "$baseUrl/passenger/history/6883026e7af508d422208587";
   static const message = "$baseUrl/ride/ride-status/6889a6f00ed53d6712276289";
+  static const rentCar = "$baseUrl/rent-car/get-all-not-assigned-rent-cars?latitude=28.6333&longitude=77.2167&radius=10000";
+  static const rentCarDetails = "$baseUrl/rent-car/get-all-not-assigned-rent-cars/688ee40e819d16daac39fba1";
 }
 
 

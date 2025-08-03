@@ -21,7 +21,7 @@ class ProfileController extends GetxController {
   List gender = const ["Male", "Female", "Other"];
 
   // String selectedLanguage = "English";
-  String image="";
+  RxString image = "".obs;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
@@ -41,8 +41,10 @@ class ProfileController extends GetxController {
   // }
 
   getProfileImage() async {
-    image = await OtherHelper.openGallery()??"";
-    update();
+    final pickedImage = await OtherHelper.openGallery();
+    if (pickedImage != null) {
+      image.value = pickedImage;
+    }
   }
 
   // selectLanguage(int index) {
@@ -112,7 +114,7 @@ class ProfileController extends GetxController {
       };
 
 
-      final response = await ApiService.multipartRequest(url: AppUrls.updateProfile, body: body,imagePath: image,header: headers,method: "PATCH");
+      final response = await ApiService.multipartRequest(url: AppUrls.updateProfile, body: body,imagePath: image.value,header: headers,method: "PATCH");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         nameController.clear();

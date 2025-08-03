@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:ride_share_flat/controller/RentCarController/rentcar_show_controller.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/button/CommonButton.dart';
 
 
+import '../../../../../../../utils/app_urls.dart';
 import '../../../../../../component/CommonText.dart';
+import '../../../../../../component/image/common_image.dart';
 import '../../../../../../component/text_field/custom_textfield.dart';
 
 import 'ConfirmRent/confirm_rent.dart';
 
-class RentCarDetails extends StatelessWidget {
+class RentCarDetails extends StatefulWidget {
   const RentCarDetails({super.key});
 
+  @override
+  State<RentCarDetails> createState() => _RentCarDetailsState();
+}
+
+class _RentCarDetailsState extends State<RentCarDetails> {
+  final RentCarController controller=Get.put(RentCarController());
+
+  @override
+  void initState() {
+    controller.getRentDetails();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,87 +35,88 @@ class RentCarDetails extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 14),
-              CustomTextField(
-                hindText: "13th Street.47 W 13th St, New York",
-                suffixIcon: Icon(Icons.search),
-                fieldBorderRadius: 10,
-                prefixIcon: Icon(Icons.location_pin),
-                fieldBorderColor: Colors.grey,
-                textStyle: TextStyle(fontSize: 12),
-              ),
-              SizedBox(height: 24),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                      height: 234,
-                      width: 319,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey.shade200,
+      body: Obx((){
+        return controller.isDetails.value
+            ? Center(child: CircularProgressIndicator(color: Colors.blueAccent,),)
+            : Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                        height: 234,
+                        width: 319,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey.shade200,
+                        ),
+                        child: Column(
+                          spacing: 5,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              spacing: 10,
+                              children: [
+                                Image.asset("assets/icons/logo.png",height: 22,width: 22,),
+                                CommonText(text: "CARENT",fontSize: 14,fontWeight: FontWeight.w600,)
+                              ],
+                            ),
+                            SizedBox(height: 10,),
+                            Center(
+                              child: SizedBox(
+                                height: 61,
+                                width: 167.53,
+                                child: ClipOval(
+                                  child: CommonImage(
+                                    imageSrc:
+                                    "${AppUrls.imageUrl}${controller.rentCarDetails.vehiclePic}",
+                                    imageType: ImageType.network,
+                                    fill: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CommonText(text: controller.rentCarDetails.brandName,fontSize: 18,fontWeight: FontWeight.w500,),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    CommonText(text: "\$${controller.rentCarDetails.rentRate}",fontSize: 16,fontWeight: FontWeight.w500,),
+                                    CommonText(text: "/${controller.rentCarDetails.rentTime}",fontSize: 16,fontWeight: FontWeight.w500,),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
-                      child: Column(
-                        spacing: 5,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      SizedBox(height: 24),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             spacing: 10,
                             children: [
-                              Image.asset("assets/icons/logo.png",height: 22,width: 22,),
-                              CommonText(text: "CARENT",fontSize: 14,fontWeight: FontWeight.w600,)
+                              Image.asset("assets/icons/logo.png",height: 30,width: 30,),
+                              CommonText(text: "CARENT",fontSize: 18,fontWeight: FontWeight.w600,)
                             ],
                           ),
-                          SizedBox(height: 10,),
-                          Center(
-                            child: Container(
-                              height: 61,
-                              width: 167.53,
-                              child: Image.asset("assets/icons/carmodel.png"),
-                            ),
-                          ),
-                          SizedBox(height: 10,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CommonText(text: "BMW G05 ",fontSize: 18,fontWeight: FontWeight.w500,),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  CommonText(text: "\$50",fontSize: 16,fontWeight: FontWeight.w500,),
-                                  CommonText(text: "/Daily",fontSize: 16,fontWeight: FontWeight.w500,),
-                                ],
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 24),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          spacing: 10,
-                          children: [
-                            Image.asset("assets/icons/logo.png",height: 30,width: 30,),
-                            CommonText(text: "CARENT",fontSize: 18,fontWeight: FontWeight.w600,)
-                          ],
-                        ),
-                        IconButton(onPressed: (){
+                          IconButton(onPressed: (){
                             showModalBottomSheet( // ✅ Prefer `showModalBottomSheet` for better behavior
                               context: context,
                               shape: RoundedRectangleBorder(
@@ -151,34 +168,35 @@ class RentCarDetails extends StatelessWidget {
                               },
                             );
 
-                        }, icon: Icon(Icons.call_outlined,size: 28,))
-                      ],
-                    )
-                  ],
+                          }, icon: Icon(Icons.call_outlined,size: 28,))
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: 24),
-              CommonText(text: "Company Location",fontSize: 16,fontWeight: FontWeight.w500,),
-              SizedBox(height: 8,),
-              Container(
-                height: 170,
-                width: 151,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10)
+                SizedBox(height: 24),
+                CommonText(text: "Company Location",fontSize: 16,fontWeight: FontWeight.w500,),
+                SizedBox(height: 8,),
+                Container(
+                  height: 170,
+                  width: 151,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Image.asset("assets/images/maps.png",fit: BoxFit.cover,),
                 ),
-                child: Image.asset("assets/images/maps.png",fit: BoxFit.cover,),
-              ),
-              SizedBox(height: 40,),
-              GestureDetector(
-            onTap: (){
-              Get.to(ConfirmRentCar());
-            },
-                  child: CommonButton(titleText: "Book Now",buttonHeight: 56,buttonWidth: 361,titleSize: 14,titleWeight: FontWeight.w500,backgroundColor: Colors.black,)),
-              SizedBox(height: 24,),
-            ],
+                SizedBox(height: 40,),
+                GestureDetector(
+                    onTap: (){
+                      Get.to(ConfirmRentCar());
+                    },
+                    child: CommonButton(titleText: AppString.bookNow,buttonHeight: 56,buttonWidth: 361,titleSize: 14,titleWeight: FontWeight.w500,backgroundColor: Colors.black,)),
+                SizedBox(height: 24,),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

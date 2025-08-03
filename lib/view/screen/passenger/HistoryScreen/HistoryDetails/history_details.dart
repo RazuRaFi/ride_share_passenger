@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/controller/HistoryController/history_controller.dart';
 import 'package:ride_share_flat/helpers/others_helper.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 
 import '../../../../../utils/app_urls.dart';
@@ -32,7 +33,7 @@ class _HistoryDetailsScreenState extends State<HistoryDetailsScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: CommonText(text: "Trip Details",fontSize: 16,fontWeight: FontWeight.w500,),
+        title: CommonText(text: AppString.tripDetails,fontSize: 16,fontWeight: FontWeight.w500,),
         centerTitle: true,
       ),
       body:Obx((){

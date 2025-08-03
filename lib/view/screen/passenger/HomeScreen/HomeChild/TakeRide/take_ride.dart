@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/SetLocation/set_location.dart';
@@ -19,7 +20,7 @@ class TakeRideSet extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: CommonText(text: "Set your location ",fontSize: 16,fontWeight: FontWeight.w500,),
+        title: CommonText(text: AppString.setLocation,fontSize: 16,fontWeight: FontWeight.w500,),
         centerTitle: true,
       ),
       body: Padding(
@@ -79,8 +80,8 @@ class TakeRideSet extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       spacing: 5,
                       children: [
-                        CommonText(text: "Home",fontSize: 14,fontWeight:FontWeight.w500),
-                        CommonText(text: "Set Address",fontSize: 12,fontWeight: FontWeight.w400,),
+                        CommonText(text:AppString.home,fontSize: 14,fontWeight:FontWeight.w500),
+                        CommonText(text: AppString.setAddress,fontSize: 12,fontWeight: FontWeight.w400,),
                       ],
                     )
                   ],
@@ -108,8 +109,8 @@ class TakeRideSet extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       spacing: 5,
                       children: [
-                        CommonText(text: "Work",fontSize: 14,fontWeight:FontWeight.w500),
-                        CommonText(text: "Set Address",fontSize: 12,fontWeight: FontWeight.w400,),
+                        CommonText(text: AppString.work,fontSize: 14,fontWeight:FontWeight.w500),
+                        CommonText(text: AppString.setAddress,fontSize: 12,fontWeight: FontWeight.w400,),
                       ],
                     )
                   ],

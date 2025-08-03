@@ -121,6 +121,7 @@ class AppString {
   static String get car => "car".tr;
   static String get schedule => "schedule".tr;
   static String get rentCar => "rentCar".tr;
+  static String get rentNow => "rentNow".tr;
   static String get takeRide => "takeRide".tr;
   static String get searchDestination => "searchDestination".tr;
   static String get home => "home".tr;

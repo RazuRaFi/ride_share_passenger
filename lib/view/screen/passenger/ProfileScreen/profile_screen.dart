@@ -148,7 +148,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 spacing: 10,
                 children: [
-                  roleContainer(title: AppString.multiplePromos,
+                  roleContainer(
+                      title: AppString.multiplePromos,
                       details:AppString.applySaved,
                       image: "assets/images/offerup.png")
                 ],
@@ -348,7 +349,9 @@ class roleContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 5,
                 children: [
-                  CommonText(text:title,fontSize: 14,fontWeight: FontWeight.w500,),
+                  CommonText(
+                    textAlign: TextAlign.start,
+                    text:title,fontSize: 14,fontWeight: FontWeight.w500,),
                   CommonText(textAlign: TextAlign.start,
                     text: details,maxLines: 2,fontSize: 12,fontWeight: FontWeight.w400,),
                 ],

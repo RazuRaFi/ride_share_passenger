@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/controller/OrderTrackingController/pending_show_controller.dart';
 import 'package:ride_share_flat/helpers/others_helper.dart';
+import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/MessageScreen/message_screen.dart';
 
@@ -37,7 +38,7 @@ class _TripDetailsOrderState extends State<TripDetailsOrder> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: CommonText(text: "Trip Details",fontSize: 16,fontWeight: FontWeight.w500,),
+        title: CommonText(text: AppString.tripDetails,fontSize: 16,fontWeight: FontWeight.w500,),
         centerTitle: true,
       ),
       body: Obx((){

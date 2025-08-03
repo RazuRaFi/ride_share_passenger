@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/controller/HistoryController/history_controller.dart';
 import 'package:ride_share_flat/helpers/others_helper.dart';
 import 'package:ride_share_flat/utils/app_string.dart';
@@ -77,7 +76,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   Row(
                                     spacing: 5,
                                     children: [
-                                      CommonText(text: "110",fontSize: 16,fontWeight: FontWeight.w500,),
+                                      CommonText(text:history.netFare.toString(),fontSize: 16,fontWeight: FontWeight.w500,),
                                       Icon(Icons.arrow_forward_ios_outlined,size: 16,),
                                     ],
                                   )
@@ -139,8 +138,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     );
                   }),
               SizedBox(height: 16,),
-
-
             ],
           ),
         );

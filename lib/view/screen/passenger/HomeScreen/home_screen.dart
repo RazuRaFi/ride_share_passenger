@@ -98,16 +98,16 @@ class HomeScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: GestureDetector(
                                 onTap:(){
-                                  if(homeController.serviceList[index]['title']== AppString.rentCar){
-                                    Get.to(RentCarScreen());
-                                  }else if(homeController.serviceList[index]['title']== AppString.motoBike){
+                                  if(index==0){
+                                    Get.to(TakeRideSet());
+                                  }else if(index==1){
                                     Get.to(()=>TakeRideSet());
-                                  }else if(homeController.serviceList[index]['title']== AppString.car){
-                                    Get.to(()=>TakeRideSet());
+                                  }else if(index==2){
+                                    Get.to(()=>RentCarScreen());
                                   }
-                                  else if(homeController.serviceList[index]['title']== AppString.schedule){
+                                  else if(index==3){
                                   Get.to(()=>ScheduleScreen());
-                                  };
+                                  }
                                 },
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -225,7 +225,6 @@ class HomeScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Container(
                                   height: 90,
-                                  width: 280,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(color: Colors.grey),

@@ -141,7 +141,7 @@ class SettingsPage extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     CommonButton(
-                                      titleText: 'Yes',
+                                      titleText: AppString.yes,
                                       backgroundColor: Colors.black,
                                       buttonHeight: 45,
                                       buttonWidth: 120,
@@ -151,7 +151,7 @@ class SettingsPage extends StatelessWidget {
                                       },
                                     ),
                                     CommonButton(
-                                      titleText: 'No',
+                                      titleText: AppString.no,
                                       backgroundColor: Colors.white,
                                       buttonHeight: 45,
                                       buttonWidth: 120,
@@ -172,7 +172,7 @@ class SettingsPage extends StatelessWidget {
                     );
                   },
                   child: CommonText(
-                    text: "Delete Account",
+                    text:AppString.deleteAccount,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: Colors.red,
