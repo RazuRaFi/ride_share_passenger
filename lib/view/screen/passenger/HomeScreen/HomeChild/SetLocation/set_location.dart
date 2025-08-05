@@ -20,7 +20,7 @@ class SetLocation extends StatefulWidget {
 }
 
 class _SetLocationHomeState extends State<SetLocation> {
-  final MapController mapController = Get.put(MapController());
+  final CustomMapController mapController = Get.put(CustomMapController());
   final CreateLoadMapController createLoadMapController = Get.put(CreateLoadMapController());
 
   final String googleApiKey = "AIzaSyC0hhuHPap6Wk98dZIyQdvvpoE3p-LuXhU";
@@ -29,7 +29,7 @@ class _SetLocationHomeState extends State<SetLocation> {
   @override
   void dispose() {
     searchLocationController.dispose();
-    Get.delete<MapController>();
+    Get.delete<CustomMapController>();
     super.dispose();
   }
 

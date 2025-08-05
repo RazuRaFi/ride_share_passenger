@@ -4,12 +4,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../controller/Mapcontroller/create_load_controller.dart';
 import '../../../controller/Mapcontroller/map_controller.dart';
-import '../../../helpers/app_routes.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/app_icons.dart';
-import '../../component/button/CommonButton.dart';
-import '../../component/image/common_image.dart';
-import '../../component/text_field/custom_textfield.dart';
+
 
 
 class MapScreen extends StatefulWidget {
@@ -20,7 +16,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  final MapController mapController = Get.put(MapController());
+  final CustomMapController mapController = Get.put(CustomMapController());
   CreateLoadMapController createLoadMapController = Get.put(
     CreateLoadMapController(),
   );
@@ -41,7 +37,7 @@ class _MapScreenState extends State<MapScreen> {
     // Dispose of the search controller
     searchLocationController.dispose();
     // Dispose of the MapController to clean up the GoogleMapController
-    Get.delete<MapController>();
+    Get.delete<CustomMapController>();
     super.dispose();
   }
 

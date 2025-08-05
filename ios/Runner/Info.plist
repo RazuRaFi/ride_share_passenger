@@ -28,6 +28,19 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>GMSApiKey</key>
+    <string>AIzaSyBRb08brXkSHozf0t3udBpAPxPGiUMQ_oc</string>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>This app uses the local network for debugging and development purposes.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app requires access to your location while you are using it.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app needs your location even in the background for best performance.</string>
+    <key>NSBonjourServices</key>
+    <array>
+        <string>_dartobservatory._tcp</string>
+        <string>_flutter-devtools._tcp</string>
+    </array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -1,25 +1,14 @@
 
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:ride_share_flat/controller/DrawerController/drawer_controller.dart';
 import 'package:ride_share_flat/controller/HomeController/home_controller.dart';
-import 'package:ride_share_flat/helpers/my_extension.dart';
 import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
-import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/booking_screen.dart';
-
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/Widget/drawer_screen.dart';
-
-import '../../../../helpers/app_routes.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_icons.dart';
 import '../../../component/CommonText.dart';
 import '../../../component/image/common_image.dart';
-import '../../../component/text_field/search_textfiled.dart';
-import '../../Map/map_screen.dart';
 import 'HomeChild/Notifications/notifications.dart';
 import 'HomeChild/RentCar/rent_car.dart';
 import 'HomeChild/Schedule/Schedule_screen.dart';
@@ -99,14 +88,14 @@ class HomeScreen extends StatelessWidget {
                                 child: GestureDetector(
                                 onTap:(){
                                   if(index==0){
-                                    Get.to(TakeRideSet());
+                                    Get.to(()=> TakeRideSet());
                                   }else if(index==1){
-                                    Get.to(()=>TakeRideSet());
+                                    Get.to(()=> TakeRideSet());
                                   }else if(index==2){
-                                    Get.to(()=>RentCarScreen());
+                                    Get.to(()=> RentCarScreen());
                                   }
                                   else if(index==3){
-                                  Get.to(()=>ScheduleScreen());
+                                  Get.to(()=> ScheduleScreen());
                                   }
                                 },
                                   child: Column(

@@ -3,7 +3,9 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:ride_share_flat/model/profile/login_profile_model.dart';
 
 import '../../helpers/app_routes.dart';
 import '../../helpers/pref_helper.dart';
@@ -14,11 +16,13 @@ import '../../utils/app_urls.dart';
 class SignInController extends GetxController{
   RxBool isLoading=false.obs;
   RxBool isRemembered = false.obs;
-  final TextEditingController emailController=TextEditingController();
-  final TextEditingController passwordController=TextEditingController();
+  final TextEditingController emailController=TextEditingController(text: kDebugMode? 'passenger@gmail.com' : '');
+  final TextEditingController passwordController=TextEditingController(text:  kDebugMode? '12345678' : '');
+  LoginProfileModel loginProfileModel = LoginProfileModel();
 
   void toggleRemembered(bool value) {
     isRemembered.value = value;
+    log("isRemembered: $isRemembered");
   }
 
   Future<void> signInUser() async {
@@ -37,29 +41,11 @@ class SignInController extends GetxController{
 
     if (response.statusCode == 200) {
       var data = response.body;
+      loginProfileModel = LoginProfileModel.fromJson(data);
 
-      PrefsHelper.token = data['data']["accessToken"];
-      PrefsHelper.userId = data['data']["user"]["_id"];
-      PrefsHelper.myImage = data['data']["user"]["profileImage"]??"";
-      PrefsHelper.myName = data['data']["user"]["fullName"];
-      PrefsHelper.myRole = data['data']["user"]["role"];
-      PrefsHelper.myEmail = data['data']["user"]["email"];
-      PrefsHelper.isLogIn = true;
-
-      PrefsHelper.setString('token', PrefsHelper.token);
-      PrefsHelper.setString("userId", PrefsHelper.userId);
-      PrefsHelper.setString("myImage", PrefsHelper.myImage);
-      PrefsHelper.setString("myName", PrefsHelper.myName);
-      PrefsHelper.setString("myEmail", PrefsHelper.myEmail);
-      PrefsHelper.setString("myRole", PrefsHelper.myRole);
-      PrefsHelper.setBool("isLogIn", PrefsHelper.isLogIn);
-
-      log("PrefsHelper.token ${PrefsHelper.token}");
-
-
+      initPrefsHelperValue(responseData: loginProfileModel);
       Get.offAllNamed(AppRoutes.navBarScreen);
-
-      SocketServices.connectToSocket(token: data['data']["accessToken"]);
+      SocketServices.connectToSocket(token: loginProfileModel.accessToken);
 
       emailController.clear();
       passwordController.clear();
@@ -69,4 +55,30 @@ class SignInController extends GetxController{
 
     isLoading(false);
   }
+
+  /// init prefs helper value
+  initPrefsHelperValue({required LoginProfileModel responseData}){
+    PrefsHelper.token = responseData.accessToken;
+    PrefsHelper.userId = responseData.user.id;
+    PrefsHelper.myImage = responseData.user.profileImage;
+    PrefsHelper.myName = responseData.user.fullName;
+    PrefsHelper.myRole = responseData.user.role;
+    PrefsHelper.myEmail = responseData.user.email;
+    PrefsHelper.phone = responseData.user.phone;
+    PrefsHelper.isLogIn = true;
+
+    if(isRemembered.value){
+      PrefsHelper.setString('token', PrefsHelper.token);
+      PrefsHelper.setString("userId", PrefsHelper.userId);
+      PrefsHelper.setString("myImage", PrefsHelper.myImage);
+      PrefsHelper.setString("myName", PrefsHelper.myName);
+      PrefsHelper.setString("myEmail", PrefsHelper.myEmail);
+      PrefsHelper.setString("phone", PrefsHelper.phone);
+      PrefsHelper.setString("myRole", PrefsHelper.myRole);
+      PrefsHelper.setBool("isLogIn", PrefsHelper.isLogIn);
+    }
+    log("PrefsHelper.token ${PrefsHelper.token}");
+
+  }
 }
+

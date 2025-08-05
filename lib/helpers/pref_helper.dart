@@ -15,6 +15,7 @@ class PrefsHelper extends GetxController {
   static String myImage = "";
   static String myName = "";
   static String myEmail = "";
+  static String phone = "";
   static String myRole = "";
   static String mySubscription = "shopping";
   static String localizationLanguageCode = 'en';
@@ -31,6 +32,7 @@ class PrefsHelper extends GetxController {
     myImage = preferences.getString("myImage") ?? "";
     myName = preferences.getString("myName") ?? "";
     myEmail = preferences.getString("myEmail") ?? "";
+    phone = preferences.getString("phone") ?? "";
     myRole = preferences.getString("myRole") ?? "";
     isLogIn = preferences.getBool("isLogIn") ?? false;
     isNotifications = preferences.getBool("isNotifications") ?? true;
