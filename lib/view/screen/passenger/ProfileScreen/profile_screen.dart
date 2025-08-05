@@ -98,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }),
                   GestureDetector(
                     onTap: () {
-                      Get.to(EditProfileScreen());
+                      Get.to(()=>EditProfileScreen());
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -129,7 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   image: "assets/icons/history.png",
                   label: AppString.history,
                   onTap: () {
-                    Get.to(HistoryScreen());
+                    Get.to(()=>HistoryScreen());
                   },
                 ),
                 _buildTabItem(
@@ -174,28 +174,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   GestureDetector(
                       onTap:(){
-                        Get.to(OrderTracking());
+                        Get.to(()=>OrderTracking());
                       },
                       child: ListItem(title: AppString.orderTracking, icon: 'assets/icons/order.png',)),
                   GestureDetector(
                       onTap: (){
-                        Get.to(SettingsPage());
+                        Get.to(()=>SettingsPage());
                       },
 
                       child: ListItem(title: AppString.settings, icon: 'assets/icons/settings.png',)),
                   GestureDetector(
                       onTap: (){
-                        Get.to(SafetyScreen());
+                        Get.to(()=>SafetyScreen());
                       },
                       child: ListItem(title:AppString.safety, icon: 'assets/icons/safety.png',)),
                   GestureDetector(
                       onTap: (){
-                        Get.to(TermsServices());
+                        Get.to(()=>TermsServices());
                       },
                       child: ListItem(title: AppString.termsOfService, icon: 'assets/icons/terms.png',)),
                   GestureDetector(
                       onTap: (){
-                        Get.to(FAQScreen());
+                        Get.to(()=>FAQScreen());
                       },
                       child: ListItem(title: AppString.faq, icon: 'assets/icons/faq2.png',)),
                 ],

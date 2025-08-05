@@ -22,9 +22,11 @@ class TripDetailsScreen extends StatefulWidget {
 
 class _TripDetailsScreenState extends State<TripDetailsScreen> {
   final CompleteShowController controller=Get.put(CompleteShowController());
+
+  var id=Get.arguments;
   @override
   void initState() {
-    controller.getCompleteDetails();
+    controller.getCompleteDetails(id: id);
     super.initState();
   }
   @override

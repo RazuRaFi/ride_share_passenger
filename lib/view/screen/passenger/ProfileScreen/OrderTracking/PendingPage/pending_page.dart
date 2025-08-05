@@ -47,7 +47,7 @@ class _PendingPageState extends State<PendingPage> {
                       final ride=controller.pendingList[index];
                       return GestureDetector(
                         onTap: (){
-                          Get.to(TripDetailsOrder());
+                          Get.to(TripDetailsOrder(),arguments:ride.id);
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(vertical: 10),

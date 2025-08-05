@@ -22,10 +22,11 @@ class RentCarDetails extends StatefulWidget {
 
 class _RentCarDetailsState extends State<RentCarDetails> {
   final RentCarController controller=Get.put(RentCarController());
+  var id=Get.arguments;
 
   @override
   void initState() {
-    controller.getRentDetails();
+    controller.getRentDetails(id: id);
     super.initState();
   }
   @override

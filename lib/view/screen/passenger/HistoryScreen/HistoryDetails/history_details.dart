@@ -22,9 +22,12 @@ class HistoryDetailsScreen extends StatefulWidget {
 
 class _HistoryDetailsScreenState extends State<HistoryDetailsScreen> {
   final HistoryController controller=Get.put(HistoryController());
+
+
+  var id = Get.arguments;
   @override
   void initState() {
-    controller.getCompleteDetails();
+    controller.getCompleteDetails(id: id);
     super.initState();
   }
   @override

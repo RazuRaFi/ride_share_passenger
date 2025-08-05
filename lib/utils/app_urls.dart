@@ -1,6 +1,8 @@
 class AppUrls {
-  static const baseUrl = "http://10.10.10.31:7010/api/v1";
-  static const imageUrl = "http://10.10.10.31:7010";
+  // static const baseUrl = "http://10.10.10.31:7010/api/v1";
+  static const baseUrl = "https://ride-sharing-flad.onrender.com/api/v1";
+  // static const imageUrl = "http://10.10.10.31:7010";
+  static const imageUrl = "https://ride-sharing-flad.onrender.com";
   static const socketUrl = "ws://10.10.10.31:7010";
 
 
@@ -29,14 +31,14 @@ class AppUrls {
   static const delete = "$baseUrl/users/delete-my-account";
   static const completeProfile = "$baseUrl/users/complete";
   static const pendingRider = "$baseUrl/passenger/get-pending-rides";
-  static const pendingRiderDetails = "$baseUrl/passenger/get-pending-rides/688304d1cd8c0a6ddf20a68e";
+  static String pendingRiderDetails(String id) => "$baseUrl/passenger/get-pending-rides/$id";
   static const completeRide = "$baseUrl/passenger/get-complete-rides";
-  static const completeRideDetails = "$baseUrl/passenger/get-complete-rides/6883026e7af508d422208587";
+  static String completeRideDetails(String id) => "$baseUrl/passenger/get-complete-rides/$id";
   static const history = "$baseUrl/passenger/history";
-  static const historyDetails = "$baseUrl/passenger/history/6883026e7af508d422208587";
+  static String historyDetails(String id) => "$baseUrl/passenger/history/$id";
   static const message = "$baseUrl/ride/ride-status/688eda909863807a05ffa11f";
   static const rentCar = "$baseUrl/rent-car/get-all-not-assigned-rent-cars?latitude=28.6333&longitude=77.2167&radius=10000";
-  static const rentCarDetails = "$baseUrl/rent-car/get-all-not-assigned-rent-cars/688ee40e819d16daac39fba1";
+  static String rentCarDetails(String id) => "$baseUrl/rent-car/get-all-not-assigned-rent-cars/$id";
 }
 
 

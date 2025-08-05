@@ -54,7 +54,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     final history=controller.historyList[index];
                     return GestureDetector(
                       onTap: (){
-                        Get.to(HistoryDetailsScreen());
+                        Get.to(HistoryDetailsScreen(),arguments: history.id);
                       },
                       child: Container(
                         margin: EdgeInsets.symmetric(vertical: 10),

@@ -40,7 +40,7 @@ class CompleteShowController extends GetxController {
     }
   }
 
-  Future<CompleteDetailsModel?> getCompleteDetails() async {
+  Future<CompleteDetailsModel?> getCompleteDetails({required String id}) async {
     isCompleteDetails(true);
 
     try {
@@ -48,7 +48,7 @@ class CompleteShowController extends GetxController {
         "token": PrefsHelper.token,
       };
 
-      var response = await ApiService.getApi(AppUrls.completeRideDetails, header: header);
+      var response = await ApiService.getApi(AppUrls.completeRideDetails(id), header: header);
 
       if (response.statusCode == 200) {
         final data = response.body['data'];

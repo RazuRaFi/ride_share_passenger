@@ -1,8 +1,10 @@
 
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_intl_phone_field/countries.dart';
 import 'package:get/get.dart';
 
 import '../../helpers/app_routes.dart';
@@ -30,7 +32,12 @@ class SignUpController extends GetxController{
   void toggleRemembered(bool value) {
     isRemembered.value = value;
   }
+  var selectedDialCode = "+33".obs;
 
+  void countryChange(Country country) {
+    selectedDialCode.value = country.dialCode;
+    log(">>>>>>>>>>>>>>> ${country.dialCode}");
+  }
 
   signUpUser() async {
     isLoading(true);
@@ -38,6 +45,7 @@ class SignUpController extends GetxController{
     Map<String, String> body = {
       "fullName": fullNameController.text,
       "email": emailController.text,
+      "phone": "${selectedDialCode.value}${phoneController.text}",
       "password": passwordController.text,
       "termsAndConditions":isRemembered.toString()
     };
