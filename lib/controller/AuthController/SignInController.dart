@@ -41,7 +41,7 @@ class SignInController extends GetxController{
 
     if (response.statusCode == 200) {
       var data = response.body;
-      loginProfileModel = LoginProfileModel.fromJson(data);
+      loginProfileModel = LoginProfileModel.fromJson(data['data']);
 
       initPrefsHelperValue(responseData: loginProfileModel);
       Get.offAllNamed(AppRoutes.navBarScreen);

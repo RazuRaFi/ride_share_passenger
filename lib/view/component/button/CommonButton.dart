@@ -36,7 +36,7 @@ class CommonButton extends StatelessWidget {
     this.isLoading = false,
     this.buttonWidth = double.infinity,
     this.borderColor,
-    this.backgroundColor = Colors.white,
+    this.backgroundColor = Colors.black,
     this.prefixIcon, // Added to constructor
     super.key,
   });

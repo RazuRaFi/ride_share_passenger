@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ride_share_flat/controller/splash_controller/splash_controller.dart';
 import 'package:ride_share_flat/helpers/my_extension.dart';
+import 'package:ride_share_flat/view/component/other_widgets/common_loader.dart';
 
 class SplashScreen extends StatelessWidget {
  const SplashScreen({super.key});
@@ -18,8 +19,7 @@ class SplashScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(child: Image.asset("assets/images/splash.png")),
-          Spacer(),
-
+          CommonLoader(),
           50.height,
         ],
       ),

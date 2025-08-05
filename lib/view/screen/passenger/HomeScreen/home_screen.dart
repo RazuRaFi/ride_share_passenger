@@ -292,7 +292,7 @@ class HomeScreen extends StatelessWidget {
                                             Row(
                                               children: [
                                                 CommonText(text: AppString.passengerSafety),
-                                                IconButton(onPressed: (){}, icon:Icon(Icons.arrow_forward,size: 18,))
+                                                Expanded(child: IconButton(onPressed: (){}, icon:Icon(Icons.arrow_forward,size: 18,)))
                                               ],
                                             ),
                                             CommonText(textAlign: TextAlign.start,

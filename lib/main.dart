@@ -6,11 +6,10 @@ import 'package:ride_share_flat/helpers/app_routes.dart';
 import 'package:ride_share_flat/helpers/pref_helper.dart';
 import 'package:ride_share_flat/localization/translation.dart';
 import 'package:ride_share_flat/services/socket_services.dart';
-import 'package:ride_share_flat/view/screen/common_screen/splash/splash_screen.dart';
-import 'package:ride_share_flat/view/test_screen.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await PrefsHelper.getAllPrefData();
   if(PrefsHelper.token.isNotEmpty){
     SocketServices.connectToSocket(token: PrefsHelper.token);
   }

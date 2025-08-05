@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../controller/AuthController/SignInController.dart';
 import '../controller/AuthController/Sign_up_controller.dart';
-import '../controller/Mapcontroller/map_controller.dart';
+import '../controller/MapController/map_controller.dart';
 import '../controller/Profile/profile_controller.dart';
 import '../controller/SettingController/change_password.dart';
 import '../controller/splash_controller/splash_controller.dart';

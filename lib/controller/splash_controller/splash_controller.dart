@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import '../../helpers/app_routes.dart';
 import '../../helpers/pref_helper.dart';
@@ -14,6 +16,7 @@ class SplashController extends GetxController {
   void navigateAfterDelay() async {
     await Future.delayed(Duration(seconds: 3));
     // Get.to(OnboardingScreen());
+    log("token: ${PrefsHelper.token}");
     if (PrefsHelper.token.isNotEmpty) {
         Get.toNamed(AppRoutes.navBarScreen);
       } else {

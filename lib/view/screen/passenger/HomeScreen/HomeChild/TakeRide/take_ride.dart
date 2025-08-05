@@ -6,18 +6,51 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/controller/Mapcontroller/map_controller.dart';
 import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
+import 'package:ride_share_flat/view/component/button/CommonButton.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
-import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/SetLocation/set_location.dart';
 
 import '../ConfirmLocationHome/confirm_location.dart';
 import '../ConfirmLocationOffice/confirm_location.dart';
 
-class TakeRideSet extends StatelessWidget {
+class TakeRideSet extends StatefulWidget {
   TakeRideSet({super.key});
 
+  @override
+  State<TakeRideSet> createState() => _TakeRideSetState();
+}
+
+class _TakeRideSetState extends State<TakeRideSet> {
   CustomMapController customMapController = Get.find<CustomMapController>();
+
   TextEditingController pickedLocationController = TextEditingController();
+
   TextEditingController dropOffLocationController = TextEditingController();
+
+  bool isPickAddress = false;
+
+  bool isDropOffAddress = false;
+
+  RxBool showGoToMapButton = false.obs;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    pickedLocationController.addListener(checkFields);
+    dropOffLocationController.addListener(checkFields);
+    super.initState();
+  }
+
+  void checkFields(){
+    showGoToMapButton.value = pickedLocationController.text.isNotEmpty && dropOffLocationController.text.isNotEmpty;
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    pickedLocationController.dispose();
+    dropOffLocationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,20 +67,26 @@ class TakeRideSet extends StatelessWidget {
           children: [
             CustomTextField(
               controller: pickedLocationController,
-              onTap: (){
-                Get.to(()=>SetLocation());
+              onChanged: (value) async {
+                if (value.isNotEmpty) {
+                  final searchResult = await customMapController.fetchPlaceSuggestions(value);
+                  customMapController.suggestions.value = searchResult;
+                  isPickAddress = true;
+                  isDropOffAddress = false;
+                } else {
+                  customMapController.suggestions.clear();
+                }
               },
               hindText: "Picked Location",suffixIcon: Icon(Icons.close),fieldBorderRadius: 10,prefixIcon: Icon(Icons.man),fieldBorderColor: Colors.grey,textStyle: TextStyle(fontSize: 12),),
             SizedBox(height: 10,),
             CustomTextField(
               controller: dropOffLocationController,
-              onTap: (){
-                Get.to(()=>SetLocation());
-              },
                 onChanged: (value) async {
                   if (value.isNotEmpty) {
                     final searchResult = await customMapController.fetchPlaceSuggestions(value);
                     customMapController.suggestions.value = searchResult;
+                    isPickAddress = false;
+                    isDropOffAddress = true;
                   } else {
                     customMapController.suggestions.clear();
                   }
@@ -55,57 +94,44 @@ class TakeRideSet extends StatelessWidget {
                 hindText: "Destination Location",suffixIcon: Icon(Icons.search),fieldBorderRadius: 10,prefixIcon: Icon(Icons.location_pin),fieldBorderColor: Colors.grey,textStyle: TextStyle(fontSize: 12)),
             SizedBox(height: 20,),
             Obx(() => customMapController.suggestions.isNotEmpty
-                ? Positioned(
-              top: 200,
-              left: 20,
-              right: 20,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(color: Colors.black12, blurRadius: 5),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ListView.separated(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  itemCount: customMapController.suggestions.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(customMapController.suggestions[index]),
-                      onTap: () {
-                        final selectedSuggestion = customMapController.suggestions[index];
-
-                        FocusScope.of(context).unfocus();
-                        customMapController.suggestions.clear();
-                      },
-                    );
-                  },
-                  separatorBuilder: (context, index) => const Divider(height: 1),
-                ),
-              ),
-            )
+                ? Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(color: Colors.black12, blurRadius: 5),
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ListView.separated(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    itemCount: customMapController.suggestions.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(customMapController.suggestions[index]),
+                        onTap: () {
+                          final selectedSuggestion = customMapController.suggestions[index];
+                          if(isPickAddress){
+                            pickedLocationController.text = selectedSuggestion;
+                          }else if(isDropOffAddress){
+                            dropOffLocationController.text = selectedSuggestion;
+                          }
+                          FocusScope.of(context).unfocus();
+                          customMapController.suggestions.clear();
+                        },
+                      );
+                    },
+                    separatorBuilder: (context, index) => const Divider(height: 1),
+                  ),
+                )
                 : const SizedBox.shrink(),),
-            // ListView.builder(
-            //   shrinkWrap: true,
-            //     physics: ScrollPhysics(),
-            //     itemCount: 3,
-            //     itemBuilder: (context,index){
-            //   return Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Row(
-            //         spacing: 10,
-            //         children: [
-            //           Icon(Icons.history),
-            //           CommonText(text: "13th Street.47 W 13th St, New York",fontSize: 14,fontWeight: FontWeight.w400,),
-            //         ],
-            //       ),
-            //       IconButton(onPressed: (){}, icon: Icon(Icons.close)),
-            //     ],
-            //   );
-            // }),
+            Obx(() => showGoToMapButton.value?
+            CommonButton(
+              onTap: () {
+
+              },
+                titleText: "Go to map"
+            ) : SizedBox.shrink(),),
             Divider(thickness: 1,color: Colors.brown,),
             SizedBox(height: 20,),
             GestureDetector(
@@ -139,7 +165,7 @@ class TakeRideSet extends StatelessWidget {
             SizedBox(height: 10,),
             GestureDetector(
               onTap: (){
-                Get.to(SetLocationOffice());
+                Get.to(()=> SetLocationOffice());
               },
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
