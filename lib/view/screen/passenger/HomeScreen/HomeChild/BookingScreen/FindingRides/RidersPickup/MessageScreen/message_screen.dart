@@ -2,14 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:ride_share_flat/controller/WebSocketController/web_socket_controller.dart';
 import 'package:ride_share_flat/helpers/pref_helper.dart';
-
-import 'package:ride_share_flat/services/socket_services.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
-
 import '../../../../../../../../../utils/app_urls.dart';
 import '../../../../../../../../component/image/common_image.dart';
 
@@ -139,37 +135,6 @@ class _MessageScreenState extends State<MessageScreen> {
           _buildInputField(),
         ],
       ),
-      // Padding(
-      //   padding: const EdgeInsets.all(16),
-      //   child: Column(
-      //     children: [
-      //       Text(
-      //         SocketServices.isConnected ? "Connected" : "Disconnected",
-      //         style: TextStyle(
-      //           color: SocketServices.isConnected
-      //               ? Colors.green
-      //               : Colors.red,
-      //         ),
-      //       ),
-      //       const SizedBox(height: 20),
-      //       TextField(
-      //         controller: textController,
-      //         decoration: const InputDecoration(labelText: 'Enter message'),
-      //       ),
-      //       const SizedBox(height: 10),
-      //       ElevatedButton(
-      //         onPressed: () {
-      //
-      //           controller.sendMessage(rideId:'6889a6f00ed53d6712276289',messageText:textController.text);
-      //           textController.clear();
-      //         },
-      //         child: const Text('Send'),
-      //       ),
-      //       const SizedBox(height: 20),
-      //
-      //     ],
-      //   ),
-      // ),
     );
   }
 

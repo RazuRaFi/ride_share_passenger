@@ -43,7 +43,7 @@ class RideBottomSheet extends StatelessWidget {
     ];
 
     return DraggableScrollableSheet(
-      initialChildSize: 0.4, // default height (0.0 to 1.0)
+      initialChildSize: 0.4,
       minChildSize: 0.3,
       maxChildSize: 0.9,
       builder: (context, scrollController) {
