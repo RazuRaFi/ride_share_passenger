@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -7,13 +8,15 @@ import 'package:geolocator/geolocator.dart';
 
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:ride_share_flat/utils/api_key.dart';
 
 
 import '../../utils/app_icons.dart';
 
-class MapController extends GetxController {
+class CustomMapController extends GetxController {
 
-  static MapController get instance => Get.put(MapController());
+  static CustomMapController get instance => Get.put(CustomMapController());
   // Current location of the user
   var currentLocation = const LatLng(23.759139, 90.429084).obs;
 
@@ -58,6 +61,8 @@ class MapController extends GetxController {
   var selectedPaymentMethod = 'Digital Payment'.obs; // Default payment method
   RxBool isLoading = false.obs;
   String vehicleType = "";
+  RxBool suggestionLoading = false.obs;
+  RxList<String> suggestions = <String>[].obs;
 
 
   @override
@@ -76,6 +81,27 @@ class MapController extends GetxController {
     mapController?.dispose();
     mapController = null;
     super.onClose();
+  }
+
+  /// Address Suggestion api
+  Future<List<String>> fetchPlaceSuggestions(String input) async {
+    suggestionLoading(true);
+    String apiKey = AppApiKeys.mapApiKey; // Replace with your actual key
+    final url = Uri.parse(
+      'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=$apiKey&components=country:us', // You can change the country code
+    );
+
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final predictions = data['predictions'] as List;
+      log("Suggestion Text- $input: $predictions");
+      suggestionLoading(false);
+      return predictions.map((e) => e['description'] as String).toList();
+    } else {
+      suggestionLoading(false);
+      throw Exception('Failed to fetch suggestions');
+    }
   }
 
   Future<void> _loadDriverMarkerIcon() async{
