@@ -1,18 +1,15 @@
 
 
-import 'package:dotted_line/dotted_line.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:ride_share_flat/controller/OrderTrackingController/pending_show_controller.dart';
 import 'package:ride_share_flat/helpers/others_helper.dart';
 import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/MessageScreen/message_screen.dart';
-
 import '../../../../../../../utils/app_urls.dart';
 import '../../../../../../component/CommonText.dart';
 import '../../../../../../component/button/CommonButton.dart';
@@ -27,9 +24,10 @@ class TripDetailsOrder extends StatefulWidget {
 
 class _TripDetailsOrderState extends State<TripDetailsOrder> {
   final PendingShowController controller=Get.put(PendingShowController());
+  var id=Get.arguments;
   @override
   void initState() {
-    controller.getRiderDetails();
+    controller.getRiderDetails(id: id);
     super.initState();
   }
   @override

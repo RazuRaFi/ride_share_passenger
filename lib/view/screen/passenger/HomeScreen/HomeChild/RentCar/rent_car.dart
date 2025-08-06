@@ -62,7 +62,7 @@ class _RentCarScreenState extends State<RentCarScreen> {
                       final car=controller.carList[index];
                       return  GestureDetector(
                         onTap: (){
-                          Get.to(RentCarDetails());
+                          Get.to(RentCarDetails(),arguments: car.id);
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),

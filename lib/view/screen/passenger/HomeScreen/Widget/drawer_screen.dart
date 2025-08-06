@@ -1,7 +1,6 @@
 
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ride_share_flat/helpers/my_extension.dart';
@@ -16,17 +15,14 @@ import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/OrderTrackin
 import 'package:ride_share_flat/view/screen/passenger/ProfileScreen/SettingsPage/settings_page.dart';
 
 import '../../../../../../utils/app_colors.dart';
-import '../../../../../../utils/app_icons.dart';
-import '../../../../../helpers/app_routes.dart';
-import '../../../../../utils/app_image.dart';
+import '../../../../../utils/app_urls.dart';
 import '../../../../component/CommonText.dart';
 import '../../../../component/image/common_image.dart';
 import '../../HistoryScreen/history_screen.dart';
-import '../HomeChild/TakeRide/take_ride.dart';
 import 'drawer_items.dart';
 
 class HomeDrawer extends StatelessWidget {
-  HomeDrawer({
+  const HomeDrawer({
     super.key,
   });
 
@@ -43,20 +39,6 @@ class HomeDrawer extends StatelessWidget {
             spacing: 15,
             children: [
             8.width,
-            // CircleAvatar(
-            //   radius: 30,
-            //   backgroundColor: AppColors.background2,
-            //   child: Center(
-            //     child: CommonImage(
-            //       imageSrc: "https://shorturl.at/LIblR",
-            //       imageType: ImageType.network,
-            //       defaultImage: AppImages.profile,
-            //       borderRadius: 100,
-            //       height: 50,
-            //       width: 50,
-            //     ),
-            //   ),
-            // ),
             Container(
               height: 49,
               width: 49,
@@ -65,7 +47,12 @@ class HomeDrawer extends StatelessWidget {
                 color: Colors.grey
               ),
               child: ClipOval(
-                child: Image.asset(PrefsHelper.myImage,fit: BoxFit.cover,),
+                child: CommonImage(
+                  imageSrc:
+                  "${AppUrls.imageUrl}${PrefsHelper.myImage}",
+                  imageType: ImageType.network,
+                  fill: BoxFit.fill,
+                ),
               ),
             ),
             CommonText(text:PrefsHelper.myName,fontSize: 16,fontWeight: FontWeight.w500,),

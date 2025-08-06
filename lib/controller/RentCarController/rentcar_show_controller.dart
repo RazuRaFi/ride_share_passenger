@@ -44,14 +44,14 @@ class RentCarController extends GetxController {
     return null;
   }
 
-  Future<void> getRentDetails() async {
+  Future<void> getRentDetails({required String id}) async {
     isDetails(true);
     try {
       Map<String, String> header = {
         "token": PrefsHelper.token,
       };
 
-      final response = await ApiService.getApi(AppUrls.rentCarDetails, header: header);
+      final response = await ApiService.getApi(AppUrls.rentCarDetails(id), header: header);
 
       if (response.statusCode == 200) {
         final data = response.body['data'];

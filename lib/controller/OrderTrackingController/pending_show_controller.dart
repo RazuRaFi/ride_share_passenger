@@ -45,7 +45,7 @@ class PendingShowController extends GetxController{
     return null;
   }
 
-  Future<PendingRideDetails?> getRiderDetails() async {
+  Future<PendingRideDetails?> getRiderDetails({required String id}) async {
     isPendingDetails(true);
 
     try {
@@ -53,7 +53,7 @@ class PendingShowController extends GetxController{
         "token": PrefsHelper.token,
       };
 
-      var response = await ApiService.getApi(AppUrls.pendingRiderDetails, header: header);
+      var response = await ApiService.getApi(AppUrls.pendingRiderDetails(id), header: header);
 
       if (response.statusCode == 200) {
         final data = response.body['data'];
