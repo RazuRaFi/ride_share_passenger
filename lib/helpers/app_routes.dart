@@ -8,12 +8,15 @@ import 'package:ride_share_flat/view/screen/common_screen/SignUp/SIgn_up_screen.
 import 'package:ride_share_flat/view/screen/common_screen/signIn/sign_in_screen.dart';
 import 'package:ride_share_flat/view/screen/common_screen/splash/splash_screen.dart';
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/riders_pickup.dart';
+import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/booking_screen.dart';
 import 'package:ride_share_flat/view/test_screen.dart';
 
+import '../view/screen/Map/map_screen.dart';
 import '../view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/DirverArrived/DriverBegun/ConfirmPayment/confirm_payment.dart';
 import '../view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/DirverArrived/DriverBegun/driver_begun.dart';
 import '../view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/RidersPickup/DirverArrived/driver_arrived.dart';
 import '../view/screen/passenger/HomeScreen/HomeChild/BookingScreen/FindingRides/finding_rides.dart';
+import '../view/screen/passenger/HomeScreen/HomeChild/TakeRide/take_ride.dart';
 
 
 
@@ -73,6 +76,8 @@ class AppRoutes {
   static const String earningDetailsScreen = "/earning_details_screen.dart";
   static const String withdrawScreen = "/withdraw_screen.dart";
   static const String driverHomeScreen = "/driver_home_screen.dart";
+  static const String takeRideSet = "/take_ride.dart";
+  static const String bookingScreen = "/booking_screen.dart";
 
   static List<GetPage> routes = [
     GetPage(
@@ -134,6 +139,18 @@ class AppRoutes {
     GetPage(
         name:navBarScreen,
         page: () => NavBarScreen(),
+        transition: Transition.fade),
+    GetPage(
+        name:takeRideSet,
+        page: () => TakeRideSet(),
+        transition: Transition.fade),
+    GetPage(
+        name:mapScreen,
+        page: () => MapScreen(),
+        transition: Transition.fade),
+    GetPage(
+        name: bookingScreen,
+        page: () => BookingScreen(),
         transition: Transition.fade),
 
   ];

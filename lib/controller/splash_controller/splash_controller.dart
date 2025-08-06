@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import '../../helpers/app_routes.dart';
 import '../../helpers/pref_helper.dart';
-import '../Mapcontroller/map_controller.dart';
+import '../MapControllers/custom_map_controller.dart';
+
+
 
 
 class SplashController extends GetxController {

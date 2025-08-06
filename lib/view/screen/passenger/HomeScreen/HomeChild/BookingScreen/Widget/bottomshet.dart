@@ -23,19 +23,19 @@ class RideBottomSheet extends StatelessWidget {
         "Price": "\$110"
       },
       {
-        "image": 'assets/icons/carmodel.png',
+        "image": 'assets/icons/carIcon.png',
         "title": "Car",
         "subtitle": "Quick and affordable ride",
         "Price": "\$210"
       },
       {
-        "image": 'assets/icons/carmodel.png',
+        "image": 'assets/icons/carIcon.png',
         "title": "Car",
         "subtitle": "Quick and affordable ride",
         "Price": "\$250"
       },
       {
-        "image": 'assets/icons/carmodel.png',
+        "image": 'assets/icons/carIcon.png',
         "title": "Schedule a car  ",
         "subtitle": "Schedule trip for long rides",
         "Price": ""

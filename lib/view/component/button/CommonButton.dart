@@ -1,13 +1,12 @@
 
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../utils/app_colors.dart';
-import '../CommonText.dart';
 
 class CommonButton extends StatelessWidget {
   final VoidCallback? onTap;
@@ -23,6 +22,7 @@ class CommonButton extends StatelessWidget {
   final bool isLoading;
   final Color backgroundColor;
   final Widget? prefixIcon; // Added prefixIcon parameter
+  final Widget? widget;
 
   const CommonButton({
     this.onTap,
@@ -38,6 +38,7 @@ class CommonButton extends StatelessWidget {
     this.borderColor,
     this.backgroundColor = Colors.black,
     this.prefixIcon, // Added to constructor
+    this.widget,
     super.key,
   });
 
@@ -68,7 +69,11 @@ class CommonButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(buttonRadius.r),
                 ),
               ),
-              child: Row(
+              child: isLoading
+                  ? Platform.isIOS
+                  ? const CupertinoActivityIndicator(color: Colors.white,)
+                  : const CircularProgressIndicator(color: Colors.white,)
+                  : widget?? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (prefixIcon != null) ...[

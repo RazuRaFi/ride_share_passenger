@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ride_share_flat/controller/HomeController/home_controller.dart';
+import 'package:ride_share_flat/controller/MapControllers/custom_map_controller.dart';
+import 'package:ride_share_flat/helpers/app_routes.dart';
 import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/text_field/custom_textfield.dart';
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/Widget/drawer_screen.dart';
@@ -13,7 +15,7 @@ import 'HomeChild/Notifications/notifications.dart';
 import 'HomeChild/RentCar/rent_car.dart';
 import 'HomeChild/Schedule/Schedule_screen.dart';
 import 'HomeChild/SetLocation/set_location.dart';
-import 'HomeChild/TakeRide/take_ride.dart';
+
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -88,9 +90,12 @@ class HomeScreen extends StatelessWidget {
                                 child: GestureDetector(
                                 onTap:(){
                                   if(index==0){
-                                    Get.to(()=> TakeRideSet());
+                                    CustomMapController.instance.vehicleType = 'bike';
+                                    Get.toNamed(AppRoutes.takeRideSet);
+                                    // Get.to(()=> TakeRideSet());
                                   }else if(index==1){
-                                    Get.to(()=> TakeRideSet());
+                                    CustomMapController.instance.vehicleType = 'car';
+                                    Get.toNamed(AppRoutes.takeRideSet);
                                   }else if(index==2){
                                     Get.to(()=> RentCarScreen());
                                   }

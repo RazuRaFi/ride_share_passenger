@@ -43,7 +43,7 @@ class ConfirmBooking extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                          Image.asset("assets/icons/carmodel.png",height: 50,width: 50,fit: BoxFit.contain,),
+                          Image.asset("assets/icons/carIcon.png",height: 50,width: 50,fit: BoxFit.contain,),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

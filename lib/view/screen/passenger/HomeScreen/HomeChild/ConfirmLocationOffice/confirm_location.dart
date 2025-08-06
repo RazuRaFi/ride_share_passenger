@@ -6,8 +6,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/screen/passenger/HomeScreen/HomeChild/BookingScreen/booking_screen.dart';
 
-import '../../../../../../controller/Mapcontroller/create_load_controller.dart';
-import '../../../../../../controller/Mapcontroller/map_controller.dart';
+import '../../../../../../controller/MapControllers/create_load_controller.dart';
+import '../../../../../../controller/MapControllers/custom_map_controller.dart';
 import '../../../../../../helpers/app_routes.dart';
 import '../../../../../../utils/app_icons.dart';
 import '../../../../../component/button/CommonButton.dart';
@@ -22,16 +22,13 @@ class SetLocationOffice extends StatefulWidget {
 }
 
 class _SetLocationHomeState extends State<SetLocationOffice> {
-  final CustomMapController mapController = Get.put(CustomMapController());
+  final CustomMapController mapController = Get.find<CustomMapController>();
   final CreateLoadMapController createLoadMapController = Get.put(CreateLoadMapController());
-
-  final String googleApiKey = "AIzaSyC0hhuHPap6Wk98dZIyQdvvpoE3p-LuXhU";
   final TextEditingController searchLocationController = TextEditingController();
 
   @override
   void dispose() {
     searchLocationController.dispose();
-    Get.delete<CustomMapController>();
     super.dispose();
   }
 

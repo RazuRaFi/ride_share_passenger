@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../../controller/Mapcontroller/create_load_controller.dart';
-import '../../../controller/Mapcontroller/map_controller.dart';
+
+import '../../../controller/MapControllers/create_load_controller.dart';
+import '../../../controller/MapControllers/custom_map_controller.dart';
 import '../../../utils/app_colors.dart';
 
 
@@ -16,10 +17,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  final CustomMapController mapController = Get.put(CustomMapController());
-  CreateLoadMapController createLoadMapController = Get.put(
-    CreateLoadMapController(),
-  );
+  final CustomMapController mapController = Get.find<CustomMapController>();
 
   TextEditingController searchLocationController = TextEditingController();
 
@@ -36,8 +34,6 @@ class _MapScreenState extends State<MapScreen> {
   void dispose() {
     // Dispose of the search controller
     searchLocationController.dispose();
-    // Dispose of the MapController to clean up the GoogleMapController
-    Get.delete<CustomMapController>();
     super.dispose();
   }
 
@@ -95,16 +91,18 @@ class _MapScreenState extends State<MapScreen> {
                 ? const Center(child: CircularProgressIndicator())
                 : GoogleMap(
               initialCameraPosition: CameraPosition(
-                target: mapController.currentLocation.value,
+                target: mapController.pickedLatLng,
                 zoom: 16.0,
               ),
               onMapCreated: mapController.setGoogleMapController,
               myLocationEnabled: true,
+              zoomControlsEnabled: true,
+              zoomGesturesEnabled: true,
               onTap: (argument) async {
                 mapController.updateAddresses(argument.latitude, argument.longitude);
               },
-              markers: Set<Marker>.of(mapController.markers),
-              circles: mapController.driverCircles,
+              markers: Set<Marker>.of(mapController.setMarkers),
+              // circles: mapController.driverCircles,
             );
           }),
 
@@ -115,14 +113,15 @@ class _MapScreenState extends State<MapScreen> {
             child: circleIconButton(
               context,
               onTap: () {
-                Map<String, String> data = {
-                  "address": createLoadMapController.selectedAddress.value,
-                  "city": createLoadMapController.city,
-                  "state": createLoadMapController.state,
-                  "zip": createLoadMapController.zip,
-                };
-                debugPrint("Data:======>>> $data");
-                Navigator.pop(context, data);
+                // Map<String, String> data = {
+                //   "address": createLoadMapController.selectedAddress.value,
+                //   "city": createLoadMapController.city,
+                //   "state": createLoadMapController.state,
+                //   "zip": createLoadMapController.zip,
+                // };
+                // debugPrint("Data:======>>> $data");
+                // Navigator.pop(context, data);
+                Get.back();
               },
               icon: const Icon(Icons.arrow_back, color: Colors.black),
             ),

@@ -3,7 +3,7 @@ class Assets {
   Assets._();
 
   static const String iconsCar = 'assets/icons/car.png';
-  static const String iconsCarmodel = 'assets/icons/carmodel.png';
+  static const String iconsCarmodel = 'assets/icons/carIcon.png';
   static const String iconsDestinationIcon = 'assets/icons/destinationIcon.png';
   static const String iconsDrawericonmenu = 'assets/icons/drawericonmenu.png';
   static const String iconsEditprofile = 'assets/icons/editprofile.png';

@@ -10,6 +10,7 @@ class AppIcons {
   static const String train = "$baseurl/train.png";
   static const String circleArrow = "$baseurl/circle_arrow.png";
   static const String carIcon = "$baseurl/carIcon.png";
+  static const String bikeIcon = "$baseurl/bikeIcon.png";
   static const String passengerIcon = "$baseurl/passengerIcon.svg";
   static const String history = "$baseurl/history.svg";
   static const String home = "$baseurl/home.svg";

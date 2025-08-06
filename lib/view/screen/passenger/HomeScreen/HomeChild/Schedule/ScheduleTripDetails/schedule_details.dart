@@ -42,7 +42,7 @@ class ScheduleDetails extends StatelessWidget {
                 title: Row(
                   children: [
                     Image.asset(
-                      'assets/icons/carmodel.png', // Your car image path
+                      'assets/icons/carIcon.png', // Your car image path
                       height: 50,
                       width: 50,
                       fit: BoxFit.contain,
@@ -89,7 +89,7 @@ class ScheduleDetails extends StatelessWidget {
                           ),
                           child: ListTile(
                             leading: Image.asset(
-                              'assets/icons/carmodel.png', // Your car image path
+                              'assets/icons/carIcon.png', // Your car image path
                               height: 50,
                               width: 50,
                               fit: BoxFit.contain,

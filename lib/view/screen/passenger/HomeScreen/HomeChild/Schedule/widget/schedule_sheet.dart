@@ -23,13 +23,13 @@ class ScheduleSheet extends StatelessWidget {
         "Price": "\$110"
       },
       {
-        "image": 'assets/icons/carmodel.png',
+        "image": 'assets/icons/carIcon.png',
         "title": "Car",
         "subtitle": "5 mins away\nQuick and affordable ride",
         "Price": "\$210"
       },
       {
-        "image": 'assets/icons/carmodel.png',
+        "image": 'assets/icons/carIcon.png',
         "title": "Car",
         "subtitle": "5 mins away\nQuick and affordable ride",
         "Price": "\$250"
