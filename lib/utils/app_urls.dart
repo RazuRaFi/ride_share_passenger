@@ -1,11 +1,10 @@
 class AppUrls {
-  // static const baseUrl = "http://10.10.10.31:7010/api/v1";
-  static const baseUrl = "https://ride-sharing-flad.onrender.com/api/v1";
-  // static const imageUrl = "http://10.10.10.31:7010";
-  static const imageUrl = "https://ride-sharing-flad.onrender.com";
-  static const socketUrl = "https://ride-sharing-flad.onrender.com";
-  // static const socketUrl = "ws://10.10.10.31:7010";
-
+  static const baseUrl = "http://10.10.10.31:7010/api/v1";
+  // static const baseUrl = "https://ride-sharing-flad.onrender.com/api/v1";
+  static const imageUrl = "http://10.10.10.31:7010";
+  // static const imageUrl = "https://ride-sharing-flad.onrender.com";
+  // static const socketUrl = "https://ride-sharing-flad.onrender.com";
+  static const socketUrl = "ws://10.10.10.31:7010";
 
 
   static const signUp = "$baseUrl/users/create-passenger";

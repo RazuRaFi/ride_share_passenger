@@ -14,7 +14,7 @@ class BookingScreen extends StatelessWidget {
           /// Google Map
           const Positioned.fill(child: MapScreen()),
           /// BottomSheet
-          const Align(
+          Align(
             alignment: Alignment.bottomCenter,
             child: RideBottomSheet(),
           ),

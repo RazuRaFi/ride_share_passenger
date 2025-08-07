@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:ride_share_flat/helpers/app_routes.dart';
+import 'package:ride_share_flat/model/EstimatePricingModel/estimate_pricing_model.dart';
 import 'package:ride_share_flat/model/NearbyDriverModel/nearby_driver_model.dart';
 
 import '../../helpers/pref_helper.dart';
@@ -139,6 +140,7 @@ class CustomMapController extends GetxController {
         await _loadMarkerIcons(vehicleType: vehicleType);
         log("response data: ${nearbyDrivers.first.userId}");
         initialMarker();
+        await estimatePriceCalculation();
         Get.toNamed(AppRoutes.bookingScreen);
       }
     } catch (e, s) {
@@ -151,13 +153,16 @@ class CustomMapController extends GetxController {
 
   /// Distance Estimate price calculation
   RxBool isPriceCalculate = false.obs;
+  RxList<Map<String, dynamic>> rideList = <Map<String, dynamic>>[].obs;
+  EstimatePricingModel estimatePricingModel = EstimatePricingModel();
+
   Future<void> estimatePriceCalculation({seatCount}) async {
     isPriceCalculate(true);
     try {
       Map<String, dynamic> body =
         {
 
-          "totalSit": seatCount,
+          // "totalSit": seatCount,
           "pickupLocation": {
             "address": pickedLocationController.text,
             "location": {
@@ -193,7 +198,30 @@ class CustomMapController extends GetxController {
 
       if (response.statusCode == 200) {
         final data = response.body['data'];
-        
+        log("estimate price: $data");
+        estimatePricingModel = EstimatePricingModel.fromJson(data);
+
+        for(EstimateDetail element in estimatePricingModel.estimates){
+          log("Estimate element:$element");
+          if(element.vehicleType == "bike"){
+            rideList.add({
+              "image": 'assets/images/bike.png',
+              "title": "Bike",
+              "subtitle": "Quick and affordable ride",
+              "Price": element.price.toString(),
+              "seatCount" : element.totalSit.toString(),
+            });
+          }else{
+            rideList.add({
+              "image": 'assets/icons/carIcon.png',
+              "title": "Car",
+              "subtitle": "Quick and affordable ride",
+              "Price": element.price.toString(),
+              "seatCount" : element.totalSit.toString(),
+            });
+          }
+        }
+        log("rideList $rideList");
       }
     } catch (e, s) {
       log("Error fetching >>> $e");
