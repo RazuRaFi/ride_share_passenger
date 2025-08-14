@@ -39,8 +39,10 @@ class AppUrls {
   static const message = "$baseUrl/ride/ride-status/688eda909863807a05ffa11f";
   static const rentCar = "$baseUrl/rent-car/get-all-not-assigned-rent-cars?latitude=28.6333&longitude=77.2167&radius=10000";
   static String rentCarDetails(String id) => "$baseUrl/rent-car/get-all-not-assigned-rent-cars/$id";
-  static String nearbyVehicle({vehicleType, lat, long}) => "$baseUrl/driver/nearby?vehicleType=$vehicleType&longitude=$long&latitude=$lat";
+  static String nearbyVehicle({vehicleType, lat, long}) => "$baseUrl/driver/nearby?VehicleType=$vehicleType&longitude=$long&latitude=$lat";
   static const estimatePrice = "$baseUrl/driver/ride-price-estimate";
+  static const rideRequest = "$baseUrl/ride/request";
+  static const rideStatusCheck = "$baseUrl/ride/passenger-ride-status";
 }
 
 

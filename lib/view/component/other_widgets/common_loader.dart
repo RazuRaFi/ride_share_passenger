@@ -15,8 +15,8 @@ class CommonLoader extends StatelessWidget {
       height: size.sp,
       width: size.sp,
       child: Platform.isIOS
-          ? const CupertinoActivityIndicator()
-          : const CircularProgressIndicator(),
+          ? Center(child: const CupertinoActivityIndicator())
+          : Center(child: const CircularProgressIndicator()),
     );
   }
 }

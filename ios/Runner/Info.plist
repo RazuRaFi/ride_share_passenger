@@ -36,6 +36,9 @@
     <string>This app requires access to your location while you are using it.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>This app needs your location even in the background for best performance.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>We use your location to provide real-time ride tracking and better service.</string>
+
     <key>NSBonjourServices</key>
     <array>
         <string>_dartobservatory._tcp</string>

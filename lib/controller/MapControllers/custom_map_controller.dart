@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:ride_share_flat/helpers/app_routes.dart';
 import 'package:ride_share_flat/model/EstimatePricingModel/estimate_pricing_model.dart';
 import 'package:ride_share_flat/model/NearbyDriverModel/nearby_driver_model.dart';
+import 'package:ride_share_flat/utils/app_utils.dart';
 
 import '../../helpers/pref_helper.dart';
 import '../../services/api_services.dart';
@@ -21,20 +22,15 @@ class CustomMapController extends GetxController {
   static CustomMapController get instance => Get.put(CustomMapController());
 
   // Current location of the user
-  var currentLocation = const LatLng(23.759139, 90.429084).obs;
+  var currentLocation = const LatLng(0, 0).obs;
+  RxString currentAddress = "".obs;
 
   // Selected location (where the user taps on the map)
   var selectedLocation = const LatLng(0.0, 0.0).obs;
 
   // Source and destination for the route (demo data)
-  var sourceLocation = const LatLng(
-    23.759139,
-    90.429084,
-  ).obs; // Dhaka, Bangladesh (demo source)
-  var destinationLocation = const LatLng(
-    23.775411,
-    90.435211,
-  ).obs; // Slightly offset (demo destination)
+  var sourceLocation = const LatLng(0, 0).obs; // Dhaka, Bangladesh (demo source)
+  var destinationLocation = const LatLng(0, 0).obs; // Slightly offset (demo destination)
 
   // Selected address as a string
   var selectedAddress = ''.obs;
@@ -69,7 +65,7 @@ class CustomMapController extends GetxController {
   var duration = 0.obs; // Duration in seconds
   var selectedPaymentMethod = 'Digital Payment'.obs; // Default payment method
   RxBool isLoading = false.obs;
-  String vehicleType = "";
+  RxString vehicleType = "".obs;
   RxBool suggestionLoading = false.obs;
   RxList<String> suggestions = <String>[].obs;
   LatLng pickedLatLng = LatLng(0, 0);
@@ -118,6 +114,9 @@ class CustomMapController extends GetxController {
 
   Future<void> fetchNearbyDrivers({vehicleType, pickedAddress, dropOffAddress}) async {
     nearbyDriverLoading(true);
+    nearbyDrivers.clear();
+    setMarkers.clear();
+    this.vehicleType.value = vehicleType;
     pickedLatLng = await convertAddressToLatLng(pickedAddress);
     dropOffLatLng = await convertAddressToLatLng(dropOffAddress);
     try {
@@ -138,8 +137,7 @@ class CustomMapController extends GetxController {
             .map((e) => NearbyDriversModel.fromJson(e))
             .toList();
         await _loadMarkerIcons(vehicleType: vehicleType);
-        log("response data: ${nearbyDrivers.first.userId}");
-        initialMarker();
+        initialMarker(vehicleType: vehicleType);
         await estimatePriceCalculation();
         Get.toNamed(AppRoutes.bookingScreen);
       }
@@ -158,10 +156,10 @@ class CustomMapController extends GetxController {
 
   Future<void> estimatePriceCalculation({seatCount}) async {
     isPriceCalculate(true);
+    rideList.clear();
     try {
       Map<String, dynamic> body =
         {
-
           // "totalSit": seatCount,
           "pickupLocation": {
             "address": pickedLocationController.text,
@@ -169,7 +167,7 @@ class CustomMapController extends GetxController {
               "type": "Point",
               "coordinates": [
                 pickedLatLng.longitude,
-                pickedLatLng.longitude
+                pickedLatLng.latitude
               ]
             }
           },
@@ -210,6 +208,7 @@ class CustomMapController extends GetxController {
               "subtitle": "Quick and affordable ride",
               "Price": element.price.toString(),
               "seatCount" : element.totalSit.toString(),
+              "vehicleType" : element.vehicleType
             });
           }else{
             rideList.add({
@@ -218,6 +217,7 @@ class CustomMapController extends GetxController {
               "subtitle": "Quick and affordable ride",
               "Price": element.price.toString(),
               "seatCount" : element.totalSit.toString(),
+              "vehicleType" : element.vehicleType
             });
           }
         }
@@ -253,7 +253,7 @@ class CustomMapController extends GetxController {
   }
 
   /// initial markers
-  initialMarker() {
+  initialMarker({vehicleType}) {
     setMarkers.add(
       Marker(
         markerId: const MarkerId('source'),
@@ -261,38 +261,52 @@ class CustomMapController extends GetxController {
         icon: sourceIcon ?? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
       ),
     );
-    for (int i = 0; i < nearbyDrivers.length; i++) {
-      final driver = nearbyDrivers[i];
-      log(
-        "🟢 VehicleMarker data for driver_$i: lat=${driver.latitude}, long=${driver.longitude}",
-      );
-
-      if (driver.latitude == 0.0 && driver.longitude == 0.0) {
-        log("⚠️ Warning: driver_$i has default coordinates.");
-      }
-
-      try {
-        setMarkers.add(
-          Marker(
-            markerId: MarkerId('driver_$i'),
-            position: LatLng(driver.latitude, driver.longitude),
-            icon:
-                vehicleMarkerIcon ??
-                BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-          ),
+    if(nearbyDrivers.isNotEmpty){
+      for (int i = 0; i < nearbyDrivers.length; i++) {
+        final driver = nearbyDrivers[i];
+        log(
+          "🟢 VehicleMarker data for driver_$i: lat=${driver.latitude}, long=${driver.longitude}",
         );
-      } catch (e) {
-        log("❌ Error while adding marker for driver_$i: $e");
+
+        if (driver.latitude == 0.0 && driver.longitude == 0.0) {
+          log("⚠️ Warning: driver_$i has default coordinates.");
+        }
+
+        log("selected vehicle type: $vehicleType");
+        log("driver vehicle type: ${driver.vehicleType}");
+        try {
+          if(vehicleType == driver.vehicleType){
+            setMarkers.add(
+              Marker(
+                markerId: MarkerId('driver_$i'),
+                position: LatLng(driver.latitude, driver.longitude),
+                icon: vehicleMarkerIcon ??
+                    BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+              ),
+            );
+          }
+        } catch (e) {
+          log("❌ Error while adding marker for driver_$i: $e");
+        }
       }
+    }else{
+      Utils.snackBarMessage("No nearby drivers found", "");
     }
   }
 
-  // Load marker icons
+  /// Load marker icons
   Future<void> _loadMarkerIcons({vehicleType}) async {
     // Load location marker icon (AppIcons.locationMarker)
     sourceIcon = await BitmapDescriptor.asset(
       const ImageConfiguration(devicePixelRatio: 2.5),
       AppIcons.sourceIcon, // Reuse locationMarker for source
+      height: 50,
+      width: 60,
+    );
+
+    destinationIcon = await BitmapDescriptor.asset(
+      const ImageConfiguration(devicePixelRatio: 2.5),
+      AppIcons.destinationIcon, // Reuse locationMarker for destination
       height: 50,
       width: 60,
     );
@@ -342,7 +356,7 @@ class CustomMapController extends GetxController {
     // _addSourceDestinationMarkers();
   }
 
-  // Get the user's current location
+  /// Get the user's current location
   Future<void> getCurrentLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -372,15 +386,84 @@ class CustomMapController extends GetxController {
     );
 
     currentLocation.value = LatLng(position.latitude, position.longitude);
+    currentAddress.value = await getAddressFromLatLng(position.latitude, position.longitude);
     selectedLocation.value = currentLocation.value;
-    sourceLocation.value =
-        currentLocation.value; // Set source as current location
+    sourceLocation.value = currentLocation.value; // Set source as current location
     updateAddresses(position.latitude, position.longitude);
 
     if (mapController != null) {
       mapController!.animateCamera(
         CameraUpdate.newLatLng(currentLocation.value),
       );
+    }
+  }
+
+  /// Address from lat lng
+  Future<String> getAddressFromLatLng(double latitude, double longitude) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+
+      if (placemarks.isNotEmpty) {
+        final place = placemarks.first;
+        return "${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.country}";
+      }
+      return "Address not found";
+    } catch (e) {
+      return "Error: $e";
+    }
+  }
+
+  /// Ride Request Send Repo
+  RxBool rideRequestSending = false.obs;
+  Future<void> rideRequestRepo({vehicleType, seatCount, paymentMethod = "cash_payment"}) async {
+    rideRequestSending(true);
+    try {
+
+      Map<String, dynamic> body = {
+        "vehicle_type": vehicleType,
+        "totalSit": seatCount,
+        "ride_payment_method": paymentMethod,
+        "pickupLocation": {
+          "address": pickedLocationController.text,
+          "location": {
+            "type": "Point",
+            "coordinates": [
+              pickedLatLng.longitude.toStringAsFixed(6),
+              pickedLatLng.latitude.toStringAsFixed(6)
+            ]
+          }
+        },
+        "dropofLocation": {
+          "address": dropOffLocationController.text,
+          "location": {
+            "type": "Point",
+            "coordinates": [
+              dropOffLatLng.longitude.toStringAsFixed(6),
+              dropOffLatLng.latitude.toStringAsFixed(6)
+            ]
+          }
+        }
+      };
+
+      Map<String, String> header = {
+        "token": PrefsHelper.token,
+        "Content-Type": "application/json"
+      };
+
+      var response = await ApiService.postApi(
+        AppUrls.rideRequest,
+        jsonEncode(body),
+        header: header,
+      );
+
+      if (response.statusCode == 200) {
+        log(response.message);
+      }
+    } catch (e, s) {
+      log("Error fetching pending rides >>> $e");
+      log("Error lines >>> $s");
+    } finally {
+      rideRequestSending(false);
     }
   }
 

@@ -125,7 +125,7 @@ class AppTranslation extends Translations {
       "requestFeature": "Request a Feature",
       "termsOfService": "Terms of Service",
       "update": "Update",
-      "motoBike": "Moto Bike",
+      "motoBike": "Motor Bike",
       "car": "Car",
       "schedule": "Schedule",
       "rentCar": "Rent Car",

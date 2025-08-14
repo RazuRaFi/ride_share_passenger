@@ -26,18 +26,27 @@ class EstimateDetail {
   String vehicleType;
   int totalSit;
   double price;
+  num durationInSeconds;
+  String distanceInMi;
+  String durationInMin;
 
   EstimateDetail({
     this.vehicleType = '',
     this.totalSit = 0,
     this.price = 0.0,
+    this.durationInSeconds = 0,
+    this.distanceInMi = '',
+    this.durationInMin = ''
   });
 
   factory EstimateDetail.fromJson(Map<String, dynamic> json) {
     return EstimateDetail(
       vehicleType: json['vehicle_type'] ?? '',
       totalSit: json['totalSit'] ?? 0,
-      price: (json['price'] ?? 0).toDouble(),
+      price: (json['fare'] ?? 0).toDouble(),
+      durationInSeconds: json['durationInSeconds'] ?? 0,
+      distanceInMi: json['distanceText'] ?? '',
+      durationInMin: json['durationText'] ?? ''
     );
   }
 }

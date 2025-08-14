@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 import 'package:ride_share_flat/helpers/debouncer.dart';
 import 'package:ride_share_flat/utils/app_string.dart';
 import 'package:ride_share_flat/view/component/CommonText.dart';
@@ -41,8 +40,8 @@ class _TakeRideSetState extends State<TakeRideSet> {
 
   @override
   void dispose() {
-    customMapController.pickedLocationController.dispose();
-    customMapController.dropOffLocationController.dispose();
+    // customMapController.pickedLocationController.dispose();
+    // customMapController.dropOffLocationController.dispose();
     CustomMapController.instance.suggestions.clear();
     super.dispose();
   }
@@ -149,7 +148,7 @@ class _TakeRideSetState extends State<TakeRideSet> {
               isLoading: CustomMapController.instance.nearbyDriverLoading.value,
               onTap: () {
                 CustomMapController.instance.fetchNearbyDrivers(
-                    vehicleType: CustomMapController.instance.vehicleType,
+                    vehicleType: CustomMapController.instance.vehicleType.value,
                     pickedAddress: customMapController.pickedLocationController.text,
                     dropOffAddress: customMapController.dropOffLocationController.text
                 );
@@ -160,7 +159,7 @@ class _TakeRideSetState extends State<TakeRideSet> {
             SizedBox(height: 20,),
             GestureDetector(
               onTap: (){
-                Get.to(SetLocationHome());
+                Get.to(()=> SetLocationHome());
               },
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),

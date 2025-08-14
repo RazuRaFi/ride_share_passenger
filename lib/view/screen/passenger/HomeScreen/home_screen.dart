@@ -53,9 +53,6 @@ class HomeScreen extends StatelessWidget {
                   }, icon: Icon(Icons.notifications_none_outlined,size: 24,))
                 ],
               ),
-
-
-
               Expanded(
                   child:SingleChildScrollView(
                     child: Column(
@@ -64,18 +61,18 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(height: 24,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(Icons.location_on_sharp,color: Colors.black,size: 30,),
-                            const CommonText(
-                              textAlign: TextAlign.start,
-                              text:
-                              "13th Street.47 W 13th St, New York, NY 10011",
-                              color: AppColors.blackLight,
-                              fontWeight: FontWeight.w400,
-                              bottom: 12,
-                              fontSize: 14,
-                            ),
+                            Obx(() => Flexible(
+                              child: CommonText(
+                                textAlign: TextAlign.start,
+                                text: CustomMapController.instance.currentAddress.isNotEmpty? CustomMapController.instance.currentAddress.value : "current Location Loading...",
+                                color: AppColors.blackLight,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                              ),
+                            ),),
                           ],
                         ),
                         SizedBox(height: 47,),
@@ -90,11 +87,11 @@ class HomeScreen extends StatelessWidget {
                                 child: GestureDetector(
                                 onTap:(){
                                   if(index==0){
-                                    CustomMapController.instance.vehicleType = 'bike';
+                                    CustomMapController.instance.vehicleType.value = 'bike';
                                     Get.toNamed(AppRoutes.takeRideSet);
                                     // Get.to(()=> TakeRideSet());
                                   }else if(index==1){
-                                    CustomMapController.instance.vehicleType = 'car';
+                                    CustomMapController.instance.vehicleType.value = 'car';
                                     Get.toNamed(AppRoutes.takeRideSet);
                                   }else if(index==2){
                                     Get.to(()=> RentCarScreen());
@@ -164,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
                           height:59,
-                          width: 361,
+                          width: Get.width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: Colors.grey)
